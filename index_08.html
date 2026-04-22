@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Agent</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .agent-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .orb-wrapper {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      cursor: pointer;
+    }
+
+    .orb {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        #cc0000, #ff3333, #990000, #ff0000, 
+        #cc0000, #660000, #ff1a1a, #cc0000
+      );
+      animation: rotate 4s linear infinite;
+      box-shadow: 0 0 40px rgba(200, 0, 0, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .orb:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 60px rgba(200, 0, 0, 0.5);
+    }
+
+    .orb.active {
+      animation: rotate 2s linear infinite, pulse 1.5s ease-in-out infinite;
+      box-shadow: 0 0 80px rgba(200, 0, 0, 0.6);
+    }
+
+    .orb.listening {
+      animation: rotate 3s linear infinite, pulse 1s ease-in-out infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .call-btn {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.2s;
+    }
+
+    .call-btn:hover {
+      background: #333;
+    }
+
+    .call-btn.active {
+      background: #cc0000;
+    }
+
+    .call-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .status {
+      color: #f0f0f0;
+      font-size: 14px;
+      opacity: 0.8;
+      min-height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="agent-container">
+    <div class="orb-wrapper" id="orbWrapper">
+      <div class="orb" id="orb"></div>
+      <button class="call-btn" id="callBtn" aria-label="Start call">
+        <svg viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.7489 2.25C2.93286 2.25 2.21942 2.92142 2.27338 3.7963C2.6686 10.2041 7.79483 15.3303 14.2026 15.7255C15.0775 15.7795 15.7489 15.066 15.7489 14.25V11.958C15.7489 11.2956 15.3144 10.7116 14.6799 10.5213L12.6435 9.91035C12.1149 9.75179 11.542 9.89623 11.1518 10.2864L10.5901 10.8482C9.15291 10.0389 7.95998 8.84599 7.15074 7.40881L7.71246 6.84709C8.10266 6.45689 8.24711 5.88396 8.08854 5.35541L7.47761 3.31898C7.28727 2.6845 6.70329 2.25 6.04087 2.25H3.7489Z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="status" id="status"></div>
+  </div>
+
+  <script type="module">
+    import { Conversation } from 'https://esm.sh/@elevenlabs/client@latest';
+
+    const AGENT_ID = 'agent_9701kpv2zakjervsk318y33a15xr';
+    const orb = document.getElementById('orb');
+    const callBtn = document.getElementById('callBtn');
+    const statusEl = document.getElementById('status');
+    let conversation = null;
+
+    callBtn.addEventListener('click', async () => {
+      if (conversation) {
+        await conversation.endSession();
+        conversation = null;
+        orb.classList.remove('active', 'listening');
+        callBtn.classList.remove('active');
+        statusEl.textContent = '';
+        return;
+      }
+
+      try {
+        statusEl.textContent = 'Connecting...';
+        orb.classList.add('active');
+        callBtn.classList.add('active');
+
+        conversation = await Conversation.startSession({
+          agentId: AGENT_ID,
+          onConnect: () => {
+            statusEl.textContent = 'Connected';
+          },
+          onDisconnect: () => {
+            statusEl.textContent = '';
+            orb.classList.remove('active', 'listening');
+            callBtn.classList.remove('active');
+            conversation = null;
+          },
+          onModeChange: ({ mode }) => {
+            if (mode === 'listening') {
+              statusEl.textContent = 'Listening...';
+              orb.classList.add('listening');
+              orb.classList.remove('active');
+            } else if (mode === 'speaking') {
+              statusEl.textContent = 'Speaking...';
+              orb.classList.add('active');
+              orb.classList.remove('listening');
+            }
+          },
+          onError: (error) => {
+            console.error('Error:', error);
+            statusEl.textContent = 'Error occurred';
+          },
+        });
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Failed to connect';
+        orb.classList.remove('active');
+        callBtn.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
