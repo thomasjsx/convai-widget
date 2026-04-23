@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Agent</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .agent-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .orb-wrapper {
+      position: relative;
+      width: 400px;
+      height: 400px;
+    }
+
+    .orb-wrapper svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .call-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+
+    .call-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .call-btn.active {
+      background: rgba(204, 0, 0, 0.8);
+      border-color: rgba(255, 100, 100, 0.6);
+    }
+
+    .call-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .call-btn.active .icon-phone { display: none; }
+    .call-btn.active .icon-end { display: block; }
+    .call-btn .icon-end { display: none; }
+
+    .status {
+      color: #f0f0f0;
+      font-size: 14px;
+      opacity: 0.8;
+      min-height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="agent-container">
+    <div class="orb-wrapper">
+      <svg id="loader" viewBox="-50 -50 300 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur id="gooBlur" in="SourceGraphic" stdDeviation="7"/>
+            <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -11"/>
+          </filter>
+          <radialGradient id="redGrad" cx="40%" cy="40%">
+            <stop offset="0%" stop-color="#ff3333"/>
+            <stop offset="50%" stop-color="#cc0000"/>
+            <stop offset="100%" stop-color="#660000"/>
+          </radialGradient>
+        </defs>
+        <g id="group" filter="url(#goo)" style="transform-origin:100px 100px; transform: scale(1.5);">
+          <path id="blobA" fill="url(#redGrad)" style="transform-origin:100px 100px;"
+            d="M100,66 C120,62 134,74 136,92 C139,112 126,128 108,130 C88,133 68,120 66,100 C64,80 78,70 100,66 Z"/>
+          <path id="blobB" fill="#990000" style="transform-origin:100px 100px;"
+            d="M100,74 C116,70 128,80 130,96 C133,114 120,126 104,128 C86,130 70,118 70,100 C70,83 82,78 100,74 Z"/>
+        </g>
+      </svg>
+
+      <button class="call-btn" id="callBtn" aria-label="Start call">
+        <svg class="icon-phone" viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.7489 2.25C2.93286 2.25 2.21942 2.92142 2.27338 3.7963C2.6686 10.2041 7.79483 15.3303 14.2026 15.7255C15.0775 15.7795 15.7489 15.066 15.7489 14.25V11.958C15.7489 11.2956 15.3144 10.7116 14.6799 10.5213L12.6435 9.91035C12.1149 9.75179 11.542 9.89623 11.1518 10.2864L10.5901 10.8482C9.15291 10.0389 7.95998 8.84599 7.15074 7.40881L7.71246 6.84709C8.10266 6.45689 8.24711 5.88396 8.08854 5.35541L7.47761 3.31898C7.28727 2.6845 6.70329 2.25 6.04087 2.25H3.7489Z"/>
+        </svg>
+        <svg class="icon-end" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="6" y1="6" x2="18" y2="18"/>
+          <line x1="18" y1="6" x2="6" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="status" id="status"></div>
+  </div>
+
+  <script>
+    // ── blob animation ──────────────────────────────
+    const idle      = { speed: 4.8, rotation: 180, distortion: 7, spread: 36 };
+    const listening = { speed: 3.6, rotation: 90,  distortion: 9, spread: 28 };
+    const speaking  = { speed: 14.4, rotation: 60, distortion: 12, spread: 44 };
+
+    let currentParams = { ...idle };
+    let targetParams  = { ...idle };
+
+    const blobA   = document.getElementById('blobA');
+    const blobB   = document.getElementById('blobB');
+    const gooBlur = document.getElementById('gooBlur');
+
+    let startTime = null;
+    function animate(ts) {
+      if (!startTime) startTime = ts;
+      const elapsed = (ts - startTime) / 1000;
+
+      const lerp = 0.03;
+      currentParams.speed      += (targetParams.speed - currentParams.speed) * lerp;
+      currentParams.rotation   += (targetParams.rotation - currentParams.rotation) * lerp;
+      currentParams.distortion += (targetParams.distortion - currentParams.distortion) * lerp;
+      currentParams.spread     += (targetParams.spread - currentParams.spread) * lerp;
+
+      gooBlur.setAttribute('stdDeviation', currentParams.distortion);
+
+      const cycle    = (2 * Math.PI) / currentParams.speed;
+      const t        = elapsed * cycle;
+      const progress = (Math.sin(t) + 1) / 2;
+      const rotDeg   = elapsed * (currentParams.rotation / currentParams.speed);
+      const spread   = currentParams.spread;
+
+      const axOff  = -spread + progress * spread * 2;
+      const aScale = 1.33 - progress * (1.33 - 0.85);
+      blobA.style.transform = `translate(${axOff}px,0) scale(${aScale}) rotate(${rotDeg}deg)`;
+
+      const bxOff  = spread - progress * spread * 2;
+      const bScale = 0.85 + progress * (1.33 - 0.85);
+      blobB.style.transform = `translate(${bxOff}px,0) scale(${bScale}) rotate(${rotDeg}deg)`;
+
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+
+    function setMode(mode) {
+      if (mode === 'listening') targetParams = { ...listening };
+      else if (mode === 'speaking') targetParams = { ...speaking };
+      else targetParams = { ...idle };
+    }
+  </script>
+
+  <script type="module">
+    import { Conversation } from 'https://esm.sh/@elevenlabs/client@latest';
+
+    const AGENT_ID = 'agent_9701kpv2zakjervsk318y33a15xr';
+    const callBtn  = document.getElementById('callBtn');
+    const statusEl = document.getElementById('status');
+    let conversation = null;
+
+    callBtn.addEventListener('click', async () => {
+      if (conversation) {
+        await conversation.endSession();
+        conversation = null;
+        callBtn.classList.remove('active');
+        statusEl.textContent = '';
+        window.setMode('idle');
+        return;
+      }
+
+      try {
+        statusEl.textContent = 'Connecting...';
+        callBtn.classList.add('active');
+        window.setMode('listening');
+
+        conversation = await Conversation.startSession({
+          agentId: AGENT_ID,
+          onConnect: () => {
+            statusEl.textContent = 'Connected';
+          },
+          onDisconnect: () => {
+            statusEl.textContent = '';
+            callBtn.classList.remove('active');
+            window.setMode('idle');
+            conversation = null;
+          },
+          onModeChange: ({ mode }) => {
+            if (mode === 'listening') {
+              statusEl.textContent = 'Listening...';
+              window.setMode('listening');
+            } else if (mode === 'speaking') {
+              statusEl.textContent = 'Speaking...';
+              window.setMode('speaking');
+            }
+          },
+          onError: (error) => {
+            console.error('Error:', error);
+            statusEl.textContent = 'Error occurred';
+          },
+        });
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Failed to connect';
+        callBtn.classList.remove('active');
+        window.setMode('idle');
+      }
+    });
+  </script>
+</body>
+</html>
