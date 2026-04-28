@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Agent</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .agent-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      overflow: visible;
+    }
+
+    .orb-stage {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      overflow: visible;
+    }
+
+    /* Two video layers for crossfade */
+    .video-layer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .video-layer.visible {
+      opacity: 1;
+    }
+
+    .video-layer video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-layer-b {
+      z-index: 0;
+    }
+
+    .video-layer-a {
+      z-index: 1;
+    }
+
+    /* Orb sits on top — stays solid */
+    .orb-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      border-radius: 50%;
+      overflow: visible;
+      z-index: 2;
+    }
+
+    .orb-wrapper:focus-visible {
+      outline: 2px solid rgba(255, 100, 100, 0.6);
+      outline-offset: 6px;
+    }
+
+    .orb {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        #cc0000, #ff3333, #990000, #ff0000,
+        #cc0000, #660000, #ff1a1a, #cc0000
+      );
+      animation: rotate 6s linear infinite;
+      box-shadow: 0 0 30px rgba(200, 0, 0, 0.2);
+      transition: box-shadow 0.5s ease;
+    }
+
+    .orb.connecting {
+      animation: rotate 2s linear infinite;
+      box-shadow: 0 0 50px rgba(200, 0, 0, 0.4);
+    }
+
+    .orb.listening {
+      animation: rotate 4s linear infinite, breathe 2s ease-in-out infinite;
+      box-shadow: 0 0 60px rgba(200, 0, 0, 0.5);
+    }
+
+    .orb.speaking {
+      animation: rotate 2s linear infinite, pulse 0.8s ease-in-out infinite;
+      box-shadow: 0 0 80px rgba(255, 50, 50, 0.7);
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.03); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.07); }
+    }
+
+    .call-indicator {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      pointer-events: none;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+
+    .orb-wrapper:hover .call-indicator {
+      background: rgba(0, 0, 0, 0.8);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .orb-wrapper.active .call-indicator {
+      background: rgba(204, 0, 0, 0.8);
+      border-color: rgba(255, 100, 100, 0.6);
+    }
+
+    .call-indicator svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .orb-wrapper.active .icon-phone { display: none; }
+    .orb-wrapper.active .icon-end { display: block; }
+    .orb-wrapper .icon-end { display: none; }
+
+    .status {
+      color: #f0f0f0;
+      font-size: 14px;
+      opacity: 0.8;
+      min-height: 20px;
+      transition: opacity 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <div class="agent-container">
+    <div class="orb-stage">
+      <!-- Two video layers for crossfade -->
+      <div class="video-layer video-layer-b" id="videoLayerB">
+        <video id="bgVideoB" muted loop playsinline></video>
+      </div>
+      <div class="video-layer video-layer-a" id="videoLayerA">
+        <video id="bgVideoA" muted loop playsinline></video>
+      </div>
+
+      <!-- Orb on top — solid -->
+      <button class="orb-wrapper" id="orbButton" aria-label="Start call">
+        <div class="orb" id="orb"></div>
+        <div class="call-indicator">
+          <svg class="icon-phone" viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.7489 2.25C2.93286 2.25 2.21942 2.92142 2.27338 3.7963C2.6686 10.2041 7.79483 15.3303 14.2026 15.7255C15.0775 15.7795 15.7489 15.066 15.7489 14.25V11.958C15.7489 11.2956 15.3144 10.7116 14.6799 10.5213L12.6435 9.91035C12.1149 9.75179 11.542 9.89623 11.1518 10.2864L10.5901 10.8482C9.15291 10.0389 7.95998 8.84599 7.15074 7.40881L7.71246 6.84709C8.10266 6.45689 8.24711 5.88396 8.08854 5.35541L7.47761 3.31898C7.28727 2.6845 6.70329 2.25 6.04087 2.25H3.7489Z"/>
+          </svg>
+          <svg class="icon-end" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="6" y1="6" x2="18" y2="18"/>
+            <line x1="18" y1="6" x2="6" y2="18"/>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <div class="status" id="status"></div>
+  </div>
+
+  <script>
+    // ── VIDEO REEL MANAGER WITH CROSSFADE ───────────
+    const REELS = {
+      master:     'videos/master.mp4',
+      horizon:    'videos/horizon.mp4',
+      economist:  'videos/economist.mp4',
+      thia:       'videos/thia.mp4',
+      agency:     'videos/agency.mp4',
+      freelance:  'videos/freelance.mp4',
+    };
+
+    const KEYWORDS = {
+      horizon:   ['orkin', 'petco', 'honda', 'nightmarket', 'uhg', 'unitedhealth', 'horizon'],
+      economist: ['1843', 'economist', 'gates foundation', 'hcl', 'kpmg', 'workfront'],
+      thia:      ['thia', 'total health', 'totalhealth', 'chatbot'],
+      agency:    ['sidekick', 't-mobile', 'publicis', 'jwt', 'bing', 'microsoft', 'rolex', 'mccann', 'oppenheimer', 'cigna', 'visa'],
+      freelance: ['vogue', 'wintour', 'nike', 'aerin', 'bbdo', 'dubai'],
+    };
+
+    const layerA = document.getElementById('videoLayerA');
+    const layerB = document.getElementById('videoLayerB');
+    const videoA = document.getElementById('bgVideoA');
+    const videoB = document.getElementById('bgVideoB');
+
+    let currentReel = null;
+    let activeLayer = 'a'; // tracks which layer is currently visible
+
+    function playReel(reelName) {
+      if (currentReel === reelName) return;
+      currentReel = reelName;
+
+      const src = REELS[reelName];
+      if (!src) {
+        stopReel();
+        return;
+      }
+
+      // Crossfade: load new video on the hidden layer, then swap visibility
+      if (activeLayer === 'a') {
+        // A is showing — load into B, fade B in, fade A out
+        videoB.src = src;
+        videoB.play().then(() => {
+          layerB.classList.add('visible');
+          layerA.classList.remove('visible');
+          activeLayer = 'b';
+        }).catch(() => {
+          console.log('Video not available:', src);
+        });
+      } else {
+        // B is showing — load into A, fade A in, fade B out
+        videoA.src = src;
+        videoA.play().then(() => {
+          layerA.classList.add('visible');
+          layerB.classList.remove('visible');
+          activeLayer = 'a';
+        }).catch(() => {
+          console.log('Video not available:', src);
+        });
+      }
+    }
+
+    function stopReel() {
+      currentReel = null;
+      layerA.classList.remove('visible');
+      layerB.classList.remove('visible');
+      videoA.pause();
+      videoA.src = '';
+      videoB.pause();
+      videoB.src = '';
+      activeLayer = 'a';
+    }
+
+    function detectReel(text) {
+      const lower = text.toLowerCase();
+      for (const [reel, words] of Object.entries(KEYWORDS)) {
+        for (const word of words) {
+          if (lower.includes(word)) {
+            return reel;
+          }
+        }
+      }
+      return 'master';
+    }
+
+    window.playReel = playReel;
+    window.stopReel = stopReel;
+    window.detectReel = detectReel;
+  </script>
+
+  <script type="module">
+    import { Conversation } from 'https://esm.sh/@elevenlabs/client@latest';
+
+    const AGENT_ID = 'agent_9701kpv2zakjervsk318y33a15xr';
+    const orb = document.getElementById('orb');
+    const orbButton = document.getElementById('orbButton');
+    const statusEl = document.getElementById('status');
+    let conversation = null;
+
+    orbButton.addEventListener('click', async () => {
+      if (conversation) {
+        await conversation.endSession();
+        conversation = null;
+        orb.className = 'orb';
+        orbButton.classList.remove('active');
+        orbButton.setAttribute('aria-label', 'Start call');
+        statusEl.textContent = '';
+        window.stopReel();
+        return;
+      }
+
+      try {
+        statusEl.textContent = 'Connecting...';
+        orb.className = 'orb connecting';
+        orbButton.classList.add('active');
+        orbButton.setAttribute('aria-label', 'End call');
+
+        window.playReel('master');
+
+        conversation = await Conversation.startSession({
+          agentId: AGENT_ID,
+          onConnect: () => {
+            statusEl.textContent = 'Connected';
+            orb.className = 'orb listening';
+          },
+          onDisconnect: () => {
+            statusEl.textContent = '';
+            orb.className = 'orb';
+            orbButton.classList.remove('active');
+            orbButton.setAttribute('aria-label', 'Start call');
+            window.stopReel();
+            conversation = null;
+          },
+          onModeChange: ({ mode }) => {
+            if (mode === 'listening') {
+              statusEl.textContent = 'Listening...';
+              orb.className = 'orb listening';
+            } else if (mode === 'speaking') {
+              statusEl.textContent = 'Speaking...';
+              orb.className = 'orb speaking';
+            }
+          },
+          onMessage: ({ message }) => {
+            if (message && message.text) {
+              const reel = window.detectReel(message.text);
+              window.playReel(reel);
+            }
+          },
+          onError: (error) => {
+            console.error('Error:', error);
+            statusEl.textContent = 'Error occurred';
+          },
+        });
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Failed to connect';
+        orb.className = 'orb';
+        orbButton.classList.remove('active');
+        orbButton.setAttribute('aria-label', 'Start call');
+        window.stopReel();
+      }
+    });
+  </script>
+</body>
+</html>
