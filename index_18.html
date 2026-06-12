@@ -125,6 +125,35 @@
       min-height: 20px;
       transition: opacity 0.3s;
     }
+
+    .cs-link {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cs-link a {
+      display: inline-block;
+      padding: 10px 20px;
+      border: 1px solid #cc0000;
+      border-radius: 24px;
+      color: #f0f0f0;
+      text-decoration: none;
+      font-size: 15px;
+      opacity: 0;
+      animation: fadeIn 0.4s ease forwards;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .cs-link a:hover {
+      background: rgba(204, 0, 0, 0.15);
+      border-color: #ff3333;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -142,6 +171,7 @@
       </div>
     </div>
     <div class="status" id="status"></div>
+    <div class="cs-link" id="csLink"></div>
   </div>
 
   <script type="module">
@@ -181,7 +211,8 @@
             show_case_study: async ({ slug }) => {
               const cs = CASE_STUDIES[(slug || '').toLowerCase().trim()];
               if (!cs) return 'No case study found for that project. Available: portfolio, thia, stitches.';
-              window.parent.postMessage({ type: 'show_case_study', title: cs.title, url: cs.url }, '*');
+              document.getElementById('csLink').innerHTML =
+                '<a href="' + cs.url + '" target="_blank" rel="noopener">View ' + cs.title + ' case study \u2192</a>';
               return `A link to the ${cs.title} case study is now showing below the orb.`;
             }
           },
