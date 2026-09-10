@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JPMC — Thomas Stevenson</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abel&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #161616;
+    --ink: #ffffff;
+    --red: #C63A2E;
+    --muted: #8a8a8a;
+    --display: "IvyPresto Headline", "ivypresto-headline", "Playfair Display", Georgia, serif;
+    --body: "Abel", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--ink); font-family: var(--body); -webkit-font-smoothing: antialiased; }
+
+  /* hero */
+  .hero { padding: 5vw 4vw 2vw; }
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(64px, 9.5vw, 110px);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+  }
+  .hero h1 .red { color: var(--red); }
+  .hero p {
+    margin-top: 2.2vw;
+    font-size: clamp(16px, 1.4vw, 22px);
+    letter-spacing: 0.02em;
+  }
+  .hero p .sep { color: var(--red); padding: 0 0.35em; }
+
+  /* orb */
+  .orb { text-align: center; padding: 6vw 4vw 8vw; }
+  .orb iframe {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    height: 400px;
+    margin: 0 auto;
+    border: 0;
+    background: transparent;
+  }
+  .orb h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(48px, 6.5vw, 80px);
+    line-height: 1;
+    margin-top: -24px;
+  }
+  .orb p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: clamp(15px, 1.2vw, 19px);
+    letter-spacing: 0.02em;
+  }
+
+  /* case studies */
+  .cases { background: #ffffff; color: #111; padding: 6vw 4vw 7vw; }
+  .cases h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(32px, 3.2vw, 48px);
+    margin-bottom: 3vw;
+  }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3vw; }
+  .tile a.img { display: block; }
+  .tile img { width: 100%; height: auto; display: block; object-fit: contain; }
+  .tile .eyebrow { margin-top: 18px; font-size: 14px; color: #666; letter-spacing: 0.02em; }
+  .tile h3 { margin-top: 6px; font-family: var(--body); font-size: 22px; font-weight: 400; }
+  .tile h3 a { color: #111; text-decoration: none; border-bottom: 2px solid #111; }
+  .tile h3 a:hover { color: var(--red); border-color: var(--red); }
+  .tile p { margin-top: 10px; font-size: 15px; line-height: 1.5; color: #333; }
+  @media (max-width: 767px) {
+    .grid { grid-template-columns: 1fr; gap: 10vw; }
+    .hero { padding-top: 10vw; }
+    .orb h2 { margin-top: -12px; }
+  }
+
+  /* footer */
+  footer { padding: 3vw 4vw; color: var(--muted); font-size: 14px; }
+  footer a { color: var(--muted); text-decoration: none; }
+</style>
+</head>
+<body>
+
+    <!--
+<section class="hero">
+  <h1>Builder<br><span class="red">&amp;</span> Designer<span class="red">.</span></h1>
+  <p>Conversational UI<span class="sep">//</span>AI prototyping<span class="sep">//</span>Design</p>
+</section>
+    -->
+
+<section class="orb">
+  <iframe src="https://thomasjsx.github.io/convai-widget/index_18.html"
+          allow="microphone; autoplay"
+          allowtransparency="true"
+          title="Conversational portfolio"></iframe>
+  <h2>Tap the Orb.</h2>
+  <p>My conversational portfolio. Press the orb to start.</p>
+</section>
+
+
+<footer>
+  Thomas Stevenson &nbsp;·&nbsp; <a href="mailto:tstevenson@gmail.com">tstevenson@gmail.com</a> &nbsp;·&nbsp; 617·821·4499
+</footer>
+
+</body>
+</html>
