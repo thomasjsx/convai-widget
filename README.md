@@ -55,4 +55,4 @@ Then open `http://localhost:8000/index_20.html` and click the orb. You'll need t
 
 ## Built with
 
-ElevenLabs Conversational AI · `@elevenlabs/client` SDK · RAG knowledge base · client-side tools · vanilla HTML and JS · built with Claude
+ElevenLabs Conversational AI · `@elevenlabs/client` SDK · RAG knowledge base · client-side tools · vanilla HTML and JS · Claude
