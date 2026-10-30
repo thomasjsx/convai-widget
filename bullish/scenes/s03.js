@@ -14,7 +14,7 @@ export default {
           <img class="char" src="${asset('s05/muse.png')}" alt="The Muse character">
           ${PHONES.map(([k, label]) => `
             <button class="phone" data-k="${k}">
-              <img class="screen" src="${asset(`meta/${k}-screen1.jpg`)}" alt="${label} on the App Store">
+              <img class="screen" src="${asset(`meta/${k}-ui.jpg`)}" alt="The ${label} app">
               <span class="label"><img src="${asset(`meta/${k}-icon.png`)}" alt="">${label}</span>
             </button>`).join('')}
         </div>
@@ -41,12 +41,15 @@ export default {
 
 const css = `
 [data-scene="s03"] .s03 { position:absolute; inset:0; display:grid; place-items:center; }
-.s03 .row { --w:min(24vw, calc(50vh * .5625), 300px); position:relative; display:flex; gap:clamp(16px,3vw,48px); align-items:flex-end; }
+.s03 .row { --w:min(26vw, calc((100vh - var(--caption-h) - 160px) * .46), 340px); position:relative; display:flex; gap:clamp(16px,3vw,48px); align-items:flex-end; }
 .s03 .phone { padding:0; display:flex; flex-direction:column; align-items:center; gap:16px;
   opacity:0; transform:translateY(40px); transition:opacity .8s var(--ease), transform .8s var(--ease), filter .6s; }
 .s03 .phone:nth-child(2){ transition-delay:.12s } .s03 .phone:nth-child(3){ transition-delay:.24s }
 .s03.in .phone { opacity:1; transform:none; }
-.s03 .screen { width:var(--w); height:auto; border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+/* the app itself, full screen in a plain iPhone: no store headline, no frame-in-a-frame */
+.s03 .screen { width:var(--w); aspect-ratio:9/19.5; height:auto; object-fit:cover; object-position:top; background:#fff;
+  border:calc(var(--w) * .025) solid #0b0d10; border-radius:calc(var(--w) * .15);
+  box-shadow:0 0 0 1px rgba(203,208,219,.16), 0 30px 70px rgba(0,0,0,.6); }
 .s03 .label { display:flex; align-items:center; gap:10px; font:500 12px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--mute); }
 .s03 .label img { width:22px; height:22px; border-radius:6px; }
 .s03 .phone:hover { transform:translateY(-8px); }
