@@ -11,12 +11,16 @@ const only = params.get('scene');
 const { beats, clips, chapters, v } = await (await fetch('script.json', { cache: 'no-cache' })).json();   // always revalidated, so text and voice never come from different versions
 const clipById = Object.fromEntries(clips.map(c => [c.id, c]));
 const order = beats.flatMap(b => [b.id, ...(b.chips ?? []).map(c => c.clip)]);   // the full walk-through, answers included
+// sections are the chapters (the opening is its own): one plays straight through, answers and all, and it stops only between them
+const section = {};
+{ let s = 0; for (const id of order) { if (chapters.some(c => c.start === id)) s++; section[id] = s; } }
 const stage = document.getElementById('stage');
 const captions = document.getElementById('captions');
 const progress = document.getElementById('progress');
 const chapterNav = document.getElementById('chapters');
 const chipsEl = document.getElementById('chips');
 const audio = new Audio();
+const askedEl = document.body.appendChild(Object.assign(document.createElement('div'), { id: 'asked', hidden: true }));
 
 const asset = p => `assets/${p}`;
 
@@ -78,6 +82,7 @@ function playItem(item, kind, from = 0) {
   clock = from; cues = []; waiting = false; hideChips();
   if (paused && !only) unpause();
   setMic('on');
+  askedEl.hidden = kind !== 'clip'; askedEl.textContent = kind === 'clip' ? item.title : '';
   words = setCaption(item);
   ctx = {
     asset, scene: item, root: roots[visual], duration: item.duration,
@@ -111,32 +116,25 @@ function playClip(id) {
   playItem(clipById[id], 'clip');
 }
 
-// after a beat (or an answer), offer that beat's remaining questions and Continue
+// what Continue plays next: back to an interrupted line, else this beat's next answer, else the next beat
+function upcoming() {
+  if (returnTo && current?.kind === 'clip') return beats[returnTo.i].id;
+  const open = (beats[beatIdx]?.chips ?? []).filter(c => !used.has(c.clip));
+  return open.length ? open[0].clip : beats[beatIdx + 1]?.id ?? null;
+}
+// after a beat or an answer: keep going inside a section; at the end of one, stop for questions, or Continue
 function offer() {
-  const beat = beats[beatIdx];
-  const open = beat.chips.filter(c => !used.has(c.clip));
-  const last = beatIdx >= beats.length - 1;
-  const back = returnTo && current?.kind === 'clip';                      // an answer to an interruption: Continue returns to the line
-  if (!open.length && (!last || back)) return only ? undefined : next();  // nothing left to ask here: keep talking
+  const following = upcoming();
+  const back = returnTo && current?.kind === 'clip';                  // answered an interruption: straight back to the line
+  if (following && (back || section[following] === section[current.item.id])) return only ? undefined : next();
   waiting = true;
   quietSince = performance.now(); setMic('ask');
-  if (last && !open.length) return document.body.classList.add('waiting'); // the close holds on its own buttons, still listening
-  chipsEl.innerHTML = '';
-  open.forEach(c => {
-    const b = document.createElement('button');
-    b.className = 'chip'; b.textContent = c.label;
-    b.onclick = () => playClip(c.clip);
-    chipsEl.appendChild(b);
-  });
-  if (!last || back) {
-    const go = document.createElement('button');
-    go.className = 'chip go'; go.textContent = 'Continue →';
-    go.onclick = next;
-    chipsEl.appendChild(go);
-  }
-  chipsEl.hidden = false;
   document.body.classList.add('waiting');
-  if ((!last || back) && !paused && !only) startAutoContinue();
+  if (!following) return;                                            // the close holds on its own buttons, still listening
+  chipsEl.innerHTML = '';
+  chipsEl.appendChild(chip('Continue →', next, 'go'));
+  chipsEl.hidden = false;
+  if (!paused && !only) startAutoContinue();
 }
 // nobody picks a question within 5 s: carry on, with the countdown shown on Continue
 const AUTO_MS = 5000;
@@ -156,9 +154,8 @@ function stopAutoContinue() {
 function hideChips() { stopAutoContinue(); chipsEl.hidden = true; chipsEl.innerHTML = ''; document.body.classList.remove('waiting'); }
 function next() {
   if (returnTo && current?.kind === 'clip') return playBeat(returnTo.i, returnTo.t);   // back to the line they interrupted
-  const open = (beats[beatIdx]?.chips ?? []).filter(c => !used.has(c.clip));
-  if (open.length) return playClip(open[0].clip);    // every answer in the chapter plays, in order, unless someone picks one first
-  if (beatIdx < beats.length - 1) playBeat(beatIdx + 1);
+  const id = upcoming();                               // every answer in a section plays, in order, unless someone asked it first
+  if (id) clipById[id] ? playClip(id) : playBeat(beats.findIndex(b => b.id === id));
 }
 
 function step() {

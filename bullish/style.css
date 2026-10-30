@@ -126,6 +126,13 @@ body.talking #controls, body.talking #chapters { opacity: .25; pointer-events: n
 body.talking #captions .w { color: var(--ink); }
 @media (max-width: 720px) { #talk { right: 20px; bottom: 20px; } }
 
+/* the question an answer is answering, shown while it plays */
+#asked { position: fixed; z-index: 16; left: 50%; bottom: calc(46px + 3.2em + 18px); transform: translateX(-50%); max-width: calc(100vw - 48px);
+  padding: 8px 15px; border-radius: 999px; border: 1px solid rgba(203,208,219,.22); background: rgba(0,0,0,.5);
+  font: 500 14px var(--sans); color: var(--mute); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; animation: chipsIn .45s var(--ease); }
+#asked[hidden], body.waiting #asked, body.preview #asked { display: none; }
+@media (max-width: 720px) { #asked { bottom: calc(70px + 4.5em + 12px); } }
+
 /* ---------- questions people can tap after a beat */
 #chips {
   position: fixed; z-index: 16; left: 50%; bottom: calc(46px + 3.2em + 18px); transform: translateX(-50%);

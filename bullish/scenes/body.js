@@ -1,4 +1,4 @@
-// body · A body for the abstract: Muse arrives, then moves (Meta's own launch footage) on "Meta gave the AI thing a body";
+// body · A body for the abstract: Muse arrives, then runs (cut from Meta's launch video) on "Meta gave the AI thing a body";
 // then the three jobs a body does that a logo can't. Hover a job to bring it forward.
 const JOBS = [
   ['explains', 'Explains', 'People understand “a helper” long before they understand “an agent.”'],
@@ -14,10 +14,7 @@ export default {
           <div class="glow"></div>
           <img src="${asset('s05/muse.png')}" alt="The Muse character">
         </div>
-        <figure class="clip">
-          <video src="${asset('body/muse-run.mp4')}" muted playsinline loop preload="auto" aria-label="Muse running on a treadmill under confetti"></video>
-          <figcaption>Meta · Muse launch video</figcaption>
-        </figure>
+        <img class="clip" src="${asset('body/muse-run.webp')}" alt="Muse running">
         <div class="col">
           <p class="kick">A body does three jobs a logo can’t</p>
           ${JOBS.map(([k, h, d]) => `<div class="job" data-k="${k}"><h3>${h}</h3><p>${d}</p></div>`).join('')}
@@ -28,19 +25,12 @@ export default {
     const s = root.querySelector('.sbody');
     s.className = 'sbody snap'; void s.offsetWidth; s.classList.remove('snap');
     s.querySelectorAll('.job').forEach(j => j.classList.remove('on'));
-    const v = s.querySelector('video');
-    v.pause(); v.currentTime = 0;
     at(0.2, () => s.classList.add('in'));                    // "Muse appeared with a fuzzy, rosy-cheeked character"
-    atWord('gave', () => {                                   // "Meta gave the “AI” thing a body."
-      s.classList.add('moving');
-      v.playbackRate = .6;                                   // 1.2 s of footage, slowed so the step reads
-      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) v.play().catch(() => {});
-    });
+    atWord('gave', () => s.classList.add('moving'));        // "Meta gave the “AI” thing a body."
     atWord('feels', () => s.classList.add('warm'));          // "It changed how the category feels."
     atWord('three', () => s.classList.add('jobs'));          // "A body does three jobs a logo can't."
     JOBS.forEach(([k]) => atWord(k, () => s.querySelector(`[data-k="${k}"]`).classList.add('on')));
   },
-  exit({ root }) { root.querySelector('.sbody video').pause(); },
 };
 
 const css = `
@@ -56,11 +46,8 @@ const css = `
 .sbody.warm .glow { opacity:1; transform:translate(-50%,-50%) scale(1.1); }
 .sbody .fig { grid-column:1; grid-row:1; }
 .sbody .col, .sbody .clip { grid-column:2; grid-row:1; }        /* the clip and the jobs share a place; one shows at a time */
-.sbody .clip { margin:0; justify-self:center; width:min(100%, 620px); opacity:0; transform:translateY(18px) scale(.97); pointer-events:none;
-  transition:opacity .8s var(--ease), transform 1s var(--ease); }
-.sbody .clip video { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:18px; background:#fff;
-  border:1px solid rgba(255,255,255,.08); box-shadow:0 30px 60px rgba(0,0,0,.5); }
-.sbody .clip figcaption { margin-top:12px; font:500 11px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--mute); }
+.sbody .clip { justify-self:center; height:min(46vh,400px); width:auto; max-width:100%; filter:drop-shadow(0 26px 34px rgba(0,0,0,.6));
+  opacity:0; transform:translateX(-24px); pointer-events:none; transition:opacity .8s var(--ease), transform 1s var(--ease); }
 .sbody.moving .clip { opacity:1; transform:none; }
 .sbody.jobs .clip { opacity:0; }
 .sbody .col { display:grid; gap:clamp(18px,3vh,30px); max-width:460px; }
@@ -76,7 +63,7 @@ const css = `
   [data-scene="body"] .sbody { grid-template-columns:1fr; grid-template-rows:auto auto; align-content:center; gap:3vh; padding:0 6vw; }
   .sbody .fig { height:min(30vh,300px); }
   .sbody .col, .sbody .clip { grid-column:1; grid-row:2; }
-  .sbody .clip { width:min(100%, 520px); }
+  .sbody .clip { height:min(24vh,240px); }
 }
 `;
 document.head.insertAdjacentHTML('beforeend', `<style>${css}</style>`);
