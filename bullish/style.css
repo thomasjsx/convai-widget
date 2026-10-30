@@ -38,7 +38,7 @@ body.paused .scene * { animation-play-state: paused !important; }
 /* ---------- captions */
 #captions {
   position: fixed; z-index: 15; left: 50%; bottom: 46px; transform: translateX(-50%);
-  width: min(920px, calc(100vw - 48px));
+  width: min(920px, calc(100vw - 2 * 130px));    /* clear of the pause button and mic dot on both sides */
   text-align: center; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.45; letter-spacing: -.005em;
   min-height: 2.9em;
 }
@@ -65,6 +65,8 @@ body.paused .scene * { animation-play-state: paused !important; }
 #mic { margin: 0; align-self: center; display: flex; align-items: center; gap: 9px; max-width: min(46vw, 420px);
   font: 500 11px/1.35 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); transition: color .3s; }
 #mic[hidden] { display: none; }
+/* just the dot on screen: the opening line already invites interruptions; the words stay for screen readers */
+#mic span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 #mic i { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: talkPulse 1.8s infinite; }
 #mic[data-state="ask"] { color: var(--ink); }
 #mic[data-state="ask"] i { animation-duration: .9s; }
@@ -96,7 +98,7 @@ body.preview #start, body.preview #chapters, body.preview #controls { display: n
   :root { --caption-h: 150px; }
   #chapters { display: none; }
   #controls { left: 20px; bottom: 20px; }
-  #captions { bottom: 70px; }
+  #captions { bottom: 70px; width: calc(100vw - 40px); }   /* on phones the controls sit below the captions */
 }
 
 /* placeholder for scenes not built yet */

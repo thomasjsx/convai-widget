@@ -17,6 +17,9 @@ export default {
   mount(root, { asset }) {
     root.innerHTML = `
       <div class="s10">
+        <div class="shelf" aria-hidden="true">
+          ${['labubu', 'tamagotchi', 'charm'].map((f, i) => `<figure style="--i:${i}"><img src="${asset(`s05/${f}.png`)}" alt=""><figcaption>Week ${i + 1}</figcaption></figure>`).join('')}
+        </div>
         <div class="ask">
           <span class="kick">Ask the team first</span>
           ${PROMPTS.map((p, i) => `
@@ -51,10 +54,14 @@ export default {
       c.classList.toggle('flipped');
     });
   },
-  enter({ root, at, atWord }) {
+  enter({ root, at, atWord, scene }) {
     const s = root.querySelector('.s10');
     const cards = [...s.querySelectorAll('.card')];
     s.className = 's10';
+    if (scene.id === 'c10') {                                // "Each designer brings one piece of culture every week."
+      atWord('culture', () => s.classList.add('shelf-on'));
+      atWord('first', () => s.classList.add('shelf-first'));   // "Thomas goes first."
+    }
     cards.forEach(c => c.classList.remove('on', 'cur', 'flipped'));
     const light = i => () => {
       cards.forEach((c, j) => c.classList.toggle('cur', j === i));
@@ -70,6 +77,14 @@ export default {
 };
 
 const css = `
+.s10 .shelf { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:clamp(24px,5vw,80px); pointer-events:none; }
+.s10 .shelf figure { margin:0; display:grid; justify-items:center; gap:16px; opacity:0; transform:translateY(24px);
+  transition:opacity .7s var(--ease) calc(var(--i) * .25s), transform .9s var(--ease) calc(var(--i) * .25s); }
+.s10 .shelf img { height:min(34vh,300px); width:auto; filter:drop-shadow(0 24px 34px rgba(0,0,0,.6)); }
+.s10 .shelf figcaption { font:500 12px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--mute); }
+.s10.shelf-on .shelf figure { opacity:1; transform:none; }
+.s10.shelf-first .shelf figure:not(:first-child) { opacity:.35; }
+.s10.shelf-first .shelf figure:first-child figcaption { color:var(--green); }
 [data-scene="s10"] .s10 { position:absolute; inset:0; container-type:size; --pad:clamp(20px,7vw,120px); }
 .s10 .kick { display:block; font:500 11px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--green); }
 

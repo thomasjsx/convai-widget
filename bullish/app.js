@@ -175,7 +175,7 @@ function step() {
   const cur = words.filter(w => clock >= w.t).pop() ?? words[0];
   if (cur && cur.sentence !== shownSentence) { shownSentence = cur.sentence; showSentence(shownSentence); }
   progress.style.width = `${((order.indexOf(item.id) + Math.min(clock / item.duration, 1)) / order.length) * 100}%`;
-  if (clock >= item.duration + 0.4) {
+  if (clock >= item.duration + 0.05) {
     if (only) return;
     offer();
   }
@@ -226,10 +226,13 @@ const keywords = s => (s.toLowerCase().replace(/[‘’]/g, "'").match(/[a-z']+/
 let rec = null, listening = false, lastAct = 0;
 
 const MIC = { on: 'Say “pause” to ask a question', ask: 'Listening · ask, or say “continue”', miss: 'No answer for that one · pick a question or say “continue”' };
+let micFold = null;
 function setMic(state) {
   if (!listening) return;
+  const changed = mic.dataset.state !== state;
   mic.hidden = false; mic.dataset.state = state;
-  mic.querySelector('span').textContent = MIC[state];
+  mic.querySelector('span').textContent = MIC[state]; mic.title = MIC[state];
+  if (changed) { mic.classList.remove('folded'); clearTimeout(micFold); micFold = setTimeout(() => mic.classList.add('folded'), 5000); }
 }
 
 // the voice comes back through the mic too: a word it said in the last few seconds isn't the viewer talking

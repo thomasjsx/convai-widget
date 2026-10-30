@@ -72,7 +72,7 @@ const css = `
 .s00 .light.on { opacity:1; }
 
 .s00 .copy { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 8vw 2vh; }
-.s00 .say { margin:0; font-weight:500; font-size:clamp(30px, min(4.6vw, 8.2vh), 76px); line-height:1.06; letter-spacing:-.035em; }
+.s00 .say { margin:0; font-weight:500; font-size:clamp(22px, min(4.6vw, calc((100vh - var(--caption-h) - 120px) / 8.5)), 76px); line-height:1.06; letter-spacing:-.035em; }
 .s00 .l1, .s00 .l2, .s00 .row { display:block; }
 .s00 .l2 { margin-top:.34em; }
 .s00 .l1 { transition:color 1.4s var(--ease); }
@@ -102,7 +102,7 @@ const css = `
 /* tall or narrow screens: one phrase per line, set larger */
 @media (max-aspect-ratio: 1/1), (max-width: 900px) {
   .s00 .copy { padding:0 max(24px, 8vw) 2vh; }
-  .s00 .say { font-size:clamp(20px, min(8.6vw, 5.2vh), 72px); line-height:1.04; }
+  .s00 .say { font-size:clamp(18px, min(8.6vw, calc((100vh - var(--caption-h) - 100px) / 11.5)), 72px); line-height:1.04; }
   .s00 .ch { display:block; }
 }
 @media (max-width: 720px) { .s00 .copy { padding:0 20px 2vh; } }
