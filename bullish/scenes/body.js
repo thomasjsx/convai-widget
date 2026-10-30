@@ -1,5 +1,5 @@
-// body · A body for the abstract: Muse arrives, then the three jobs a body does that a logo can't.
-// Hover a job to bring it forward.
+// body · A body for the abstract: Muse arrives, then moves (Meta's own launch footage) on "Meta gave the AI thing a body";
+// then the three jobs a body does that a logo can't. Hover a job to bring it forward.
 const JOBS = [
   ['explains', 'Explains', 'People understand “a helper” long before they understand “an agent.”'],
   ['invites', 'Invites', 'A character makes people ask what it is.'],
@@ -14,6 +14,10 @@ export default {
           <div class="glow"></div>
           <img src="${asset('s05/muse.png')}" alt="The Muse character">
         </div>
+        <figure class="clip">
+          <video src="${asset('body/muse-run.mp4')}" muted playsinline loop preload="auto" aria-label="Muse running on a treadmill under confetti"></video>
+          <figcaption>Meta · Muse launch video</figcaption>
+        </figure>
         <div class="col">
           <p class="kick">A body does three jobs a logo can’t</p>
           ${JOBS.map(([k, h, d]) => `<div class="job" data-k="${k}"><h3>${h}</h3><p>${d}</p></div>`).join('')}
@@ -24,11 +28,19 @@ export default {
     const s = root.querySelector('.sbody');
     s.className = 'sbody snap'; void s.offsetWidth; s.classList.remove('snap');
     s.querySelectorAll('.job').forEach(j => j.classList.remove('on'));
-    at(0.2, () => s.classList.add('in'));                    // "Then Muse walked in"
+    const v = s.querySelector('video');
+    v.pause(); v.currentTime = 0;
+    at(0.2, () => s.classList.add('in'));                    // "Muse appeared with a fuzzy, rosy-cheeked character"
+    atWord('gave', () => {                                   // "Meta gave the “AI” thing a body."
+      s.classList.add('moving');
+      v.playbackRate = .6;                                   // 1.2 s of footage, slowed so the step reads
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) v.play().catch(() => {});
+    });
     atWord('feels', () => s.classList.add('warm'));          // "It changed how the category feels."
     atWord('three', () => s.classList.add('jobs'));          // "A body does three jobs a logo can't."
     JOBS.forEach(([k]) => atWord(k, () => s.querySelector(`[data-k="${k}"]`).classList.add('on')));
   },
+  exit({ root }) { root.querySelector('.sbody video').pause(); },
 };
 
 const css = `
@@ -42,6 +54,15 @@ const css = `
   background:radial-gradient(closest-side, rgba(255,214,180,.22), rgba(255,190,160,.06) 55%, transparent 75%); transition:all 1.4s var(--ease); }
 .sbody.in .glow { opacity:.7; transform:translate(-50%,-50%) scale(.9); }
 .sbody.warm .glow { opacity:1; transform:translate(-50%,-50%) scale(1.1); }
+.sbody .fig { grid-column:1; grid-row:1; }
+.sbody .col, .sbody .clip { grid-column:2; grid-row:1; }        /* the clip and the jobs share a place; one shows at a time */
+.sbody .clip { margin:0; justify-self:center; width:min(100%, 620px); opacity:0; transform:translateY(18px) scale(.97); pointer-events:none;
+  transition:opacity .8s var(--ease), transform 1s var(--ease); }
+.sbody .clip video { display:block; width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:18px; background:#fff;
+  border:1px solid rgba(255,255,255,.08); box-shadow:0 30px 60px rgba(0,0,0,.5); }
+.sbody .clip figcaption { margin-top:12px; font:500 11px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--mute); }
+.sbody.moving .clip { opacity:1; transform:none; }
+.sbody.jobs .clip { opacity:0; }
 .sbody .col { display:grid; gap:clamp(18px,3vh,30px); max-width:460px; }
 .sbody .kick { margin:0; font:500 12px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--mute);
   opacity:0; transition:opacity .8s var(--ease); }
@@ -54,6 +75,8 @@ const css = `
 @media (max-aspect-ratio: 1/1), (max-width: 900px) {
   [data-scene="body"] .sbody { grid-template-columns:1fr; grid-template-rows:auto auto; align-content:center; gap:3vh; padding:0 6vw; }
   .sbody .fig { height:min(30vh,300px); }
+  .sbody .col, .sbody .clip { grid-column:1; grid-row:2; }
+  .sbody .clip { width:min(100%, 520px); }
 }
 `;
 document.head.insertAdjacentHTML('beforeend', `<style>${css}</style>`);
