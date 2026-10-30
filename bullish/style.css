@@ -33,11 +33,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .scene.active { opacity: 1; visibility: visible; transition: opacity .6s var(--ease); }
 
-/* ---------- byline (Thomas is the presenter) */
-#byline {
-  position: fixed; z-index: 15; top: 40px; left: 40px;
-  font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--mute);
-}
 body.paused .scene * { animation-play-state: paused !important; }
 
 /* ---------- captions */
@@ -91,7 +86,6 @@ body.preview #start, body.preview #chapters, body.preview #controls { display: n
 @media (max-width: 720px) {
   :root { --caption-h: 150px; }
   #chapters { display: none; }
-  #byline { left: 20px; top: 22px; }
   #controls { left: 20px; bottom: 20px; }
   #captions { bottom: 70px; }
 }
@@ -101,9 +95,6 @@ body.preview #start, body.preview #chapters, body.preview #controls { display: n
 .placeholder b { font: 500 13px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
 .placeholder p { margin: 0; color: var(--mute); font-size: 18px; line-height: 1.5; }
 
-/* title cards carry Thomas's name themselves */
-body[data-scene="s00"] #byline, body[data-scene="s12"] #byline { opacity: 0; }
-#byline { transition: opacity .5s var(--ease); }
 
 /* nothing to control until it plays */
 body:not(.playing):not(.preview) #controls, body:not(.playing):not(.preview) #chapters { opacity: 0; pointer-events: none; }

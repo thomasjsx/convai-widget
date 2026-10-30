@@ -67,7 +67,7 @@ const showSentence = n => { for (const w of words) w.el.hidden = w.sentence !== 
 let beatIdx = -1, current = null, visual = null, ctx = null;
 let clock = 0, last = performance.now(), paused = false, waiting = false, cues = [];
 const used = new Set();
-const norm = w => w.toLowerCase().replace(/[^a-z0-9#%']/g, '');
+const norm = w => w.toLowerCase().replace(/[‘’]/g, "'").replace(/[^a-z0-9#%']/g, '');
 
 function playItem(item, kind) {
   if (ctx && visual) { mods[visual].exit?.(ctx); roots[visual].classList.remove('active'); }

@@ -4,226 +4,274 @@
    "id": "b0",
    "scene": "s00",
    "title": "The thesis",
-   "vo": "Hi. I'm an AI Thomas Stevenson built to walk you through his thinking. Interrupt me anytime, and ask anything. A good campaign looks right. A memorable one makes people feel something. What moves it from one to the other is looking at something complex through a lens nobody else in the category would choose.",
+   "vo": "Hi. I\u2019m a Conversational versions Thomas built to walk you through his thinking. Please, interrupt me anytime, and ask anything. A good campaign looks correct, proper and expected. A memorable campaign adds to that those campaign's can make people feel something. What moves a campaign from one to the other is looking at something complex through an unlikely lens nobody else in the category would choose.",
    "chips": [],
    "audio": "audio/b0.mp3",
-   "duration": 17.67,
+   "duration": 22.87,
    "words": [
     [
      "Hi.",
      0.0
     ],
     [
-     "I'm",
-     0.662
-    ],
-    [
-     "an",
-     0.848
-    ],
-    [
-     "AI",
-     0.987
-    ],
-    [
-     "Thomas",
-     1.393
-    ],
-    [
-     "Stevenson",
-     1.718
-    ],
-    [
-     "built",
-     2.287
-    ],
-    [
-     "to",
-     2.531
-    ],
-    [
-     "walk",
-     2.635
-    ],
-    [
-     "you",
-     2.856
-    ],
-    [
-     "through",
-     2.972
-    ],
-    [
-     "his",
-     3.216
-    ],
-    [
-     "thinking.",
-     3.355
-    ],
-    [
-     "Interrupt",
-     4.621
-    ],
-    [
-     "me",
-     5.039
-    ],
-    [
-     "anytime,",
-     5.166
-    ],
-    [
-     "and",
-     5.677
-    ],
-    [
-     "ask",
-     5.805
-    ],
-    [
-     "anything.",
-     6.06
-    ],
-    [
-     "A",
-     7.117
-    ],
-    [
-     "good",
-     7.279
-    ],
-    [
-     "campaign",
-     7.477
-    ],
-    [
-     "looks",
-     7.883
-    ],
-    [
-     "right.",
-     8.127
-    ],
-    [
-     "A",
-     8.8
-    ],
-    [
-     "memorable",
-     8.951
-    ],
-    [
-     "one",
-     9.416
-    ],
-    [
-     "makes",
-     9.636
-    ],
-    [
-     "people",
-     9.857
-    ],
-    [
-     "feel",
-     10.159
-    ],
-    [
-     "something.",
-     10.461
-    ],
-    [
-     "What",
-     11.68
-    ],
-    [
-     "moves",
-     11.958
-    ],
-    [
-     "it",
-     12.272
-    ],
-    [
-     "from",
-     12.388
-    ],
-    [
-     "one",
-     12.62
-    ],
-    [
-     "to",
-     12.852
-    ],
-    [
-     "the",
-     12.98
-    ],
-    [
-     "other",
-     13.119
-    ],
-    [
-     "is",
-     13.351
-    ],
-    [
-     "looking",
-     13.491
-    ],
-    [
-     "at",
-     13.758
-    ],
-    [
-     "something",
-     13.851
-    ],
-    [
-     "complex",
-     14.199
-    ],
-    [
-     "through",
-     14.791
+     "I\u2019m",
+     0.488
     ],
     [
      "a",
-     15.035
+     0.685
     ],
     [
-     "lens",
-     15.116
+     "Conversational",
+     0.755
     ],
     [
-     "nobody",
-     15.499
+     "versions",
+     1.451
     ],
     [
-     "else",
-     15.824
+     "Thomas",
+     2.717
     ],
     [
-     "in",
-     16.01
+     "built",
+     3.146
+    ],
+    [
+     "to",
+     3.367
+    ],
+    [
+     "walk",
+     3.46
+    ],
+    [
+     "you",
+     3.692
+    ],
+    [
+     "through",
+     3.808
+    ],
+    [
+     "his",
+     4.075
+    ],
+    [
+     "thinking.",
+     4.238
+    ],
+    [
+     "Please,",
+     4.946
+    ],
+    [
+     "interrupt",
+     5.236
+    ],
+    [
+     "me",
+     5.596
+    ],
+    [
+     "anytime,",
+     5.724
+    ],
+    [
+     "and",
+     6.235
+    ],
+    [
+     "ask",
+     6.362
+    ],
+    [
+     "anything.",
+     6.606
+    ],
+    [
+     "A",
+     7.43
+    ],
+    [
+     "good",
+     7.581
+    ],
+    [
+     "campaign",
+     7.755
+    ],
+    [
+     "looks",
+     8.15
+    ],
+    [
+     "correct,",
+     8.394
+    ],
+    [
+     "proper",
+     8.8
+    ],
+    [
+     "and",
+     9.149
+    ],
+    [
+     "expected.",
+     9.265
+    ],
+    [
+     "A",
+     10.194
+    ],
+    [
+     "memorable",
+     10.356
+    ],
+    [
+     "campaign",
+     10.809
+    ],
+    [
+     "adds",
+     11.401
+    ],
+    [
+     "to",
+     11.773
+    ],
+    [
+     "that",
+     11.912
+    ],
+    [
+     "those",
+     12.167
+    ],
+    [
+     "campaign's",
+     12.434
+    ],
+    [
+     "can",
+     12.98
+    ],
+    [
+     "make",
+     13.131
+    ],
+    [
+     "people",
+     13.293
+    ],
+    [
+     "feel",
+     13.595
+    ],
+    [
+     "something.",
+     13.909
+    ],
+    [
+     "What",
+     14.698
+    ],
+    [
+     "moves",
+     14.988
+    ],
+    [
+     "a",
+     15.383
+    ],
+    [
+     "campaign",
+     15.476
+    ],
+    [
+     "from",
+     16.091
+    ],
+    [
+     "one",
+     16.312
+    ],
+    [
+     "to",
+     16.509
     ],
     [
      "the",
-     16.092
+     16.649
+    ],
+    [
+     "other",
+     16.8
+    ],
+    [
+     "is",
+     17.369
+    ],
+    [
+     "looking",
+     17.566
+    ],
+    [
+     "at",
+     17.868
+    ],
+    [
+     "something",
+     17.984
+    ],
+    [
+     "complex",
+     18.344
+    ],
+    [
+     "through",
+     18.982
+    ],
+    [
+     "an",
+     19.203
+    ],
+    [
+     "unlikely",
+     19.354
+    ],
+    [
+     "lens",
+     19.934
+    ],
+    [
+     "nobody",
+     20.329
+    ],
+    [
+     "else",
+     20.724
+    ],
+    [
+     "in",
+     20.933
+    ],
+    [
+     "the",
+     21.026
     ],
     [
      "category",
-     16.196
+     21.13
     ],
     [
      "would",
-     16.73
+     21.641
     ],
     [
      "choose.",
-     16.916
+     21.827
     ]
    ],
    "voice": "Eric"
@@ -232,7 +280,7 @@
    "id": "b1",
    "scene": "s02",
    "title": "What Thomas picked",
-   "vo": "The work he loves is Muse, by Meta. It does that for an AI agent made for everyone, the most abstract product in tech.",
+   "vo": "The work we will talk about today is Muse, by Meta. Muse does that for an AI agent, agents are the most abstract product in tech.",
    "chips": [
     {
      "label": "So cute sells?",
@@ -244,7 +292,7 @@
     }
    ],
    "audio": "audio/b1.mp3",
-   "duration": 7.46,
+   "duration": 8.52,
    "words": [
     [
      "The",
@@ -252,95 +300,103 @@
     ],
     [
      "work",
-     0.197
+     0.186
     ],
     [
-     "he",
-     0.406
+     "we",
+     0.383
     ],
     [
-     "loves",
-     0.534
+     "will",
+     0.476
+    ],
+    [
+     "talk",
+     0.65
+    ],
+    [
+     "about",
+     0.848
+    ],
+    [
+     "today",
+     1.068
     ],
     [
      "is",
-     0.836
+     1.451
     ],
     [
      "Muse,",
-     0.987
+     1.672
     ],
     [
      "by",
-     1.486
+     2.334
     ],
     [
      "Meta.",
-     1.683
+     2.554
     ],
     [
-     "It",
-     2.299
+     "Muse",
+     3.576
     ],
     [
      "does",
-     2.461
+     3.866
     ],
     [
      "that",
-     2.647
+     4.087
     ],
     [
      "for",
-     2.856
+     4.331
     ],
     [
      "an",
-     3.007
+     4.493
     ],
     [
      "AI",
-     3.135
+     4.632
     ],
     [
-     "agent",
-     3.529
+     "agent,",
+     5.039
     ],
     [
-     "made",
-     3.843
+     "agents",
+     5.492
     ],
     [
-     "for",
-     4.063
-    ],
-    [
-     "everyone,",
-     4.261
+     "are",
+     5.863
     ],
     [
      "the",
-     5.004
+     5.991
     ],
     [
      "most",
-     5.143
+     6.095
     ],
     [
      "abstract",
-     5.399
+     6.374
     ],
     [
      "product",
-     5.933
+     6.978
     ],
     [
      "in",
-     6.339
+     7.407
     ],
     [
      "tech.",
-     6.467
+     7.546
     ]
    ],
    "voice": "Eric"
@@ -473,7 +529,7 @@
    "id": "b3",
    "scene": "body",
    "title": "A body for the abstract",
-   "vo": "Then Muse walked in with a fuzzy, rosy-cheeked character. It gave the thing a body. Muse didn't change what the category can do. It changed how the category feels.",
+   "vo": "Muse appeared in with a fuzzy, rosy-cheeked character. Meta gave the \u201cAI\u201d thing a body. Muse didn\u2019t change what the category can do. It changed how the category feels.",
    "chips": [
     {
      "label": "What does a body do?",
@@ -482,130 +538,126 @@
     {
      "label": "Where did it come from?",
      "clip": "c3"
-    },
-    {
-     "label": "Who made it?",
-     "clip": "c4"
     }
    ],
    "audio": "audio/b3.mp3",
-   "duration": 10.33,
+   "duration": 11.5,
    "words": [
     [
-     "Then",
+     "Muse",
      0.0
     ],
     [
-     "Muse",
-     0.29
-    ],
-    [
-     "walked",
-     0.604
+     "appeared",
+     0.372
     ],
     [
      "in",
-     0.94
+     0.778
     ],
     [
      "with",
-     1.08
+     0.952
     ],
     [
      "a",
-     1.254
+     1.126
     ],
     [
      "fuzzy,",
-     1.347
+     1.207
     ],
     [
      "rosy-cheeked",
-     1.741
+     1.591
     ],
     [
      "character.",
-     2.519
+     2.368
     ],
     [
-     "It",
-     3.425
+     "Meta",
+     3.634
     ],
     [
      "gave",
-     3.622
+     3.924
     ],
     [
      "the",
-     3.913
+     4.168
+    ],
+    [
+     "\u201cAI\u201d",
+     4.307
     ],
     [
      "thing",
-     4.04
+     4.772
     ],
     [
      "a",
-     4.272
+     5.004
     ],
     [
      "body.",
-     4.354
+     5.074
     ],
     [
      "Muse",
-     5.19
+     6.014
     ],
     [
-     "didn't",
-     5.526
+     "didn\u2019t",
+     6.316
     ],
     [
      "change",
-     5.84
+     6.618
     ],
     [
      "what",
-     6.246
+     7.129
     ],
     [
      "the",
-     6.42
+     7.314
     ],
     [
      "category",
-     6.536
+     7.43
     ],
     [
      "can",
-     7.07
+     7.93
     ],
     [
      "do.",
-     7.256
+     8.104
     ],
     [
      "It",
-     7.872
+     8.986
     ],
     [
      "changed",
-     8.046
+     9.172
     ],
     [
      "how",
-     8.382
+     9.567
     ],
     [
      "the",
-     8.522
+     9.718
     ],
     [
      "category",
-     8.638
+     9.834
     ],
     [
      "feels.",
-     9.183
+     10.379
     ]
    ],
    "voice": "Eric"
@@ -614,7 +666,7 @@
    "id": "b4",
    "scene": "s03",
    "title": "Staid to interesting",
-   "vo": "Meta isn't a cute company. Its naming and look are staid and corporate: a blue mark built to sit quietly across its apps. Meta didn't redesign the house to make room for Muse. It let one product step outside, with its own mark, its own character and a name with history. The house stayed sober, and one product got a soul. Does every product in your house have to look like the parent?",
+   "vo": "But Why. Why did Meta a company known as building the container make a symbol/ character . Meta's naming and look are staid, corporate, clean: a blue mark built to sit quietly across its apps. Meta didn\u2019t redesign the house to make room for Muse. It let one product step outside, with its own mark, its own character and a name with history. The house stayed sober, and one product got a soul. Does every product in your house have to look like the parent?",
    "chips": [
     {
      "label": "Why would Meta do it?",
@@ -626,299 +678,347 @@
     }
    ],
    "audio": "audio/b4.mp3",
-   "duration": 24.27,
+   "duration": 29.65,
    "words": [
     [
-     "Meta",
+     "But",
      0.0
     ],
     [
-     "isn't",
-     0.673
+     "Why.",
+     0.279
     ],
     [
-     "a",
-     0.987
+     "Why",
+     1.091
     ],
     [
-     "cute",
-     1.057
-    ],
-    [
-     "company.",
-     1.335
-    ],
-    [
-     "Its",
-     2.055
-    ],
-    [
-     "naming",
-     2.322
-    ],
-    [
-     "and",
-     2.659
-    ],
-    [
-     "look",
-     2.775
-    ],
-    [
-     "are",
-     3.019
-    ],
-    [
-     "staid",
-     3.17
-    ],
-    [
-     "and",
-     3.715
-    ],
-    [
-     "corporate:",
-     3.924
-    ],
-    [
-     "a",
-     4.981
-    ],
-    [
-     "blue",
-     5.143
-    ],
-    [
-     "mark",
-     5.445
-    ],
-    [
-     "built",
-     5.805
-    ],
-    [
-     "to",
-     6.072
-    ],
-    [
-     "sit",
-     6.2
-    ],
-    [
-     "quietly",
-     6.432
-    ],
-    [
-     "across",
-     6.896
-    ],
-    [
-     "its",
-     7.279
-    ],
-    [
-     "apps.",
-     7.465
+     "did",
+     1.312
     ],
     [
      "Meta",
-     8.742
+     1.509
     ],
     [
-     "didn't",
-     9.056
+     "a",
+     1.858
     ],
     [
-     "redesign",
-     9.323
+     "company",
+     2.032
+    ],
+    [
+     "known",
+     2.496
+    ],
+    [
+     "as",
+     2.763
+    ],
+    [
+     "building",
+     2.937
     ],
     [
      "the",
-     9.834
+     3.32
     ],
     [
-     "house",
-     9.95
-    ],
-    [
-     "to",
-     10.205
+     "container",
+     3.437
     ],
     [
      "make",
-     10.31
+     4.005
     ],
     [
-     "room",
-     10.484
+     "a",
+     4.214
     ],
     [
-     "for",
-     10.693
-    ],
-    [
-     "Muse.",
-     10.867
-    ],
-    [
-     "It",
-     11.784
-    ],
-    [
-     "let",
-     11.958
-    ],
-    [
-     "one",
-     12.179
-    ],
-    [
-     "product",
-     12.388
-    ],
-    [
-     "step",
-     12.783
-    ],
-    [
-     "outside,",
-     13.119
-    ],
-    [
-     "with",
-     14.025
-    ],
-    [
-     "its",
-     14.245
-    ],
-    [
-     "own",
-     14.408
-    ],
-    [
-     "mark,",
-     14.605
-    ],
-    [
-     "its",
-     15.047
-    ],
-    [
-     "own",
-     15.221
+     "symbol/",
+     4.331
     ],
     [
      "character",
-     15.383
+     4.865
+    ],
+    [
+     ".",
+     5.526
+    ],
+    [
+     "Meta's",
+     6.397
+    ],
+    [
+     "naming",
+     6.803
     ],
     [
      "and",
-     15.975
-    ],
-    [
-     "a",
-     16.173
-    ],
-    [
-     "name",
-     16.289
-    ],
-    [
-     "with",
-     16.591
-    ],
-    [
-     "history.",
-     16.788
-    ],
-    [
-     "The",
-     17.821
-    ],
-    [
-     "house",
-     18.007
-    ],
-    [
-     "stayed",
-     18.239
-    ],
-    [
-     "sober,",
-     18.564
-    ],
-    [
-     "and",
-     19.342
-    ],
-    [
-     "one",
-     19.621
-    ],
-    [
-     "product",
-     19.83
-    ],
-    [
-     "got",
-     20.167
-    ],
-    [
-     "a",
-     20.352
-    ],
-    [
-     "soul.",
-     20.434
-    ],
-    [
-     "Does",
-     21.072
-    ],
-    [
-     "every",
-     21.328
-    ],
-    [
-     "product",
-     21.583
-    ],
-    [
-     "in",
-     21.966
-    ],
-    [
-     "your",
-     22.071
-    ],
-    [
-     "house",
-     22.233
-    ],
-    [
-     "have",
-     22.5
-    ],
-    [
-     "to",
-     22.674
+     7.221
     ],
     [
      "look",
-     22.767
+     7.361
     ],
     [
-     "like",
-     22.976
+     "are",
+     7.686
+    ],
+    [
+     "staid,",
+     7.953
+    ],
+    [
+     "corporate,",
+     8.766
+    ],
+    [
+     "clean:",
+     9.334
+    ],
+    [
+     "a",
+     10.24
+    ],
+    [
+     "blue",
+     10.391
+    ],
+    [
+     "mark",
+     10.681
+    ],
+    [
+     "built",
+     10.995
+    ],
+    [
+     "to",
+     11.262
+    ],
+    [
+     "sit",
+     11.378
+    ],
+    [
+     "quietly",
+     11.598
+    ],
+    [
+     "across",
+     12.063
+    ],
+    [
+     "its",
+     12.423
+    ],
+    [
+     "apps.",
+     12.597
+    ],
+    [
+     "Meta",
+     13.804
+    ],
+    [
+     "didn\u2019t",
+     14.118
+    ],
+    [
+     "redesign",
+     14.385
     ],
     [
      "the",
-     23.139
+     14.907
+    ],
+    [
+     "house",
+     15.035
+    ],
+    [
+     "to",
+     15.337
+    ],
+    [
+     "make",
+     15.441
+    ],
+    [
+     "room",
+     15.639
+    ],
+    [
+     "for",
+     15.894
+    ],
+    [
+     "Muse.",
+     16.068
+    ],
+    [
+     "It",
+     17.055
+    ],
+    [
+     "let",
+     17.241
+    ],
+    [
+     "one",
+     17.45
+    ],
+    [
+     "product",
+     17.694
+    ],
+    [
+     "step",
+     18.123
+    ],
+    [
+     "outside,",
+     18.437
+    ],
+    [
+     "with",
+     19.04
+    ],
+    [
+     "its",
+     19.203
+    ],
+    [
+     "own",
+     19.354
+    ],
+    [
+     "mark,",
+     19.551
+    ],
+    [
+     "its",
+     20.167
+    ],
+    [
+     "own",
+     20.376
+    ],
+    [
+     "character",
+     20.538
+    ],
+    [
+     "and",
+     20.991
+    ],
+    [
+     "a",
+     21.107
+    ],
+    [
+     "name",
+     21.188
+    ],
+    [
+     "with",
+     21.444
+    ],
+    [
+     "history.",
+     21.618
+    ],
+    [
+     "The",
+     22.779
+    ],
+    [
+     "house",
+     22.941
+    ],
+    [
+     "stayed",
+     23.15
+    ],
+    [
+     "sober,",
+     23.452
+    ],
+    [
+     "and",
+     24.056
+    ],
+    [
+     "one",
+     24.276
+    ],
+    [
+     "product",
+     24.462
+    ],
+    [
+     "got",
+     24.88
+    ],
+    [
+     "a",
+     25.089
+    ],
+    [
+     "soul.",
+     25.182
+    ],
+    [
+     "Does",
+     26.494
+    ],
+    [
+     "every",
+     26.738
+    ],
+    [
+     "product",
+     26.958
+    ],
+    [
+     "in",
+     27.353
+    ],
+    [
+     "your",
+     27.469
+    ],
+    [
+     "house",
+     27.632
+    ],
+    [
+     "have",
+     27.899
+    ],
+    [
+     "to",
+     28.061
+    ],
+    [
+     "look",
+     28.154
+    ],
+    [
+     "like",
+     28.34
+    ],
+    [
+     "the",
+     28.502
     ],
     [
      "parent?",
-     23.243
+     28.607
     ]
    ],
    "voice": "Eric"
@@ -1723,9 +1823,9 @@
    "id": "c1",
    "scene": "s02",
    "title": "Why Muse?",
-   "vo": "What Thomas cares about is taking esoteric things and making them accessible. An AI agent is about as esoteric as products get. You can't see it, you can't hold it, and most people are a little afraid of it.",
+   "vo": "What Thomas cares about is taking esoteric topics, product and making them accessible. An AI agent is about as esoteric as products get. You can\u2019t see it, you can\u2019t hold it, and most people are a little afraid of it.",
    "audio": "audio/c1.mp3",
-   "duration": 12.84,
+   "duration": 13.35,
    "words": [
     [
      "What",
@@ -1733,155 +1833,159 @@
     ],
     [
      "Thomas",
-     0.267
+     0.244
     ],
     [
      "cares",
-     0.604
+     0.58
     ],
     [
      "about",
-     0.859
+     0.871
     ],
     [
      "is",
-     1.091
+     1.138
     ],
     [
      "taking",
-     1.196
+     1.254
     ],
     [
      "esoteric",
-     1.579
+     1.614
     ],
     [
-     "things",
-     2.345
+     "topics,",
+     2.264
+    ],
+    [
+     "product",
+     3.228
     ],
     [
      "and",
-     2.914
+     3.727
     ],
     [
      "making",
-     3.181
+     3.936
     ],
     [
      "them",
-     3.495
+     4.203
     ],
     [
      "accessible.",
-     3.657
+     4.354
     ],
     [
      "An",
-     4.574
+     5.433
     ],
     [
      "AI",
-     4.795
+     5.642
     ],
     [
      "agent",
-     5.248
+     5.991
     ],
     [
      "is",
-     5.689
+     6.327
     ],
     [
      "about",
-     5.898
+     6.455
     ],
     [
      "as",
-     6.13
+     6.687
     ],
     [
      "esoteric",
-     6.339
+     6.885
     ],
     [
      "as",
-     7.14
+     7.558
     ],
     [
      "products",
-     7.303
+     7.721
     ],
     [
      "get.",
-     7.732
+     8.208
     ],
     [
      "You",
-     8.429
-    ],
-    [
-     "can't",
-     8.591
-    ],
-    [
-     "see",
-     8.858
-    ],
-    [
-     "it,",
-     9.067
-    ],
-    [
-     "you",
      9.439
     ],
     [
-     "can't",
-     9.567
+     "can\u2019t",
+     9.636
     ],
     [
-     "hold",
-     9.799
+     "see",
+     9.927
     ],
     [
      "it,",
-     10.043
+     10.147
+    ],
+    [
+     "you",
+     10.263
+    ],
+    [
+     "can\u2019t",
+     10.379
+    ],
+    [
+     "hold",
+     10.612
+    ],
+    [
+     "it,",
+     10.867
     ],
     [
      "and",
-     10.449
+     10.983
     ],
     [
      "most",
-     10.704
+     11.157
     ],
     [
      "people",
-     10.925
-    ],
-    [
-     "are",
-     11.18
-    ],
-    [
-     "a",
-     11.308
-    ],
-    [
-     "little",
      11.366
     ],
     [
+     "are",
+     11.645
+    ],
+    [
+     "a",
+     11.819
+    ],
+    [
+     "little",
+     11.889
+    ],
+    [
      "afraid",
-     11.587
+     12.132
     ],
     [
      "of",
-     11.912
+     12.469
     ],
     [
      "it.",
-     12.016
+     12.562
     ]
    ],
    "voice": "Eric"
@@ -2085,9 +2189,9 @@
    "id": "c3",
    "scene": "s05",
    "title": "Where did it come from?",
-   "vo": "And it comes from culture. Meta read the moment: a character people compare to a Labubu, in a device that looks like a Tamagotchi. Not because it's cute. Because it's current.",
+   "vo": "And it comes from culture. Meta read the moment: a character people can compare to a Labubu, in a device that looks like a 90\u2019s Tamagotchi. Not because it\u2019s cute. Because it\u2019s current.",
    "audio": "audio/c3.mp3",
-   "duration": 12.15,
+   "duration": 13.58,
    "words": [
     [
      "And",
@@ -2099,202 +2203,127 @@
     ],
     [
      "comes",
-     0.348
+     0.337
     ],
     [
      "from",
-     0.592
+     0.557
     ],
     [
      "culture.",
-     0.801
+     0.743
     ],
     [
      "Meta",
-     1.718
+     2.415
     ],
     [
      "read",
-     2.067
+     2.717
     ],
     [
      "the",
-     2.299
+     2.914
     ],
     [
      "moment:",
-     2.438
+     3.03
     ],
     [
      "a",
-     3.251
+     4.261
     ],
     [
      "character",
-     3.402
+     4.389
     ],
     [
      "people",
-     3.936
+     4.841
+    ],
+    [
+     "can",
+     5.132
     ],
     [
      "compare",
-     4.249
+     5.317
     ],
     [
      "to",
-     4.644
+     5.677
     ],
     [
      "a",
-     4.795
+     5.817
     ],
     [
      "Labubu,",
-     4.876
+     5.886
     ],
     [
      "in",
-     5.77
+     7.07
     ],
     [
      "a",
-     5.944
+     7.233
     ],
     [
      "device",
-     6.026
+     7.314
     ],
     [
      "that",
-     6.374
+     7.651
     ],
     [
      "looks",
-     6.536
+     7.802
     ],
     [
      "like",
-     6.792
+     8.046
     ],
     [
      "a",
-     6.989
+     8.22
+    ],
+    [
+     "90\u2019s",
+     8.324
     ],
     [
      "Tamagotchi.",
-     7.094
+     8.684
     ],
     [
      "Not",
-     8.649
+     10.403
     ],
     [
      "because",
-     8.893
+     10.6
     ],
     [
-     "it's",
-     9.183
+     "it\u2019s",
+     10.855
     ],
     [
      "cute.",
-     9.381
+     11.006
     ],
     [
      "Because",
-     10.507
+     11.97
     ],
     [
-     "it's",
-     10.844
+     "it\u2019s",
+     12.295
     ],
     [
      "current.",
-     11.029
-    ]
-   ],
-   "voice": "Eric"
-  },
-  {
-   "id": "c4",
-   "scene": "body",
-   "title": "Who made it?",
-   "vo": "Both inside and outside. An outside lettering artist drew the mark. Muse's own product designer created the character.",
-   "audio": "audio/c4.mp3",
-   "duration": 7.18,
-   "words": [
-    [
-     "Both",
-     0.0
-    ],
-    [
-     "inside",
-     0.348
-    ],
-    [
-     "and",
-     0.755
-    ],
-    [
-     "outside.",
-     0.871
-    ],
-    [
-     "An",
-     1.649
-    ],
-    [
-     "outside",
-     1.846
-    ],
-    [
-     "lettering",
-     2.241
-    ],
-    [
-     "artist",
-     2.612
-    ],
-    [
-     "drew",
-     2.891
-    ],
-    [
-     "the",
-     3.077
-    ],
-    [
-     "mark.",
-     3.181
-    ],
-    [
-     "Muse's",
-     4.191
-    ],
-    [
-     "own",
-     4.621
-    ],
-    [
-     "product",
-     4.807
-    ],
-    [
-     "designer",
-     5.213
-    ],
-    [
-     "created",
-     5.631
-    ],
-    [
-     "the",
-     5.979
-    ],
-    [
-     "character.",
-     6.072
+     12.469
     ]
    ],
    "voice": "Eric"

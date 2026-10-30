@@ -10,15 +10,16 @@ export default {
         <div class="light"></div>
         <div class="copy">
           <h2 class="say">
-            <span class="l1"><span class="ch">${words('A good campaign')}</span> <span class="ch">${words('looks right.')}</span></span>
+            <span class="l1"><span class="row"><span class="ch">${words('A good campaign')}</span> <span class="ch">${words('looks correct,')}</span></span>
+              <span class="row"><span class="ch">${words('proper and expected.')}</span></span></span>
             <span class="l2">
-              <span class="row"><span class="ch">${words('A memorable one')}</span> <span class="ch">${words('makes people')}</span></span>
+              <span class="row"><span class="ch">${words('A memorable campaign')}</span> <span class="ch">${words('adds to that')}</span></span>
+              <span class="row"><span class="ch">${words("those campaign's")}</span> <span class="ch">${words('can make people')}</span></span>
               <span class="row"><span class="ch"><span class="w feel" data-w="feel"><span class="glow" aria-hidden="true">feel</span><span class="t">feel</span></span> ${words('something.')}</span></span>
             </span>
           </h2>
           <div class="sig">
             <i class="rule"></i>
-            <p class="name">Thomas Stevenson</p>
             <p class="for">for Bullish, CoinDesk and Consensus</p>
             <p class="keys"><kbd>Space</kbd> pause <span class="sep"></span><kbd>&larr;</kbd><kbd>&rarr;</kbd> skip</p>
           </div>
@@ -48,7 +49,7 @@ export default {
     s.classList.remove('reset');
 
     // every word lands on its spoken word; count repeats, including any said before the thesis starts
-    const norm = x => x.toLowerCase().replace(/[^a-z']/g, '');
+    const norm = x => x.toLowerCase().replace(/[‘’]/g, "'").replace(/[^a-z']/g, '');
     const spoken = scene.vo.split(/\s+/).map(norm);
     const before = spoken.slice(0, Math.max(0, spoken.indexOf('good') - 1));
     const seen = {};
@@ -77,7 +78,7 @@ const css = `
 .s00 .light.on { opacity:1; }
 
 .s00 .copy { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 8vw 2vh; }
-.s00 .say { margin:0; font-weight:500; font-size:clamp(34px, min(5.3vw, 10.4vh), 84px); line-height:1.06; letter-spacing:-.035em; }
+.s00 .say { margin:0; font-weight:500; font-size:clamp(30px, min(4.6vw, 8.2vh), 76px); line-height:1.06; letter-spacing:-.035em; }
 .s00 .l1, .s00 .l2, .s00 .row { display:block; }
 .s00 .l2 { margin-top:.34em; }
 .s00 .l1 { transition:color 1.4s var(--ease); }
@@ -108,10 +109,8 @@ const css = `
 .s00 .sig { margin-top:clamp(40px, 9vh, 92px); }
 .s00 .sig > * { opacity:0; transform:translateY(10px); transition:opacity 1s var(--ease), transform 1.1s var(--ease); }
 .s00 .rule { display:block; width:56px; height:2px; margin-bottom:24px; background:var(--grad); transform:scaleX(0); transform-origin:left; opacity:1; }
-.s00 .name { margin:0; font-size:clamp(20px, 1.9vw, 28px); font-weight:500; letter-spacing:-.012em; }
 .s00 .for { margin:10px 0 0; font:500 12px/1.5 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--mute); }
 .s00.signed .rule { transform:scaleX(1); transition:transform 1.2s cubic-bezier(.6,0,.2,1); }
-.s00.signed .name { opacity:1; transform:none; transition-delay:.15s; }
 .s00.signed .for { opacity:1; transform:none; transition-delay:.4s; }
 .s00 .keys { display:flex; align-items:center; gap:8px; margin:26px 0 0;
   font:500 11px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; color:rgba(203,208,219,.55); }
@@ -124,11 +123,10 @@ const css = `
 /* tall or narrow screens: one phrase per line, set larger */
 @media (max-aspect-ratio: 1/1), (max-width: 900px) {
   .s00 .copy { padding:0 max(24px, 8vw) 2vh; }
-  .s00 .say { font-size:clamp(32px, 11vw, 84px); line-height:1.04; }
+  .s00 .say { font-size:clamp(26px, 8.6vw, 72px); line-height:1.04; }
   .s00 .ch { display:block; }
   .s00 .sig { margin-top:clamp(36px, 6vh, 72px); }
-  .s00 .name { font-size:clamp(20px, 3.4vw, 28px); }
 }
-@media (max-width: 720px) { .s00 .copy { padding:0 20px 2vh; } }   /* align with the byline */
+@media (max-width: 720px) { .s00 .copy { padding:0 20px 2vh; } }
 `;
 document.head.insertAdjacentHTML('beforeend', `<style>${css}</style>`);
