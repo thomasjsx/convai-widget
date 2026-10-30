@@ -21,9 +21,10 @@ export default {
         </div>
       </div>`;
   },
-  enter({ root, at, atWord }) {
+  enter({ root, at, atWord, kind }) {
     const s = root.querySelector('.sbody');
     s.className = 'sbody snap'; void s.offsetWidth; s.classList.remove('snap');
+    if (kind === 'beat') s.classList.add('solo');            // the beat: Muse alone, centred, still, then it dissolves into the running Muse
     s.querySelectorAll('.job').forEach(j => j.classList.remove('on'));
     at(0.2, () => s.classList.add('in'));                    // "Muse appeared with a fuzzy, rosy-cheeked character"
     atWord('gave', () => s.classList.add('moving'));        // "Meta gave the “AI” thing a body."
@@ -49,6 +50,10 @@ const css = `
 .sbody .clip { justify-self:center; height:min(46vh,400px); width:auto; max-width:100%; filter:drop-shadow(0 26px 34px rgba(0,0,0,.6));
   opacity:0; transform:translateX(-24px); pointer-events:none; transition:opacity .8s var(--ease), transform 1s var(--ease); }
 .sbody.moving .clip { opacity:1; transform:none; }
+/* solo: one Muse in the middle; the still dissolves into the running one in the same spot */
+.sbody.solo .fig, .sbody.solo .clip { grid-column:1 / -1; grid-row:1; justify-self:center; }
+.sbody.solo .clip { height:min(56vh,480px); transform:none; transition:opacity 1.2s var(--ease); }
+.sbody.solo.moving .fig img { opacity:0; transition:opacity 1.2s var(--ease); }
 .sbody.jobs .clip { opacity:0; }
 .sbody .col { display:grid; gap:clamp(18px,3vh,30px); max-width:460px; }
 .sbody .kick { margin:0; font:500 12px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--mute);
@@ -64,6 +69,8 @@ const css = `
   .sbody .fig { height:min(30vh,300px); }
   .sbody .col, .sbody .clip { grid-column:1; grid-row:2; }
   .sbody .clip { height:min(24vh,240px); }
+  .sbody.solo .fig, .sbody.solo .clip { grid-column:1; grid-row:1 / -1; align-self:center; }
+  .sbody.solo .clip { height:min(30vh,300px); }
 }
 `;
 document.head.insertAdjacentHTML('beforeend', `<style>${css}</style>`);
