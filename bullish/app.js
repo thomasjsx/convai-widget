@@ -10,6 +10,7 @@ const only = params.get('scene');
 
 const { beats, clips, chapters, v } = await (await fetch('script.json', { cache: 'no-cache' })).json();   // always revalidated, so text and voice never come from different versions
 const clipById = Object.fromEntries(clips.map(c => [c.id, c]));
+const order = beats.flatMap(b => [b.id, ...(b.chips ?? []).map(c => c.clip)]);   // the full walk-through, answers included
 const stage = document.getElementById('stage');
 const captions = document.getElementById('captions');
 const progress = document.getElementById('progress');
@@ -66,34 +67,38 @@ const showSentence = n => { for (const w of words) w.el.hidden = w.sentence !== 
 // ---------- playback
 let beatIdx = -1, current = null, visual = null, ctx = null;
 let clock = 0, last = performance.now(), paused = false, waiting = false, cues = [];
+let returnTo = null;      // { i, t }: the line someone interrupted, picked up again after the answer
+const heard = [];        // words the voice just said, with when, so the mic can tell them from the viewer
 const used = new Set();
 const norm = w => w.toLowerCase().replace(/[‘’]/g, "'").replace(/[^a-z0-9#%']/g, '');
 
-function playItem(item, kind) {
+function playItem(item, kind, from = 0) {
   if (ctx && visual) { mods[visual].exit?.(ctx); roots[visual].classList.remove('active'); }
   current = { item, kind }; visual = item.scene;
-  clock = 0; cues = []; waiting = false; hideChips();
+  clock = from; cues = []; waiting = false; hideChips();
+  if (paused && !only) unpause();
+  setMic('on');
   words = setCaption(item);
   ctx = {
     asset, scene: item, root: roots[visual], duration: item.duration,
     at: (t, fn) => cues.push({ t, fn, done: false }),
     atWord: (word, fn, nth = 1) => {
       const hits = words.filter(w => norm(w.el.textContent) === norm(word));
-      const hit = hits[nth - 1] ?? hits[0];
-      if (hit) cues.push({ t: hit.t, fn, done: false });   // a word that isn't spoken never fires
+      const hit = hits[nth - 1];
+      if (hit) cues.push({ t: hit.t, fn, done: false });   // a word that isn't spoken (that many times) never fires, so the screen never shows a line the voice doesn't say
     },
   };
   shownSentence = -1; showSentence(0);
   document.body.dataset.scene = visual;
   roots[visual].classList.add('active');
   mods[visual].enter(ctx);
-  if (item.audio) { audio.src = item.audio; audio.currentTime = 0; if (!paused) audio.play().catch(() => {}); }
+  if (item.audio) { audio.src = item.audio; audio.currentTime = from; if (!paused) audio.play().catch(() => {}); }
   else audio.removeAttribute('src');
 }
 
-function playBeat(i) {
-  beatIdx = i;
-  playItem(beats[i], 'beat');
+function playBeat(i, from = 0) {
+  beatIdx = i; returnTo = null;
+  playItem(beats[i], 'beat', from);
   chapterNav.querySelectorAll('button').forEach((b, k, all) => {
     const from = beats.findIndex(x => x.id === b.dataset.start);
     const to = all[k + 1] ? beats.findIndex(x => x.id === all[k + 1].dataset.start) : beats.length;
@@ -111,9 +116,11 @@ function offer() {
   const beat = beats[beatIdx];
   const open = beat.chips.filter(c => !used.has(c.clip));
   const last = beatIdx >= beats.length - 1;
-  if (!open.length && current.kind === 'beat' && !last) return next();   // nothing to ask here: keep talking
-  if (last && !open.length) return;                                       // the close holds on its own buttons
+  const back = returnTo && current?.kind === 'clip';                      // an answer to an interruption: Continue returns to the line
+  if (!open.length && (!last || back)) return only ? undefined : next();  // nothing left to ask here: keep talking
   waiting = true;
+  quietSince = performance.now(); setMic('ask');
+  if (last && !open.length) return document.body.classList.add('waiting'); // the close holds on its own buttons, still listening
   chipsEl.innerHTML = '';
   open.forEach(c => {
     const b = document.createElement('button');
@@ -121,7 +128,7 @@ function offer() {
     b.onclick = () => playClip(c.clip);
     chipsEl.appendChild(b);
   });
-  if (!last) {
+  if (!last || back) {
     const go = document.createElement('button');
     go.className = 'chip go'; go.textContent = 'Continue →';
     go.onclick = next;
@@ -129,7 +136,7 @@ function offer() {
   }
   chipsEl.hidden = false;
   document.body.classList.add('waiting');
-  if (!last && !paused) startAutoContinue();
+  if ((!last || back) && !paused && !only) startAutoContinue();
 }
 // nobody picks a question within 5 s: carry on, with the countdown shown on Continue
 const AUTO_MS = 5000;
@@ -147,7 +154,12 @@ function stopAutoContinue() {
   chipsEl.querySelector('.go')?.classList.remove('timed');
 }
 function hideChips() { stopAutoContinue(); chipsEl.hidden = true; chipsEl.innerHTML = ''; document.body.classList.remove('waiting'); }
-function next() { if (beatIdx < beats.length - 1) playBeat(beatIdx + 1); }
+function next() {
+  if (returnTo && current?.kind === 'clip') return playBeat(returnTo.i, returnTo.t);   // back to the line they interrupted
+  const open = (beats[beatIdx]?.chips ?? []).filter(c => !used.has(c.clip));
+  if (open.length) return playClip(open[0].clip);    // every answer in the chapter plays, in order, unless someone picks one first
+  if (beatIdx < beats.length - 1) playBeat(beatIdx + 1);
+}
 
 function step() {
   // real elapsed time, so a throttled or background tab doesn't fall behind the voice
@@ -157,10 +169,14 @@ function step() {
   const item = current.item;
   clock = item.audio && !audio.paused ? audio.currentTime : clock + dt;
   for (const c of cues) if (!c.done && clock >= c.t) { c.done = true; c.fn(); }
-  for (const w of words) w.el.classList.toggle('said', clock >= w.t);
+  for (const w of words) {
+    const said = clock >= w.t;
+    w.el.classList.toggle('said', said);
+    if (said && !w.heard) { w.heard = true; heard.push({ k: norm(w.el.textContent), at: now }); }
+  }
   const cur = words.filter(w => clock >= w.t).pop() ?? words[0];
   if (cur && cur.sentence !== shownSentence) { shownSentence = cur.sentence; showSentence(shownSentence); }
-  progress.style.width = `${((beatIdx + (current.kind === 'beat' ? Math.min(clock / item.duration, 1) : 1)) / beats.length) * 100}%`;
+  progress.style.width = `${((order.indexOf(item.id) + Math.min(clock / item.duration, 1)) / order.length) * 100}%`;
   if (clock >= item.duration + 0.4) {
     if (only) return;
     offer();
@@ -171,29 +187,152 @@ setInterval(step, 200);                             // keeps time when frames ar
 
 function setPaused(p) {
   paused = p;
+  if (p) quietSince = performance.now();
   document.body.classList.toggle('paused', p);
   document.getElementById('pause').textContent = p ? '▶' : '❚❚';
   if (waiting) p ? stopAutoContinue() : startAutoContinue();    // pausing holds the questions on screen
-  else if (current?.item.audio) p ? audio.pause() : audio.play().catch(() => {});
+  else {
+    if (!p) { hideChips(); setMic('on'); }                        // questions offered mid-line go away when it plays on
+    if (current?.item.audio) p ? audio.pause() : audio.ended || audio.play().catch(() => {});   // never restart a line that has finished
+  }
 }
+// start something new without restarting what was paused
+function unpause() { paused = false; document.body.classList.remove('paused'); document.getElementById('pause').textContent = '❚❚'; }
 
 // ---------- chrome
 chapters.forEach(c => {
   const b = document.createElement('button');
   b.textContent = c.title; b.dataset.start = c.start;
-  b.onclick = () => { setPaused(false); playBeat(beats.findIndex(x => x.id === c.start)); };
+  b.onclick = e => { e.currentTarget.blur(); setPaused(false); playBeat(beats.findIndex(x => x.id === c.start)); };
   chapterNav.appendChild(b);
 });
-document.getElementById('pause').onclick = () => setPaused(!paused);
+document.getElementById('pause').onclick = e => { e.currentTarget.blur(); setPaused(!paused); };
 addEventListener('keydown', e => {
   if (e.target.closest?.('button, a, input')) return;  // let focused controls have their keys
+  if (!current || document.body.classList.contains('talking')) return;
   if (e.code === 'Space') { e.preventDefault(); setPaused(!paused); }
   if (e.code === 'ArrowRight') next();
   if (e.code === 'ArrowLeft' && beatIdx > 0) playBeat(beatIdx - 1);
 });
 
+// ---------- voice: say "pause" (or "wait", "hold on", "I have a question") and it stops to take a question.
+// Ask one out loud, or say "continue". Chrome and Safari; elsewhere the buttons do the same.
+const mic = document.getElementById('mic')            // a page cached from before this existed gets one made here
+  ?? document.getElementById('controls').appendChild(Object.assign(document.createElement('p'), { id: 'mic', hidden: true, innerHTML: '<i></i><span></span>' }));
+const STOP = /\b(pause|stop|wait|hold on|hang on|hold up|question)\b/g;
+const GO = /\b(continue|keep going|go on|carry on|resume|go ahead)\b/g;
+const SKIP = new Set(`a an the is are was it its it's does doesn't do don't did isn't what what's why how who where when would will
+  you your me my i he his him they them their to of and or in on for at that this these about can could tell more so just like um uh`.split(/\s+/));
+const stem = w => w.replace(/'s$/, '').replace(/^(\w{3,})s$/, '$1');
+const keywords = s => (s.toLowerCase().replace(/[‘’]/g, "'").match(/[a-z']+/g) ?? []).filter(w => !SKIP.has(w)).map(stem);
+let rec = null, listening = false, lastAct = 0;
+
+const MIC = { on: 'Say “pause” to ask a question', ask: 'Listening · ask, or say “continue”', miss: 'No answer for that one · pick a question or say “continue”' };
+function setMic(state) {
+  if (!listening) return;
+  mic.hidden = false; mic.dataset.state = state;
+  mic.querySelector('span').textContent = MIC[state];
+}
+
+// the voice comes back through the mic too: a word it said in the last few seconds isn't the viewer talking
+function recent() {
+  const since = performance.now() - 5000;
+  while (heard.length && heard[0].at < since) heard.shift();
+  return new Set(heard.map(x => stem(x.k)));
+}
+const said = (word, r = recent()) => r.has(stem(word.split(' ')[0]));
+// an echo is a run of its words; a viewer's question is short and mostly their own words
+const echo = text => {
+  const ws = text.split(/\s+/).map(w => stem(norm(w))).filter(Boolean), r = recent();
+  return ws.length >= 3 && ws.filter(w => r.has(w)).length / ws.length >= 0.75;
+};
+let quietSince = 0;      // when the voice last stopped; its final words can still arrive from the mic just after
+
+// a spoken question picks the answer whose question shares the most words with it; this chapter's questions first
+function matchQuestion(text) {
+  const asked = new Set(keywords(text));
+  const offered = new Set((beats[beatIdx]?.chips ?? []).map(c => c.clip));
+  let best = null, top = 0;
+  for (const c of clips) {
+    const want = keywords(c.title);
+    const hits = want.filter(k => asked.has(k)).length;
+    const score = hits && hits / want.length + (offered.has(c.id) ? 0.25 : 0);
+    if (score > top) { top = score; best = c; }
+  }
+  return best;
+}
+
+// stopped mid-line: offer this chapter's questions, and Continue picks the line back up
+function stopToAsk() {
+  if (!current) return;
+  if (!paused) setPaused(true);
+  if (waiting) return setMic('ask');                 // the questions are already up; hold them
+  chipsEl.innerHTML = '';
+  const open = current.kind === 'beat' ? (beats[beatIdx].chips ?? []).filter(c => !used.has(c.clip)) : [];
+  for (const c of open) chipsEl.appendChild(chip(c.label, () => answer(c.clip)));
+  chipsEl.appendChild(chip('Continue →', carryOn, 'go'));
+  chipsEl.hidden = false;
+  document.body.classList.add('waiting');
+  setMic('ask');
+}
+function chip(label, onclick, extra = '') {
+  const b = document.createElement('button');
+  b.className = `chip ${extra}`.trim(); b.textContent = label; b.onclick = onclick;
+  return b;
+}
+function answer(id) {
+  if (current.kind === 'beat' && (!waiting || beatIdx === beats.length - 1)) {   // interrupted mid-line, or at the close: come back to that sentence
+    const cur = words.filter(w => clock >= w.t).pop();
+    returnTo = { i: beatIdx, t: cur ? Math.max(0, words.find(w => w.sentence === cur.sentence).t - 0.15) : 0 };
+  }
+  playClip(id);
+}
+function carryOn() { if (waiting) next(); else setPaused(false); }
+
+function hear(text, final) {
+  const t = text.toLowerCase(), now = performance.now();
+  if (!current || now - lastAct < 1500) return;
+  const quiet = paused || waiting;                 // the voice isn't talking, so this is the viewer
+  const tail = t.split(/\s+/).slice(-4).join(' ');   // a result keeps growing; only its newest words can be a command
+  const stop = tail.match(STOP)?.[0], go = tail.match(GO)?.[0];
+  if (stop && !(paused && chipsEl.childElementCount) && (quiet || !said(stop))) { lastAct = now; return stopToAsk(); }
+  if (!quiet) return;
+  if (go && !said(go)) { lastAct = now; return carryOn(); }
+  if (echo(t) || now - quietSince < 1000) return;
+  const q = t.replace(STOP, ' ').replace(GO, ' ');
+  if (!keywords(q).length) return;
+  if (waiting && !paused) stopAutoContinue();      // someone is asking: don't move on under them
+  if (!final) return;
+  const c = matchQuestion(q);
+  if (c) { lastAct = now; return answer(c.id); }
+  setMic('miss');
+  if (waiting && !paused) startAutoContinue();
+}
+
+function listen() {
+  const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!Recognition || only || rec) return;
+  rec = new Recognition();
+  rec.continuous = true; rec.interimResults = true; rec.lang = 'en-US';
+  rec.onstart = () => setMic(paused || waiting ? 'ask' : 'on');
+  let fails = 0;
+  rec.onresult = e => { fails = 0; for (let i = e.resultIndex; i < e.results.length; i++) hear(e.results[i][0].transcript, e.results[i].isFinal); };
+  rec.onerror = e => {
+    if (e.error === 'no-speech' || e.error === 'aborted') return;
+    if (/not-allowed|service-not-allowed|audio-capture|language-not-supported/.test(e.error) || ++fails > 3) unlisten();
+  };
+  rec.onend = () => { if (listening) setTimeout(() => { try { rec?.start(); } catch {} }, 250); };   // browsers stop after a silence; keep listening
+  listening = true;
+  try { rec.start(); } catch { unlisten(); }
+}
+function unlisten() {
+  listening = false; mic.hidden = true;
+  const r = rec; rec = null;
+  try { r?.abort(); } catch {}
+}
+
 const start = document.getElementById('start');
-document.getElementById('play').onclick = () => { start.classList.add('gone'); document.body.classList.add('playing'); playBeat(0); };
+document.getElementById('play').onclick = e => { e.currentTarget.blur(); start.inert = true; start.classList.add('gone'); document.body.classList.add('playing'); listen(); playBeat(0); };
 
 // freeze what's playing at t seconds with every cue fired and animations settled
 function freezeAt(t) {
@@ -215,7 +354,7 @@ const itemFor = scene => {
 };
 const showVisual = scene => {
   const f = itemFor(scene); if (!f) return false;
-  if (f.kind === 'beat') playBeat(f.i); else { beatIdx = Math.max(beatIdx, 0); playClip(f.id); }
+  if (f.kind === 'beat') playBeat(f.i); else { beatIdx = Math.max(beatIdx, 0); playItem(clipById[f.id], 'clip'); }
   freezeAt(current.item.duration);
   return true;
 };
@@ -249,10 +388,15 @@ if (agent?.agent_id) {
     if (s) await s.endSession().catch(() => {});
     document.body.classList.remove('talking');
     setState('idle', 'Ask a question');
+    listen();
     if (resumeAt != null) { setPaused(false); playBeat(resumeAt); resumeAt = null; }   // back where they left off
   };
+  let connecting = false;
   talk.onclick = async () => {
     if (session) return finish();
+    if (connecting) return;
+    connecting = true;
+    unlisten();
     resumeAt = Math.max(beatIdx, 0);
     if (beatIdx >= 0) setPaused(true);
     document.body.classList.add('talking', 'playing');
@@ -276,7 +420,9 @@ if (agent?.agent_id) {
       session = null;
       document.body.classList.remove('talking');
       setState('idle', 'Microphone needed to ask');
-    }
+      listen();
+      if (resumeAt != null) { setPaused(false); resumeAt = null; }
+    } finally { connecting = false; }
   };
 }
 requestAnimationFrame(frame);

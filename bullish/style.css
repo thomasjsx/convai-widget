@@ -61,6 +61,15 @@ body.paused .scene * { animation-play-state: paused !important; }
 }
 #controls button:hover { border-color: var(--green); color: var(--ink); }
 
+/* the mic is on: a quiet line beside pause saying what it listens for */
+#mic { margin: 0; align-self: center; display: flex; align-items: center; gap: 9px; max-width: min(46vw, 420px);
+  font: 500 11px/1.35 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); transition: color .3s; }
+#mic[hidden] { display: none; }
+#mic i { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: talkPulse 1.8s infinite; }
+#mic[data-state="ask"] { color: var(--ink); }
+#mic[data-state="ask"] i { animation-duration: .9s; }
+@media (max-width: 720px) { #mic { max-width: 62vw; font-size: 10px; } }
+
 #progress { position: fixed; z-index: 15; left: 0; bottom: 0; height: 2px; width: 0; background: var(--grad); }
 
 /* ---------- start screen */
