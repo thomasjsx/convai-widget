@@ -226,7 +226,7 @@ const SKIP = new Set(`a an the is are was it its it's does doesn't do don't did 
 const stem = w => w.replace(/'s$/, '').replace(/^(\w{3,})s$/, '$1');
 const keywords = s => (s.toLowerCase().replace(/[‘’]/g, "'").match(/[a-z']+/g) ?? []).filter(w => !SKIP.has(w)).map(stem);
 let rec = null, listening = false, lastAct = 0;
-let askAgent = null, talking = false;           // set once the live agent is configured: it answers anything
+let askAgent = null, endAgent = null, talking = false;   // set once the live agent is configured: it answers anything
 let cut = null;                                  // { idx, n }: where in a growing result the viewer started talking
 
 const MIC = { on: 'Say “pause” to ask a question', ask: 'Listening · ask, or say “continue”', miss: 'No answer for that one · pick a question or say “continue”',
@@ -305,7 +305,11 @@ function carryOn() { if (waiting) next(); else setPaused(false); }
 
 function hear(text, final, idx) {
   const now = performance.now();
-  if (!current || talking || now - lastAct < 1500) return;
+  if (talking) {                                   // the agent has the floor; "continue" hands back to the walk-through
+    if (text.toLowerCase().split(/\s+/).slice(-3).join(' ').match(GO)) endAgent?.();
+    return;
+  }
+  if (!current || now - lastAct < 1500) return;
   let words = text.toLowerCase().split(/\s+/).filter(Boolean);
   if (cut && cut.idx === idx) words = words.slice(cut.n);    // only what they said, not the voice before it
   const t = words.join(' ');
@@ -483,7 +487,7 @@ if (agent?.agent_id) {
     if (session) { if (firstText) session.sendUserMessage?.(firstText); return; }
     if (connecting) return;
     connecting = true; talking = true;
-    unlisten(); hideChips();
+    hideChips();                                   // keep listening, only for "continue"
     if (current) { saved = { item: current.item, kind: current.kind, at: Math.max(0, clock - .3), beat: beatIdx }; if (!paused) setPaused(true); }
     document.body.classList.add('talking', 'playing');
     start.classList.add('gone'); start.inert = true;
@@ -502,6 +506,7 @@ if (agent?.agent_id) {
         onDisconnect: () => { if (session) finish(); },
         onError: e => { console.error(e); },
       });
+      if (agent.context) session.sendContextualUpdate?.(briefing());   // the Orb doesn't know this walk-through: tell it
       if (firstText) session.sendUserMessage?.(firstText);   // what they already asked, so they don't repeat it
     } catch (e) {
       console.error(e);
@@ -512,7 +517,16 @@ if (agent?.agent_id) {
       if (saved) { setPaused(false); saved = null; }
     } finally { connecting = false; }
   };
+  // what the agent needs to answer from: where they are, and the whole script, Thomas's words only
+  const briefing = () => [
+    `The viewer is watching Thomas Stevenson's interactive walk-through "What makes a good brand campaign?", made for Bullish, the company behind CoinDesk and Consensus.`,
+    `They paused it ${current ? `during: "${current.item.vo}"` : 'at the start'} to ask you something.`,
+    `Answer from this script and what you know about Thomas, in one or two sentences, without greeting them. Don't speak as if Thomas works at Bullish. If they say continue, say "Sure." and stop.`,
+    `The script, in order:`,
+    ...order.map(id => { const it = clipById[id] ?? beats.find(b => b.id === id); return it.heading === false || !clipById[id] ? it.vo : `${it.title} ${it.vo}`; }),
+  ].join('\n');
   askAgent = text => startTalk(text);
+  endAgent = () => finish();
   talk.onclick = () => session ? finish() : startTalk();
 }
 requestAnimationFrame(frame);
