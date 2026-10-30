@@ -16,7 +16,6 @@ const section = {};
 { let s = 0; for (const id of order) { if (chapters.some(c => c.start === id && c.stop !== false)) s++; section[id] = s; } }   // a chapter marked stop:false runs on from the one before
 const stage = document.getElementById('stage');
 const captions = document.getElementById('captions');
-const progress = document.getElementById('progress');
 const chapterNav = document.getElementById('chapters');
 const chipsEl = document.getElementById('chips');
 const audio = new Audio();
@@ -105,6 +104,9 @@ function playItem(item, kind, from = 0) {
 function playBeat(i, from = 0) {
   beatIdx = i; returnTo = null;
   playItem(beats[i], 'beat', from);
+  markChapter(i);
+}
+function markChapter(i) {
   chapterNav.querySelectorAll('button').forEach((b, k, all) => {
     const from = beats.findIndex(x => x.id === b.dataset.start);
     const to = all[k + 1] ? beats.findIndex(x => x.id === all[k + 1].dataset.start) : beats.length;
@@ -174,7 +176,7 @@ function step() {
   }
   const cur = words.filter(w => clock >= w.t).pop() ?? words[0];
   if (cur && cur.sentence !== shownSentence) { shownSentence = cur.sentence; showSentence(shownSentence); }
-  progress.style.width = `${((order.indexOf(item.id) + Math.min(clock / item.duration, 1)) / order.length) * 100}%`;
+  if (!scrubbing) setScrub(startAt[order.indexOf(item.id)] + Math.min(clock, item.duration));
   if (clock >= item.duration + 0.05) {
     if (only) return;
     offer();
@@ -225,7 +227,16 @@ const stem = w => w.replace(/'s$/, '').replace(/^(\w{3,})s$/, '$1');
 const keywords = s => (s.toLowerCase().replace(/[‘’]/g, "'").match(/[a-z']+/g) ?? []).filter(w => !SKIP.has(w)).map(stem);
 let rec = null, listening = false, lastAct = 0;
 
-const MIC = { on: 'Say “pause” to ask a question', ask: 'Listening · ask, or say “continue”', miss: 'No answer for that one · pick a question or say “continue”' };
+const MIC = { on: 'Say “pause” to ask a question', ask: 'Listening · ask, or say “continue”', miss: 'No answer for that one · pick a question or say “continue”',
+  off: 'Microphone is off · tap the dot to turn it on' };
+const heardEl = mic.appendChild(Object.assign(document.createElement('em'), { className: 'heard' }));
+let heardFade = null;
+function showHeard(text) {                        // what it just caught, so a viewer can see it's listening
+  heardEl.textContent = `“${text.trim().split(/\s+/).slice(-6).join(' ')}”`;
+  mic.classList.add('hearing'); clearTimeout(heardFade);
+  heardFade = setTimeout(() => mic.classList.remove('hearing'), 2200);
+}
+mic.addEventListener('click', () => { if (mic.dataset.state === 'off') { rec = null; listen(); } });
 let micFold = null;
 function setMic(state) {
   if (!listening) return;
@@ -317,14 +328,24 @@ function listen() {
   rec.continuous = true; rec.interimResults = true; rec.lang = 'en-US';
   rec.onstart = () => setMic(paused || waiting ? 'ask' : 'on');
   let fails = 0;
-  rec.onresult = e => { fails = 0; for (let i = e.resultIndex; i < e.results.length; i++) hear(e.results[i][0].transcript, e.results[i].isFinal); };
+  rec.onresult = e => {
+    fails = 0;
+    for (let i = e.resultIndex; i < e.results.length; i++) hear(e.results[i][0].transcript, e.results[i].isFinal);
+    showHeard(e.results[e.results.length - 1][0].transcript);
+  };
   rec.onerror = e => {
     if (e.error === 'no-speech' || e.error === 'aborted') return;
-    if (/not-allowed|service-not-allowed|audio-capture|language-not-supported/.test(e.error) || ++fails > 3) unlisten();
+    if (/not-allowed|service-not-allowed|audio-capture|language-not-supported/.test(e.error) || ++fails > 3) micOff(e.error);
   };
   rec.onend = () => { if (listening) setTimeout(() => { try { rec?.start(); } catch {} }, 250); };   // browsers stop after a silence; keep listening
   listening = true;
   try { rec.start(); } catch { unlisten(); }
+}
+function micOff(why) {                             // stay visible and say so, rather than vanish
+  listening = false;
+  const r = rec; rec = null; try { r?.abort(); } catch {}
+  mic.hidden = false; mic.dataset.state = 'off'; mic.classList.remove('folded', 'hearing');
+  mic.querySelector('span').textContent = mic.title = `${MIC.off} (${why})`;
 }
 function unlisten() {
   listening = false; mic.hidden = true;
@@ -334,6 +355,52 @@ function unlisten() {
 
 const start = document.getElementById('start');
 document.getElementById('play').onclick = e => { e.currentTarget.blur(); start.inert = true; start.classList.add('gone'); document.body.classList.add('playing'); listen(); playBeat(0); };
+
+// ---------- scrubber: the whole walk-through as one line along the bottom; click or drag to jump anywhere
+const items = order.map(id => clipById[id] ?? beats.find(b => b.id === id));
+const startAt = []; { let s = 0; for (const it of items) { startAt.push(s); s += it.duration; } }
+const total = items.reduce((s, it) => s + it.duration, 0);
+const scrub = document.body.appendChild(Object.assign(document.createElement('div'), {
+  id: 'scrub', innerHTML: '<div class="track"><i class="fill"></i><b class="knob"></b></div><span class="tip"></span>' }));
+const track = scrub.querySelector('.track'), fill = scrub.querySelector('.fill'), knob = scrub.querySelector('.knob'), tip = scrub.querySelector('.tip');
+chapters.forEach(c => {                                // a notch where each section starts
+  const tick = document.createElement('i'); tick.className = 'tick';
+  tick.style.left = `${startAt[order.indexOf(c.start)] / total * 100}%`; track.appendChild(tick);
+});
+let scrubbing = false;
+function setScrub(s) { const f = `${Math.min(s / total, 1) * 100}%`; fill.style.width = f; knob.style.left = f; }
+const timeAt = x => { const r = scrub.getBoundingClientRect(); return Math.min(Math.max((x - r.left) / r.width, 0), .9999) * total; };
+const itemAt = s => { let k = items.length - 1; while (k > 0 && startAt[k] > s) k--; return k; };
+const sectionTitle = k => [...chapters].reverse().find(c => order.indexOf(c.start) <= k)?.title ?? 'Opening';
+const clockText = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+function showTip(s, x) {
+  const r = scrub.getBoundingClientRect();
+  tip.textContent = `${sectionTitle(itemAt(s))} · ${clockText(s)}`;
+  tip.style.left = `${Math.min(Math.max(x - r.left, 80), r.width - 80)}px`;
+}
+function seekTo(s) {
+  const k = itemAt(s), it = items[k], local = Math.max(0, s - startAt[k] - .05);
+  used.clear(); order.slice(0, k).forEach(id => clipById[id] && used.add(id));   // everything before here counts as heard
+  start.classList.add('gone'); start.inert = true; document.body.classList.add('playing'); listen();
+  if (clipById[it.id]) {
+    returnTo = null; beatIdx = beats.findIndex(b => (b.chips ?? []).some(c => c.clip === it.id));
+    playClip(it.id); clock = local; audio.currentTime = local; markChapter(beatIdx);
+  } else playBeat(beats.indexOf(it), local);
+}
+scrub.addEventListener('pointerdown', e => {
+  scrubbing = true; scrub.classList.add('drag'); scrub.setPointerCapture(e.pointerId);
+  setScrub(timeAt(e.clientX)); showTip(timeAt(e.clientX), e.clientX);
+});
+scrub.addEventListener('pointermove', e => {
+  showTip(timeAt(e.clientX), e.clientX);
+  if (scrubbing) setScrub(timeAt(e.clientX));
+});
+scrub.addEventListener('pointerup', e => {
+  if (!scrubbing) return;
+  scrubbing = false; scrub.classList.remove('drag');
+  seekTo(timeAt(e.clientX));
+});
+scrub.addEventListener('pointercancel', () => { scrubbing = false; scrub.classList.remove('drag'); });
 
 // freeze what's playing at t seconds with every cue fired and animations settled
 function freezeAt(t) {

@@ -70,9 +70,31 @@ body.paused .scene * { animation-play-state: paused !important; }
 #mic i { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: talkPulse 1.8s infinite; }
 #mic[data-state="ask"] { color: var(--ink); }
 #mic[data-state="ask"] i { animation-duration: .9s; }
+#mic[data-state="off"] { cursor: pointer; }
+#mic[data-state="off"] i { background: var(--mute); animation: none; }
+#mic .heard { font: 500 13px/1.3 var(--sans); font-style: normal; color: var(--ink); white-space: nowrap; max-width: 0; overflow: hidden; opacity: 0;
+  transition: max-width .4s var(--ease), opacity .3s; }
+#mic.hearing .heard { max-width: 340px; opacity: .85; }
 @media (max-width: 720px) { #mic { max-width: 62vw; font-size: 10px; } }
 
-#progress { position: fixed; z-index: 15; left: 0; bottom: 0; height: 2px; width: 0; background: var(--grad); }
+#progress { display: none; }   /* the scrubber shows progress now */
+
+/* ---------- scrubber: the whole walk-through along the bottom edge */
+#scrub { position: fixed; z-index: 17; left: 0; right: 0; bottom: 0; height: 18px; cursor: pointer; touch-action: none;
+  padding-bottom: env(safe-area-inset-bottom, 0px); }
+#scrub .track { position: absolute; left: 0; right: 0; bottom: env(safe-area-inset-bottom, 0px); height: 3px; background: rgba(203,208,219,.16); transition: height .15s; }
+#scrub:hover .track, #scrub.drag .track { height: 7px; }
+#scrub .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--grad); }
+#scrub .knob { position: absolute; top: 50%; left: 0; width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px; border-radius: 50%;
+  background: var(--ink); box-shadow: 0 0 0 3px rgba(0,0,0,.5); opacity: 0; transition: opacity .15s; }
+#scrub:hover .knob, #scrub.drag .knob { opacity: 1; }
+#scrub .tick { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: #000; }
+#scrub .tip { position: absolute; bottom: 16px; transform: translateX(-50%); padding: 6px 10px; border-radius: 6px; white-space: nowrap;
+  background: rgba(0,0,0,.85); border: 1px solid rgba(203,208,219,.2); font: 500 11px var(--mono); letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink); opacity: 0; pointer-events: none; transition: opacity .15s; }
+#scrub:hover .tip, #scrub.drag .tip { opacity: 1; }
+body:not(.playing) #scrub, body.preview #scrub { display: none; }
+@media (hover: none) { #scrub .track { height: 5px; } #scrub .knob { opacity: 1; } }
 
 /* ---------- start screen */
 #start {
