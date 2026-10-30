@@ -1,0 +1,153 @@
+/* What's your Muse? — shared tokens and shell layout. Scenes style themselves under [data-scene="sNN"]. */
+:root {
+  color-scheme: dark;            /* one deliberate dark look */
+  --bg: #000;
+  --ink: #fff;
+  --mute: #cbd0db;              /* Bullish Disclaimer Grey */
+  --surface: #1c1c1c;
+  --green: #18e589;             /* Bullish Green */
+  --green-hi: #39ea9b;
+  --blue: #218cff;              /* Bullish Blue */
+  --grad: linear-gradient(90deg, #18e589, #218cff);
+  --cd-yellow: #ffd200;         /* CoinDesk */
+  --cs-cyan: #26ecff;           /* Consensus */
+  --cs-pink: #ff0062;
+  --cs-black: #020a0a;
+  --sans: "DM Sans", system-ui, sans-serif;
+  --mono: "DM Mono", ui-monospace, monospace;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+  --caption-h: 132px;           /* space the captions reserve at the bottom */
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: var(--sans); overflow: hidden; }
+img, video, svg { display: block; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* ---------- stage: every scene is a full-bleed layer, shown one at a time */
+#stage { position: fixed; inset: 0; }
+.scene {
+  position: absolute; inset: 0 0 var(--caption-h) 0;
+  opacity: 0; visibility: hidden;
+  transition: opacity .6s var(--ease), visibility 0s linear .6s;
+}
+.scene.active { opacity: 1; visibility: visible; transition: opacity .6s var(--ease); }
+
+/* ---------- byline (Thomas is the presenter) */
+#byline {
+  position: fixed; z-index: 15; top: 40px; left: 40px;
+  font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--mute);
+}
+body.paused .scene * { animation-play-state: paused !important; }
+
+/* ---------- captions */
+#captions {
+  position: fixed; z-index: 15; left: 50%; bottom: 46px; transform: translateX(-50%);
+  width: min(920px, calc(100vw - 48px));
+  text-align: center; font-size: clamp(17px, 1.6vw, 22px); line-height: 1.45; letter-spacing: -.005em;
+  min-height: 2.9em;
+}
+#captions .w { color: rgba(203,208,219,.38); transition: color .18s linear; }
+#captions .w.said { color: var(--ink); }
+
+/* ---------- chapters and controls */
+#chapters {
+  position: fixed; z-index: 15; top: 40px; right: 40px; display: flex; gap: 22px;
+  font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase;
+}
+#chapters button { color: rgba(203,208,219,.45); padding: 6px 0; border-bottom: 1px solid transparent; transition: color .3s, border-color .3s; }
+#chapters button:hover { color: var(--mute); }
+#chapters button.on { color: var(--ink); border-bottom-color: var(--green); }
+
+#controls { position: fixed; z-index: 15; left: 40px; bottom: 46px; display: flex; gap: 14px; }
+#controls button {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(203,208,219,.25);
+  display: grid; place-items: center; color: var(--mute); font: 500 13px var(--mono);
+}
+#controls button:hover { border-color: var(--green); color: var(--ink); }
+
+#progress { position: fixed; z-index: 15; left: 0; bottom: 0; height: 2px; width: 0; background: var(--grad); }
+
+/* ---------- start screen */
+#start {
+  position: fixed; z-index: 30; inset: 0; display: grid; place-items: center; align-content: end;
+  padding-bottom: 14vh; gap: 18px; text-align: center;
+  background: radial-gradient(60% 50% at 50% 45%, rgba(24,229,137,.06), transparent 70%);
+  transition: opacity .6s var(--ease);
+}
+#start.gone { opacity: 0; pointer-events: none; }
+#start h1 { margin: 0; font-weight: 500; font-size: clamp(28px, 3.4vw, 46px); letter-spacing: -.02em; }
+#start p { margin: 0; color: var(--mute); font: 500 12px/1.6 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+#start { padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+#start h1, #start p { max-width: 100%; text-wrap: balance; }
+#play {
+  margin-top: 10px; padding: 14px 26px; border-radius: 999px; background: var(--ink); color: #000;
+  font-weight: 500; font-size: 16px; display: inline-flex; gap: 10px; align-items: center;
+}
+#play:hover { background: var(--green); }
+
+body.preview #start, body.preview #chapters, body.preview #controls { display: none; }
+
+@media (max-width: 720px) {
+  :root { --caption-h: 150px; }
+  #chapters { display: none; }
+  #byline { left: 20px; top: 22px; }
+  #controls { left: 20px; bottom: 20px; }
+  #captions { bottom: 70px; }
+}
+
+/* placeholder for scenes not built yet */
+.placeholder { position: absolute; inset: 0; display: grid; place-content: center; gap: 14px; text-align: center; padding: 0 12vw; }
+.placeholder b { font: 500 13px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
+.placeholder p { margin: 0; color: var(--mute); font-size: 18px; line-height: 1.5; }
+
+/* title cards carry Thomas's name themselves */
+body[data-scene="s00"] #byline, body[data-scene="s12"] #byline { opacity: 0; }
+#byline { transition: opacity .5s var(--ease); }
+
+/* nothing to control until it plays */
+body:not(.playing):not(.preview) #controls, body:not(.playing):not(.preview) #chapters { opacity: 0; pointer-events: none; }
+#controls, #chapters { transition: opacity .6s var(--ease); }
+
+/* ---------- talk back: shown only when an agent is configured */
+#talk {
+  position: fixed; z-index: 16; right: 40px; bottom: 40px; display: none; align-items: center; gap: 10px;
+  padding: 10px 16px 10px 12px; border-radius: 999px; border: 1px solid rgba(203,208,219,.28);
+  font: 500 13px var(--sans); color: var(--ink); background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
+}
+body.can-talk #talk { display: inline-flex; }
+#talk:hover { border-color: var(--green); }
+#talk i { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(24,229,137,.6); }
+#talk[data-state="connecting"] i { background: var(--mute); animation: talkPulse 1s infinite; }
+#talk[data-state="listening"] i { animation: talkPulse 1.6s infinite; }
+#talk[data-state="speaking"] i { background: var(--blue); animation: talkPulse .7s infinite; }
+@keyframes talkPulse { 0% { box-shadow: 0 0 0 0 rgba(24,229,137,.55); } 100% { box-shadow: 0 0 0 12px rgba(24,229,137,0); } }
+body.talking #controls, body.talking #chapters { opacity: .25; pointer-events: none; }
+body.talking #captions .w { color: var(--ink); }
+@media (max-width: 720px) { #talk { right: 20px; bottom: 20px; } }
+
+/* ---------- questions people can tap after a beat */
+#chips {
+  position: fixed; z-index: 16; left: 50%; bottom: calc(46px + 3.2em + 18px); transform: translateX(-50%);
+  width: min(920px, calc(100vw - 48px)); display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  animation: chipsIn .45s var(--ease);
+}
+#chips .chip {
+  padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(203,208,219,.3); background: rgba(0,0,0,.6);
+  font: 500 14px var(--sans); color: var(--ink); backdrop-filter: blur(6px); transition: border-color .2s, background .2s;
+}
+#chips .chip:hover, #chips .chip:focus-visible { border-color: var(--green); outline: none; }
+#chips .chip.go { background: var(--ink); color: #000; border-color: var(--ink); }
+#chips .chip.go:hover { background: var(--green); border-color: var(--green); }
+@keyframes chipsIn { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@media (max-width: 720px) { #chips { bottom: calc(70px + 4.5em + 12px); } }
+
+/* auto-continue: a fill sweeps across Continue while it waits */
+#chips .chip.go { position: relative; overflow: hidden; isolation: isolate; }
+#chips .chip.go::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--green);
+  transform: scaleX(0); transform-origin: left center;
+}
+#chips .chip.go.timed::before { animation: autoFill var(--auto, 5s) linear forwards; }
+@keyframes autoFill { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { #chips .chip.go.timed::before { animation: none; } }

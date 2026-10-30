@@ -1,0 +1,282 @@
+// What makes a good brand campaign? — conversation engine.
+// script.json has short "beats" (the walk-through) and "clips" (answers to questions people can tap).
+// After a beat with questions, it stops and waits: tap a question to hear the answer, or Continue.
+// Each visual module in scenes/<id>.js exports { mount(root, ctx), enter(ctx), exit?(ctx) };
+// ctx.atWord(word, fn) cues a visual on a spoken word of whatever is playing over it.
+// ?scene=s03&t=12 freezes a visual at 12 s for review stills.
+
+const params = new URLSearchParams(location.search);
+const only = params.get('scene');
+
+const { beats, clips, chapters } = await (await fetch('script.json')).json();
+const clipById = Object.fromEntries(clips.map(c => [c.id, c]));
+const stage = document.getElementById('stage');
+const captions = document.getElementById('captions');
+const progress = document.getElementById('progress');
+const chapterNav = document.getElementById('chapters');
+const chipsEl = document.getElementById('chips');
+const audio = new Audio();
+
+const asset = p => `assets/${p}`;
+
+function placeholder(id) {
+  return { mount(root) { root.innerHTML = `<div class="placeholder"><b>${id}</b></div>`; }, enter() {} };
+}
+
+// one module per visual, shared by every beat or answer that plays over it
+const visualIds = [...new Set([...beats, ...clips].map(x => x.scene))];
+const load = id => import(`./scenes/${id}.js`).catch(() => import(`./scenes/${id}.js?retry`));
+const mods = {}, roots = {};
+await Promise.all(visualIds.map(async id => {
+  mods[id] = await load(id).then(m => m.default).catch(() => placeholder(id));
+}));
+for (const id of visualIds) {
+  const root = document.createElement('section');
+  root.className = 'scene'; root.dataset.scene = id;
+  stage.appendChild(root);
+  try { mods[id].mount(root, { asset }); }
+  catch (e) { console.error(id, e); mods[id] = placeholder(id); mods[id].mount(root); }
+  roots[id] = root;
+}
+
+// ---------- captions: one sentence at a time, words lighting up with the voice
+let words = [], shownSentence = -1;
+function setCaption(item) {
+  const ws = item.vo.split(/\s+/);
+  const weights = ws.map(w => w.length + 2);
+  const total = weights.reduce((a, b) => a + b, 0);
+  const span = Math.max(item.duration - 1.0, 1);
+  // with a real voice, each word carries its exact start time; otherwise estimate from length
+  const exact = item.words?.length === ws.length ? item.words.map(([, t]) => t) : null;
+  let acc = 0, sentence = 0;
+  captions.innerHTML = '';
+  return ws.map((w, i) => {
+    const el = document.createElement('span');
+    el.className = 'w'; el.textContent = w + ' ';
+    captions.appendChild(el);
+    const s = sentence;
+    if (/[.?!:]["”’]?$/.test(w)) sentence++;
+    const t = exact ? exact[i] : 0.25 + (acc / total) * span;
+    acc += weights[i];
+    return { el, t, sentence: s };
+  });
+}
+const showSentence = n => { for (const w of words) w.el.hidden = w.sentence !== n; };
+
+// ---------- playback
+let beatIdx = -1, current = null, visual = null, ctx = null;
+let clock = 0, last = performance.now(), paused = false, waiting = false, cues = [];
+const used = new Set();
+const norm = w => w.toLowerCase().replace(/[^a-z0-9#%']/g, '');
+
+function playItem(item, kind) {
+  if (ctx && visual) { mods[visual].exit?.(ctx); roots[visual].classList.remove('active'); }
+  current = { item, kind }; visual = item.scene;
+  clock = 0; cues = []; waiting = false; hideChips();
+  words = setCaption(item);
+  ctx = {
+    asset, scene: item, root: roots[visual], duration: item.duration,
+    at: (t, fn) => cues.push({ t, fn, done: false }),
+    atWord: (word, fn, nth = 1) => {
+      const hits = words.filter(w => norm(w.el.textContent) === norm(word));
+      const hit = hits[nth - 1] ?? hits[0];
+      if (hit) cues.push({ t: hit.t, fn, done: false });   // a word that isn't spoken never fires
+    },
+  };
+  shownSentence = -1; showSentence(0);
+  document.body.dataset.scene = visual;
+  roots[visual].classList.add('active');
+  mods[visual].enter(ctx);
+  if (item.audio) { audio.src = item.audio; audio.currentTime = 0; if (!paused) audio.play().catch(() => {}); }
+  else audio.removeAttribute('src');
+}
+
+function playBeat(i) {
+  beatIdx = i;
+  playItem(beats[i], 'beat');
+  chapterNav.querySelectorAll('button').forEach((b, k, all) => {
+    const from = beats.findIndex(x => x.id === b.dataset.start);
+    const to = all[k + 1] ? beats.findIndex(x => x.id === all[k + 1].dataset.start) : beats.length;
+    b.classList.toggle('on', from <= i && i < to);
+  });
+}
+
+function playClip(id) {
+  used.add(id);
+  playItem(clipById[id], 'clip');
+}
+
+// after a beat (or an answer), offer that beat's remaining questions and Continue
+function offer() {
+  const beat = beats[beatIdx];
+  const open = beat.chips.filter(c => !used.has(c.clip));
+  const last = beatIdx >= beats.length - 1;
+  if (!open.length && current.kind === 'beat' && !last) return next();   // nothing to ask here: keep talking
+  if (last && !open.length) return;                                       // the close holds on its own buttons
+  waiting = true;
+  chipsEl.innerHTML = '';
+  open.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'chip'; b.textContent = c.label;
+    b.onclick = () => playClip(c.clip);
+    chipsEl.appendChild(b);
+  });
+  if (!last) {
+    const go = document.createElement('button');
+    go.className = 'chip go'; go.textContent = 'Continue →';
+    go.onclick = next;
+    chipsEl.appendChild(go);
+  }
+  chipsEl.hidden = false;
+  document.body.classList.add('waiting');
+  if (!last && !paused) startAutoContinue();
+}
+// nobody picks a question within 5 s: carry on, with the countdown shown on Continue
+const AUTO_MS = 5000;
+let autoTimer = null;
+function startAutoContinue() {
+  stopAutoContinue();
+  const go = chipsEl.querySelector('.go');
+  if (!go) return;
+  go.style.setProperty('--auto', `${AUTO_MS}ms`);
+  void go.offsetWidth; go.classList.add('timed');
+  autoTimer = setTimeout(next, AUTO_MS);
+}
+function stopAutoContinue() {
+  clearTimeout(autoTimer); autoTimer = null;
+  chipsEl.querySelector('.go')?.classList.remove('timed');
+}
+function hideChips() { stopAutoContinue(); chipsEl.hidden = true; chipsEl.innerHTML = ''; document.body.classList.remove('waiting'); }
+function next() { if (beatIdx < beats.length - 1) playBeat(beatIdx + 1); }
+
+function step() {
+  // real elapsed time, so a throttled or background tab doesn't fall behind the voice
+  const now = performance.now();
+  const dt = Math.min((now - last) / 1000, 5); last = now;
+  if (!current || paused || waiting) return;
+  const item = current.item;
+  clock = item.audio && !audio.paused ? audio.currentTime : clock + dt;
+  for (const c of cues) if (!c.done && clock >= c.t) { c.done = true; c.fn(); }
+  for (const w of words) w.el.classList.toggle('said', clock >= w.t);
+  const cur = words.filter(w => clock >= w.t).pop() ?? words[0];
+  if (cur && cur.sentence !== shownSentence) { shownSentence = cur.sentence; showSentence(shownSentence); }
+  progress.style.width = `${((beatIdx + (current.kind === 'beat' ? Math.min(clock / item.duration, 1) : 1)) / beats.length) * 100}%`;
+  if (clock >= item.duration + 0.4) {
+    if (only) return;
+    offer();
+  }
+}
+const frame = () => { step(); requestAnimationFrame(frame); };
+setInterval(step, 200);                             // keeps time when frames are suspended
+
+function setPaused(p) {
+  paused = p;
+  document.body.classList.toggle('paused', p);
+  document.getElementById('pause').textContent = p ? '▶' : '❚❚';
+  if (waiting) p ? stopAutoContinue() : startAutoContinue();    // pausing holds the questions on screen
+  else if (current?.item.audio) p ? audio.pause() : audio.play().catch(() => {});
+}
+
+// ---------- chrome
+chapters.forEach(c => {
+  const b = document.createElement('button');
+  b.textContent = c.title; b.dataset.start = c.start;
+  b.onclick = () => { setPaused(false); playBeat(beats.findIndex(x => x.id === c.start)); };
+  chapterNav.appendChild(b);
+});
+document.getElementById('pause').onclick = () => setPaused(!paused);
+addEventListener('keydown', e => {
+  if (e.target.closest?.('button, a, input')) return;  // let focused controls have their keys
+  if (e.code === 'Space') { e.preventDefault(); setPaused(!paused); }
+  if (e.code === 'ArrowRight') next();
+  if (e.code === 'ArrowLeft' && beatIdx > 0) playBeat(beatIdx - 1);
+});
+
+const start = document.getElementById('start');
+document.getElementById('play').onclick = () => { start.classList.add('gone'); document.body.classList.add('playing'); playBeat(0); };
+
+// freeze what's playing at t seconds with every cue fired and animations settled
+function freezeAt(t) {
+  clock = t; paused = true; document.body.classList.add('paused');
+  audio.pause();
+  for (const c of cues) if (c.t <= t) { c.done = true; c.fn(); }
+  for (const w of words) w.el.classList.toggle('said', t >= w.t);
+  const cur = words.filter(w => t >= w.t).pop();
+  if (cur) { shownSentence = cur.sentence; showSentence(cur.sentence); }
+  setTimeout(() => document.getAnimations().forEach(a => { try { a.finish(); } catch {} }), 60);
+}
+
+// first beat or answer that plays over a visual, for previews and the live agent
+const itemFor = scene => {
+  const b = beats.findIndex(x => x.scene === scene);
+  if (b >= 0) return { kind: 'beat', i: b };
+  const c = clips.find(x => x.scene === scene);
+  return c ? { kind: 'clip', id: c.id } : null;
+};
+const showVisual = scene => {
+  const f = itemFor(scene); if (!f) return false;
+  if (f.kind === 'beat') playBeat(f.i); else { beatIdx = Math.max(beatIdx, 0); playClip(f.id); }
+  freezeAt(current.item.duration);
+  return true;
+};
+
+if (only) {
+  document.body.classList.add('preview');
+  start.classList.add('gone');
+  const f = params.get('clip') ? { kind: 'clip', id: params.get('clip') } : itemFor(only);
+  if (f?.kind === 'beat') playBeat(f.i); else if (f) { beatIdx = 0; playClip(f.id); }
+  const t = Number(params.get('t'));
+  if (t) freezeAt(t);
+  if (params.has('offer')) offer();                 // ?offer shows the questions that follow this beat
+}
+
+// ---------- talk back: an ElevenLabs agent answers questions and puts the matching visual on stage
+const agent = await fetch('agent.json').then(r => r.ok ? r.json() : null).catch(() => null);
+const talk = document.getElementById('talk');
+if (agent?.agent_id) {
+  document.body.classList.add('can-talk');
+  let session = null, resumeAt = null;
+  const label = talk.querySelector('span');
+  const setState = (state, text) => { talk.dataset.state = state; label.textContent = text; };
+  const showAnswer = text => {
+    captions.innerHTML = '';
+    const el = document.createElement('span');
+    el.className = 'w said'; el.textContent = text;
+    captions.appendChild(el);
+  };
+  const finish = async () => {
+    const s = session; session = null;
+    if (s) await s.endSession().catch(() => {});
+    document.body.classList.remove('talking');
+    setState('idle', 'Ask a question');
+    if (resumeAt != null) { setPaused(false); playBeat(resumeAt); resumeAt = null; }   // back where they left off
+  };
+  talk.onclick = async () => {
+    if (session) return finish();
+    resumeAt = Math.max(beatIdx, 0);
+    if (beatIdx >= 0) setPaused(true);
+    document.body.classList.add('talking', 'playing');
+    start.classList.add('gone');
+    setState('connecting', 'Connecting…');
+    try {
+      const { Conversation } = await import('https://esm.sh/@elevenlabs/client@latest');
+      session = await Conversation.startSession({
+        agentId: agent.agent_id,
+        clientTools: {
+          show_scene: async ({ scene }) => showVisual(scene) ? `Now showing ${scene}.` : `No visual called ${scene}.`,
+        },
+        onConnect: () => setState('listening', 'Listening… tap to return'),
+        onModeChange: ({ mode }) => setState(mode, mode === 'speaking' ? 'Answering… tap to return' : 'Listening… tap to return'),
+        onMessage: ({ message, source }) => { if (source === 'ai') showAnswer(message); },
+        onDisconnect: () => { if (session) finish(); },
+        onError: e => { console.error(e); setState('idle', 'Ask a question'); },
+      });
+    } catch (e) {
+      console.error(e);
+      session = null;
+      document.body.classList.remove('talking');
+      setState('idle', 'Microphone needed to ask');
+    }
+  };
+}
+requestAnimationFrame(frame);
