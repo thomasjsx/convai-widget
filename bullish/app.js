@@ -219,8 +219,10 @@ addEventListener('keydown', e => {
 // Ask one out loud, or say "continue". Chrome and Safari; elsewhere the buttons do the same.
 const mic = document.getElementById('mic')            // a page cached from before this existed gets one made here
   ?? document.getElementById('controls').appendChild(Object.assign(document.createElement('p'), { id: 'mic', hidden: true, innerHTML: '<i></i><span></span>' }));
-const STOP = /\b(pause|stop|wait|hold on|hang on|hold up|question)\b/g;
-const GO = /\b(continue|keep going|go on|carry on|resume|go ahead)\b/g;
+const STOP = /\b(pause|stop|wait|hold it|hold on|hang on|hold up|one sec|question)\b/g;
+const GO = /\b(continue|keep going|go on|carry on|resume|go ahead|play)\b/g;
+const BACK = /\b(go back|back up|rewind|say that again|repeat that|one more time)\b/g;
+const NEXT = /\b(skip|next|move on)\b/g;
 const SKIP = new Set(`a an the is are was it its it's does doesn't do don't did isn't what what's why how who where when would will
   you your me my i he his him they them their to of and or in on for at that this these about can could tell more so just like um uh`.split(/\s+/));
 const stem = w => w.replace(/'s$/, '').replace(/^(\w{3,})s$/, '$1');
@@ -229,7 +231,7 @@ let rec = null, listening = false, lastAct = 0;
 let askAgent = null, endAgent = null, talking = false;   // set once the live agent is configured: it answers anything
 let cut = null;                                  // { idx, n }: where in a growing result the viewer started talking
 
-const MIC = { on: 'Say “pause” to ask a question', ask: 'Listening · ask, or say “continue”', miss: 'No answer for that one · pick a question or say “continue”',
+const MIC = { on: 'Say “hold it”, “go back”, “skip”, or ask a question', ask: 'Listening · ask, or say “continue”', miss: 'No answer for that one · pick a question or say “continue”',
   off: 'Microphone is off · tap the dot to turn it on' };
 const heardEl = mic.appendChild(Object.assign(document.createElement('em'), { className: 'heard' }));
 let heardFade = null;
@@ -302,6 +304,25 @@ function answer(id) {
   playClip(id);
 }
 function carryOn() { if (waiting) next(); else setPaused(false); }
+function goBack() {
+  const starts = []; for (const w of words) if (starts[w.sentence] === undefined) starts[w.sentence] = w.t;
+  const cur = waiting ? starts.length - 1 : (words.filter(w => clock >= w.t).pop()?.sentence ?? 0);
+  let to = starts[cur] ?? 0;
+  if (!waiting && clock - to < 1.5) {
+    if (cur > 0) to = starts[cur - 1];
+    else {                                          // already at the top: the paragraph before
+      const k = order.indexOf(current.item.id); if (k > 0) {
+        const prev = order[k - 1];
+        if (clipById[prev]) { beatIdx = beats.findIndex(b => (b.chips ?? []).some(c => c.clip === prev)); playItem(clipById[prev], 'clip'); markChapter(beatIdx); }
+        else playBeat(beats.findIndex(b => b.id === prev));
+        return;
+      }
+    }
+  }
+  hideChips(); waiting = false; unpause();
+  audio.currentTime = clock = Math.max(0, to - .1);
+  audio.play().catch(() => {}); setMic('on');
+}
 
 function hear(text, final, idx) {
   const now = performance.now();
@@ -316,6 +337,9 @@ function hear(text, final, idx) {
   const quiet = paused || waiting;                 // the voice isn't talking, so this is the viewer
   const tail = words.slice(-4).join(' ');          // a result keeps growing; only its newest words can be a command
   const stop = tail.match(STOP)?.[0], go = tail.match(GO)?.[0];
+  const back = tail.match(BACK)?.[0], skip = tail.match(NEXT)?.[0];
+  if (back && !said(back.split(' ').pop())) { lastAct = now; cut = null; return goBack(); }
+  if (skip && !said(skip)) { lastAct = now; cut = null; return next(); }
   if (!quiet) {
     // anyone talking over the voice stops it: their own words, not the voice coming back through the mic
     const r = recent();
@@ -328,7 +352,7 @@ function hear(text, final, idx) {
   }
   if (go && !said(go)) { lastAct = now; cut = null; return carryOn(); }
   if (echo(t) || now - quietSince < 1000) return;
-  const q = t.replace(STOP, ' ').replace(GO, ' ');
+  const q = t.replace(STOP, ' ').replace(GO, ' ').replace(BACK, ' ').replace(NEXT, ' ');
   if (!keywords(q).length) return;
   if (waiting && !paused) stopAutoContinue();      // someone is asking: don't move on under them
   if (!final) return;
