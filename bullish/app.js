@@ -8,7 +8,7 @@
 const params = new URLSearchParams(location.search);
 const only = params.get('scene');
 
-const { beats, clips, chapters, v } = await (await fetch('script.json', { cache: 'no-cache' })).json();   // always revalidated, so text and voice never come from different versions
+const { beats, clips, chapters, v } = await (await fetch(`script.json?t=${Date.now()}`, { cache: 'no-store' })).json();   // never a cached copy (GitHub's CDN holds files 10 min), so text and voice always come from the same version
 const clipById = Object.fromEntries(clips.map(c => [c.id, c]));
 const order = beats.flatMap(b => [b.id, ...(b.chips ?? []).map(c => c.clip)]);   // the full walk-through, answers included
 // sections are the chapters (the opening is its own): one plays straight through, answers and all, and it stops only between them
