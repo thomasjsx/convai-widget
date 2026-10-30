@@ -14,7 +14,7 @@ export default {
               <span class="row"><span class="ch">${words('proper and expected.')}</span></span></span>
             <span class="l2">
               <span class="row"><span class="ch">${words('A memorable campaign')}</span> <span class="ch">${words('adds to that.')}</span></span>
-              <span class="row"><span class="ch">${words("Those memorable campaign's")}</span> <span class="ch">${words('or products')}</span></span>
+              <span class="row"><span class="ch">${words('Those memorable campaigns')}</span> <span class="ch">${words('or products')}</span></span>
               <span class="row"><span class="ch">${words('can make people')}</span> <span class="ch"><span class="w feel" data-w="feel"><span class="glow" aria-hidden="true">feel</span><span class="t">feel</span></span> ${words('something.')}</span></span>
             </span>
           </h2>
