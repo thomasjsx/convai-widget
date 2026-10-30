@@ -226,6 +226,8 @@ const SKIP = new Set(`a an the is are was it its it's does doesn't do don't did 
 const stem = w => w.replace(/'s$/, '').replace(/^(\w{3,})s$/, '$1');
 const keywords = s => (s.toLowerCase().replace(/[‘’]/g, "'").match(/[a-z']+/g) ?? []).filter(w => !SKIP.has(w)).map(stem);
 let rec = null, listening = false, lastAct = 0;
+let askAgent = null, talking = false;           // set once the live agent is configured: it answers anything
+let cut = null;                                  // { idx, n }: where in a growing result the viewer started talking
 
 const MIC = { on: 'Say “pause” to ask a question', ask: 'Listening · ask, or say “continue”', miss: 'No answer for that one · pick a question or say “continue”',
   off: 'Microphone is off · tap the dot to turn it on' };
@@ -301,22 +303,35 @@ function answer(id) {
 }
 function carryOn() { if (waiting) next(); else setPaused(false); }
 
-function hear(text, final) {
-  const t = text.toLowerCase(), now = performance.now();
-  if (!current || now - lastAct < 1500) return;
+function hear(text, final, idx) {
+  const now = performance.now();
+  if (!current || talking || now - lastAct < 1500) return;
+  let words = text.toLowerCase().split(/\s+/).filter(Boolean);
+  if (cut && cut.idx === idx) words = words.slice(cut.n);    // only what they said, not the voice before it
+  const t = words.join(' ');
   const quiet = paused || waiting;                 // the voice isn't talking, so this is the viewer
-  const tail = t.split(/\s+/).slice(-4).join(' ');   // a result keeps growing; only its newest words can be a command
+  const tail = words.slice(-4).join(' ');          // a result keeps growing; only its newest words can be a command
   const stop = tail.match(STOP)?.[0], go = tail.match(GO)?.[0];
-  if (stop && !(paused && chipsEl.childElementCount) && (quiet || !said(stop))) { lastAct = now; return stopToAsk(); }
-  if (!quiet) return;
-  if (go && !said(go)) { lastAct = now; return carryOn(); }
+  if (!quiet) {
+    // anyone talking over the voice stops it: their own words, not the voice coming back through the mic
+    const r = recent();
+    const theirs = words.slice(-3).map(w => stem(norm(w))).filter(w => w.length > 1 && !r.has(w));
+    if ((stop && !said(stop)) || (theirs.length >= 2 && !echo(t))) {
+      cut = { idx, n: Math.max(0, words.length - 3) };
+      stopToAsk(); quietSince = 0;                 // what follows in this breath is theirs
+    }
+    return;
+  }
+  if (go && !said(go)) { lastAct = now; cut = null; return carryOn(); }
   if (echo(t) || now - quietSince < 1000) return;
   const q = t.replace(STOP, ' ').replace(GO, ' ');
   if (!keywords(q).length) return;
   if (waiting && !paused) stopAutoContinue();      // someone is asking: don't move on under them
   if (!final) return;
+  lastAct = now; cut = null;
+  if (askAgent) return askAgent(q);                // the live agent takes anything
   const c = matchQuestion(q);
-  if (c) { lastAct = now; return answer(c.id); }
+  if (c) return answer(c.id);
   setMic('miss');
   if (waiting && !paused) startAutoContinue();
 }
@@ -330,7 +345,7 @@ function listen() {
   let fails = 0;
   rec.onresult = e => {
     fails = 0;
-    for (let i = e.resultIndex; i < e.results.length; i++) hear(e.results[i][0].transcript, e.results[i].isFinal);
+    for (let i = e.resultIndex; i < e.results.length; i++) hear(e.results[i][0].transcript, e.results[i].isFinal, i);
     showHeard(e.results[e.results.length - 1][0].transcript);
   };
   rec.onerror = e => {
@@ -442,7 +457,7 @@ const agent = await fetch('agent.json').then(r => r.ok ? r.json() : null).catch(
 const talk = document.getElementById('talk');
 if (agent?.agent_id) {
   document.body.classList.add('can-talk');
-  let session = null, resumeAt = null;
+  let session = null, connecting = false, saved = null;
   const label = talk.querySelector('span');
   const setState = (state, text) => { talk.dataset.state = state; label.textContent = text; };
   const showAnswer = text => {
@@ -454,21 +469,24 @@ if (agent?.agent_id) {
   const finish = async () => {
     const s = session; session = null;
     if (s) await s.endSession().catch(() => {});
+    talking = false;
     document.body.classList.remove('talking');
     setState('idle', 'Ask a question');
     listen();
-    if (resumeAt != null) { setPaused(false); playBeat(resumeAt); resumeAt = null; }   // back where they left off
+    if (saved) {                                   // back to the exact line and moment they interrupted
+      const { item, kind, at, beat } = saved; saved = null;
+      if (kind === 'beat') playBeat(beat, at);
+      else { beatIdx = beat; playItem(item, 'clip', at); markChapter(beat); }
+    }
   };
-  let connecting = false;
-  talk.onclick = async () => {
-    if (session) return finish();
+  const startTalk = async firstText => {
+    if (session) { if (firstText) session.sendUserMessage?.(firstText); return; }
     if (connecting) return;
-    connecting = true;
-    unlisten();
-    resumeAt = Math.max(beatIdx, 0);
-    if (beatIdx >= 0) setPaused(true);
+    connecting = true; talking = true;
+    unlisten(); hideChips();
+    if (current) { saved = { item: current.item, kind: current.kind, at: Math.max(0, clock - .3), beat: beatIdx }; if (!paused) setPaused(true); }
     document.body.classList.add('talking', 'playing');
-    start.classList.add('gone');
+    start.classList.add('gone'); start.inert = true;
     setState('connecting', 'Connecting…');
     try {
       const { Conversation } = await import('https://esm.sh/@elevenlabs/client@latest');
@@ -476,21 +494,25 @@ if (agent?.agent_id) {
         agentId: agent.agent_id,
         clientTools: {
           show_scene: async ({ scene }) => showVisual(scene) ? `Now showing ${scene}.` : `No visual called ${scene}.`,
+          resume_walkthrough: async () => { setTimeout(finish, 400); return 'Resuming the walk-through.'; },
         },
-        onConnect: () => setState('listening', 'Listening… tap to return'),
-        onModeChange: ({ mode }) => setState(mode, mode === 'speaking' ? 'Answering… tap to return' : 'Listening… tap to return'),
+        onConnect: () => setState('listening', 'Listening… tap to go back'),
+        onModeChange: ({ mode }) => setState(mode, mode === 'speaking' ? 'Answering… tap to go back' : 'Listening… tap to go back'),
         onMessage: ({ message, source }) => { if (source === 'ai') showAnswer(message); },
         onDisconnect: () => { if (session) finish(); },
-        onError: e => { console.error(e); setState('idle', 'Ask a question'); },
+        onError: e => { console.error(e); },
       });
+      if (firstText) session.sendUserMessage?.(firstText);   // what they already asked, so they don't repeat it
     } catch (e) {
       console.error(e);
-      session = null;
+      session = null; talking = false;
       document.body.classList.remove('talking');
       setState('idle', 'Microphone needed to ask');
       listen();
-      if (resumeAt != null) { setPaused(false); resumeAt = null; }
+      if (saved) { setPaused(false); saved = null; }
     } finally { connecting = false; }
   };
+  askAgent = text => startTalk(text);
+  talk.onclick = () => session ? finish() : startTalk();
 }
 requestAnimationFrame(frame);
