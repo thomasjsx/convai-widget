@@ -13,9 +13,9 @@ export default {
             <span class="l1"><span class="row"><span class="ch">${words('A good campaign')}</span> <span class="ch">${words('looks correct,')}</span></span>
               <span class="row"><span class="ch">${words('proper and expected.')}</span></span></span>
             <span class="l2">
-              <span class="row"><span class="ch">${words('A memorable campaign')}</span> <span class="ch">${words('adds to that')}</span></span>
-              <span class="row"><span class="ch">${words("those campaign's")}</span> <span class="ch">${words('can make people')}</span></span>
-              <span class="row"><span class="ch"><span class="w feel" data-w="feel"><span class="glow" aria-hidden="true">feel</span><span class="t">feel</span></span> ${words('something.')}</span></span>
+              <span class="row"><span class="ch">${words('A memorable campaign')}</span> <span class="ch">${words('adds to that.')}</span></span>
+              <span class="row"><span class="ch">${words("Those memorable campaign's")}</span> <span class="ch">${words('or products')}</span></span>
+              <span class="row"><span class="ch">${words('can make people')}</span> <span class="ch"><span class="w feel" data-w="feel"><span class="glow" aria-hidden="true">feel</span><span class="t">feel</span></span> ${words('something.')}</span></span>
             </span>
           </h2>
           <div class="sig">
@@ -59,7 +59,8 @@ export default {
       seen[k] = (seen[k] || 0) + 1;
       atWord(w.dataset.w, () => w.classList.add('on'), seen[k]);
     });
-    atWord('memorable', () => s.classList.add('dim'));       // the merely-right line steps back
+    const nth = k => before.filter(x => x === k).length + 1;   // the thesis's own word, not one said in the intro
+    atWord('memorable', () => s.classList.add('dim'), nth('memorable'));   // the merely-right line steps back
     atWord('feel', () => s.classList.add('lit'));            // gradient wipes across "feel"
     atWord('Thomas', () => s.classList.add('signed'));       // the lockup
     atWord('difference', () => s.classList.add('pulse'));    // "feel" breathes once more
@@ -123,7 +124,7 @@ const css = `
 /* tall or narrow screens: one phrase per line, set larger */
 @media (max-aspect-ratio: 1/1), (max-width: 900px) {
   .s00 .copy { padding:0 max(24px, 8vw) 2vh; }
-  .s00 .say { font-size:clamp(26px, 8.6vw, 72px); line-height:1.04; }
+  .s00 .say { font-size:clamp(20px, min(8.6vw, 5.2vh), 72px); line-height:1.04; }
   .s00 .ch { display:block; }
   .s00 .sig { margin-top:clamp(36px, 6vh, 72px); }
 }

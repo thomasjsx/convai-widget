@@ -4,10 +4,10 @@
    "id": "b0",
    "scene": "s00",
    "title": "The thesis",
-   "vo": "Hi. I\u2019m a Conversational versions Thomas built to walk you through his thinking. Please, interrupt me anytime, and ask anything. A good campaign looks correct, proper and expected. A memorable campaign adds to that those campaign's can make people feel something. What moves a campaign from one to the other is looking at something complex through an unlikely lens nobody else in the category would choose.",
+   "vo": "Hi. I\u2019m a conversational versions of Thomas. Built to walk you through his thinking on what makes a memorable campaign or product. Please, interrupt me anytime, and ask questions . A good campaign looks correct, proper and expected. A memorable campaign adds to that. Those memorable campaign's or products can make people feel something. What moves a campaign or product from one to the other is looking at something complex through an unlikely lens nobody else in the category chose.",
    "chips": [],
-   "audio": "audio/b0.mp3",
-   "duration": 22.87,
+   "audio": "audio/b0.mp3?v=9c0054cb",
+   "duration": 28.96,
    "words": [
     [
      "Hi.",
@@ -15,263 +15,319 @@
     ],
     [
      "I\u2019m",
-     0.488
+     0.43
     ],
     [
      "a",
-     0.685
+     0.592
     ],
     [
-     "Conversational",
-     0.755
+     "conversational",
+     0.662
     ],
     [
      "versions",
-     1.451
+     1.358
     ],
     [
-     "Thomas",
-     2.717
+     "of",
+     1.73
     ],
     [
-     "built",
-     3.146
+     "Thomas.",
+     1.834
+    ],
+    [
+     "Built",
+     2.752
     ],
     [
      "to",
-     3.367
+     3.007
     ],
     [
      "walk",
-     3.46
+     3.111
     ],
     [
      "you",
-     3.692
+     3.355
     ],
     [
      "through",
-     3.808
+     3.471
     ],
     [
      "his",
-     4.075
+     3.704
     ],
     [
-     "thinking.",
-     4.238
+     "thinking",
+     3.843
     ],
     [
-     "Please,",
-     4.946
+     "on",
+     4.226
     ],
     [
-     "interrupt",
-     5.236
+     "what",
+     4.354
     ],
     [
-     "me",
-     5.596
-    ],
-    [
-     "anytime,",
-     5.724
-    ],
-    [
-     "and",
-     6.235
-    ],
-    [
-     "ask",
-     6.362
-    ],
-    [
-     "anything.",
-     6.606
-    ],
-    [
-     "A",
-     7.43
-    ],
-    [
-     "good",
-     7.581
-    ],
-    [
-     "campaign",
-     7.755
-    ],
-    [
-     "looks",
-     8.15
-    ],
-    [
-     "correct,",
-     8.394
-    ],
-    [
-     "proper",
-     8.8
-    ],
-    [
-     "and",
-     9.149
-    ],
-    [
-     "expected.",
-     9.265
-    ],
-    [
-     "A",
-     10.194
-    ],
-    [
-     "memorable",
-     10.356
-    ],
-    [
-     "campaign",
-     10.809
-    ],
-    [
-     "adds",
-     11.401
-    ],
-    [
-     "to",
-     11.773
-    ],
-    [
-     "that",
-     11.912
-    ],
-    [
-     "those",
-     12.167
-    ],
-    [
-     "campaign's",
-     12.434
-    ],
-    [
-     "can",
-     12.98
-    ],
-    [
-     "make",
-     13.131
-    ],
-    [
-     "people",
-     13.293
-    ],
-    [
-     "feel",
-     13.595
-    ],
-    [
-     "something.",
-     13.909
-    ],
-    [
-     "What",
-     14.698
-    ],
-    [
-     "moves",
-     14.988
+     "makes",
+     4.516
     ],
     [
      "a",
-     15.383
+     4.714
+    ],
+    [
+     "memorable",
+     4.795
     ],
     [
      "campaign",
-     15.476
+     5.248
     ],
     [
-     "from",
-     16.091
+     "or",
+     6.072
     ],
     [
-     "one",
-     16.312
+     "product.",
+     6.327
+    ],
+    [
+     "Please,",
+     7.767
+    ],
+    [
+     "interrupt",
+     8.081
+    ],
+    [
+     "me",
+     8.429
+    ],
+    [
+     "anytime,",
+     8.557
+    ],
+    [
+     "and",
+     9.207
+    ],
+    [
+     "ask",
+     9.404
+    ],
+    [
+     "questions",
+     9.578
+    ],
+    [
+     ".",
+     10.136
+    ],
+    [
+     "A",
+     11.099
+    ],
+    [
+     "good",
+     11.238
+    ],
+    [
+     "campaign",
+     11.413
+    ],
+    [
+     "looks",
+     11.796
+    ],
+    [
+     "correct,",
+     12.028
+    ],
+    [
+     "proper",
+     12.666
+    ],
+    [
+     "and",
+     13.108
+    ],
+    [
+     "expected.",
+     13.282
+    ],
+    [
+     "A",
+     14.327
+    ],
+    [
+     "memorable",
+     14.478
+    ],
+    [
+     "campaign",
+     14.872
+    ],
+    [
+     "adds",
+     15.488
     ],
     [
      "to",
-     16.509
+     15.882
     ],
     [
-     "the",
-     16.649
+     "that.",
+     16.01
     ],
     [
-     "other",
-     16.8
+     "Those",
+     17.02
     ],
     [
-     "is",
-     17.369
+     "memorable",
+     17.322
     ],
     [
-     "looking",
-     17.566
+     "campaign's",
+     17.728
     ],
     [
-     "at",
-     17.868
+     "or",
+     18.216
     ],
     [
-     "something",
-     17.984
-    ],
-    [
-     "complex",
+     "products",
      18.344
     ],
     [
-     "through",
-     18.982
+     "can",
+     18.75
     ],
     [
-     "an",
-     19.203
+     "make",
+     18.913
     ],
     [
-     "unlikely",
-     19.354
+     "people",
+     19.098
     ],
     [
-     "lens",
-     19.934
+     "feel",
+     19.435
     ],
     [
-     "nobody",
-     20.329
+     "something.",
+     19.83
     ],
     [
-     "else",
-     20.724
+     "What",
+     20.782
     ],
     [
-     "in",
-     20.933
+     "moves",
+     21.014
+    ],
+    [
+     "a",
+     21.258
+    ],
+    [
+     "campaign",
+     21.339
+    ],
+    [
+     "or",
+     21.734
+    ],
+    [
+     "product",
+     21.85
+    ],
+    [
+     "from",
+     22.187
+    ],
+    [
+     "one",
+     22.407
+    ],
+    [
+     "to",
+     22.639
     ],
     [
      "the",
-     21.026
+     22.767
+    ],
+    [
+     "other",
+     22.906
+    ],
+    [
+     "is",
+     23.464
+    ],
+    [
+     "looking",
+     23.661
+    ],
+    [
+     "at",
+     23.94
+    ],
+    [
+     "something",
+     24.056
+    ],
+    [
+     "complex",
+     24.381
+    ],
+    [
+     "through",
+     25.414
+    ],
+    [
+     "an",
+     25.693
+    ],
+    [
+     "unlikely",
+     25.809
+    ],
+    [
+     "lens",
+     26.296
+    ],
+    [
+     "nobody",
+     26.68
+    ],
+    [
+     "else",
+     26.993
+    ],
+    [
+     "in",
+     27.179
+    ],
+    [
+     "the",
+     27.249
     ],
     [
      "category",
-     21.13
+     27.341
     ],
     [
-     "would",
-     21.641
-    ],
-    [
-     "choose.",
-     21.827
+     "chose.",
+     27.841
     ]
    ],
    "voice": "Eric"
@@ -291,7 +347,7 @@
      "clip": "c1"
     }
    ],
-   "audio": "audio/b1.mp3",
+   "audio": "audio/b1.mp3?v=ecd30652",
    "duration": 8.52,
    "words": [
     [
@@ -407,7 +463,7 @@
    "title": "Unexpected in its space",
    "vo": "Look at how AI brands itself. Sparks, gradients, abstract marks. Every major player has kept its AI faceless. Microsoft redrew Copilot this year. Same idea, less of it.",
    "chips": [],
-   "audio": "audio/b2.mp3",
+   "audio": "audio/b2.mp3?v=c1f6716b",
    "duration": 13.31,
    "words": [
     [
@@ -540,7 +596,7 @@
      "clip": "c3"
     }
    ],
-   "audio": "audio/b3.mp3",
+   "audio": "audio/b3.mp3?v=08b7c0e6",
    "duration": 11.5,
    "words": [
     [
@@ -677,7 +733,7 @@
      "clip": "c6"
     }
    ],
-   "audio": "audio/b4.mp3",
+   "audio": "audio/b4.mp3?v=4ff4b642",
    "duration": 29.65,
    "words": [
     [
@@ -1038,7 +1094,7 @@
      "clip": "c8"
     }
    ],
-   "audio": "audio/b5.mp3",
+   "audio": "audio/b5.mp3?v=828b44a6",
    "duration": 9.54,
    "words": [
     [
@@ -1195,7 +1251,7 @@
      "clip": "c10"
     }
    ],
-   "audio": "audio/b6.mp3",
+   "audio": "audio/b6.mp3?v=c65624de",
    "duration": 9.36,
    "words": [
     [
@@ -1324,7 +1380,7 @@
      "clip": "c12"
     }
    ],
-   "audio": "audio/b7.mp3",
+   "audio": "audio/b7.mp3?v=2b15a20e",
    "duration": 19.72,
    "words": [
     [
@@ -1568,7 +1624,7 @@
    "title": "What's your Muse?",
    "vo": "So the question Thomas would bring to the team on day one is the one I'll leave you with. What's your Muse?",
    "chips": [],
-   "audio": "audio/b8.mp3",
+   "audio": "audio/b8.mp3?v=74c6fa7e",
    "duration": 5.46,
    "words": [
     [
@@ -1669,7 +1725,7 @@
    "scene": "s02",
    "title": "So cute sells?",
    "vo": "No. This isn't an argument that cute sells. Under the character, Muse does much of what ChatGPT or Claude does. What's different is how it feels, and the way Meta found that feeling can be taught.",
-   "audio": "audio/c0.mp3",
+   "audio": "audio/c0.mp3?v=8d26fd06",
    "duration": 12.19,
    "words": [
     [
@@ -1824,7 +1880,7 @@
    "scene": "s02",
    "title": "Why Muse?",
    "vo": "What Thomas cares about is taking esoteric topics, product and making them accessible. An AI agent is about as esoteric as products get. You can\u2019t see it, you can\u2019t hold it, and most people are a little afraid of it.",
-   "audio": "audio/c1.mp3",
+   "audio": "audio/c1.mp3?v=1db4593b",
    "duration": 13.35,
    "words": [
     [
@@ -1995,7 +2051,7 @@
    "scene": "body",
    "title": "What does a body do?",
    "vo": "A body does three jobs a logo can't. It explains: people understand \"a helper\" long before they understand \"an agent.\" It invites: a character makes people ask what it is. It accumulates: the same face in every launch builds on the last instead of starting over.",
-   "audio": "audio/c2.mp3",
+   "audio": "audio/c2.mp3?v=3c68d566",
    "duration": 17.67,
    "words": [
     [
@@ -2190,7 +2246,7 @@
    "scene": "s05",
    "title": "Where did it come from?",
    "vo": "And it comes from culture. Meta read the moment: a character people can compare to a Labubu, in a device that looks like a 90\u2019s Tamagotchi. Not because it\u2019s cute. Because it\u2019s current.",
-   "audio": "audio/c3.mp3",
+   "audio": "audio/c3.mp3?v=b7fea14d",
    "duration": 13.58,
    "words": [
     [
@@ -2333,7 +2389,7 @@
    "scene": "s06",
    "title": "Why would Meta do it?",
    "vo": "Faceless AI is easy to fear. Seven in ten Americans oppose an AI data center in their area. You can't really be mad that the little guy has a data center.",
-   "audio": "audio/c5.mp3",
+   "audio": "audio/c5.mp3?v=533fdb52",
    "duration": 8.66,
    "words": [
     [
@@ -2468,7 +2524,7 @@
    "scene": "s07",
    "title": "Doesn't anyone hate it?",
    "vo": "And some people hate it. Meta shipped it anyway. A character some people hate is still a character people talk about. A logo nobody minds is a logo nobody notices. Warmth has to open a door, never hide what's behind it.",
-   "audio": "audio/c6.mp3",
+   "audio": "audio/c6.mp3?v=326a4267",
    "duration": 13.07,
    "words": [
     [
@@ -2643,7 +2699,7 @@
    "scene": "team",
    "title": "What's his answer?",
    "vo": "His answer: a face disarms people who are angry at a faceless industry. But he'd want to hear the team's first.",
-   "audio": "audio/c7.mp3",
+   "audio": "audio/c7.mp3?v=91cdace1",
    "duration": 7.69,
    "words": [
     [
@@ -2738,7 +2794,7 @@
    "scene": "team",
    "title": "What would that look like for Bullish?",
    "vo": "From the outside, those are hypotheses, not answers. That's where the team would start, and Thomas would want to hear yours first.",
-   "audio": "audio/c8.mp3",
+   "audio": "audio/c8.mp3?v=028dea8a",
    "duration": 7.59,
    "words": [
     [
@@ -2837,7 +2893,7 @@
    "scene": "team",
    "title": "What's underneath?",
    "vo": "The thinking isn't a teddy bear who trades crypto. It's what's underneath: decide how something should feel, choose a lens nobody else in the category would choose, borrow it from the culture people already live in, and stay honest.",
-   "audio": "audio/c9.mp3",
+   "audio": "audio/c9.mp3?v=66bfcd2d",
    "duration": 14.05,
    "words": [
     [
@@ -3004,7 +3060,7 @@
    "scene": "s10",
    "title": "And for the team?",
    "vo": "And one habit. Each designer brings one piece of culture every week. Thomas goes first.",
-   "audio": "audio/c10.mp3",
+   "audio": "audio/c10.mp3?v=2b0edc9f",
    "duration": 5.78,
    "words": [
     [
@@ -3075,7 +3131,7 @@
    "scene": "weave",
    "title": "What's Figma Weave?",
    "vo": "It puts AI image, video, animation and motion models on one canvas. In Weave, a designer can build a tool that takes any input and returns a consistent output.",
-   "audio": "audio/c11.mp3",
+   "audio": "audio/c11.mp3?v=6db9c489",
    "duration": 10.43,
    "words": [
     [
@@ -3202,7 +3258,7 @@
    "scene": "weave",
    "title": "When would you bring in an agency?",
    "vo": "For brand-defining work, a partner like Collins. We write the brief and own the idea. Meta did both: an outside artist drew Muse's mark, and its own designer created the character.",
-   "audio": "audio/c12.mp3",
+   "audio": "audio/c12.mp3?v=8a5aa6d9",
    "duration": 12.42,
    "words": [
     [
@@ -3350,5 +3406,6 @@
    "title": "Building it",
    "start": "b7"
   }
- ]
+ ],
+ "v": "6d5f89fb"
 }

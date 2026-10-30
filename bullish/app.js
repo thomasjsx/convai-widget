@@ -8,7 +8,7 @@
 const params = new URLSearchParams(location.search);
 const only = params.get('scene');
 
-const { beats, clips, chapters } = await (await fetch('script.json')).json();
+const { beats, clips, chapters, v } = await (await fetch('script.json', { cache: 'no-cache' })).json();   // always revalidated, so text and voice never come from different versions
 const clipById = Object.fromEntries(clips.map(c => [c.id, c]));
 const stage = document.getElementById('stage');
 const captions = document.getElementById('captions');
@@ -25,7 +25,7 @@ function placeholder(id) {
 
 // one module per visual, shared by every beat or answer that plays over it
 const visualIds = [...new Set([...beats, ...clips].map(x => x.scene))];
-const load = id => import(`./scenes/${id}.js`).catch(() => import(`./scenes/${id}.js?retry`));
+const load = id => import(`./scenes/${id}.js?v=${v}`).catch(() => import(`./scenes/${id}.js?v=${v}&retry`));
 const mods = {}, roots = {};
 await Promise.all(visualIds.map(async id => {
   mods[id] = await load(id).then(m => m.default).catch(() => placeholder(id));
