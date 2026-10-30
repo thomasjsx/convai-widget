@@ -55,7 +55,7 @@ export default {
     atWord('marks', () => s.classList.add('cold'));         // the colour drains: a faceless wall
     atWord('copilot', () => s.classList.add('iso'));
     atWord('same', () => s.classList.add('same'));          // redrawn, still the same idea
-    atWord('less', () => s.classList.add('less'));          // it settles back into the wall
+    atWord('animated', () => s.classList.add('less'));      // "…but animated": it settles back into the wall
   },
 };
 

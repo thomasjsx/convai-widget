@@ -457,122 +457,182 @@
    "id": "b2",
    "scene": "s01",
    "title": "Unexpected in its space",
-   "vo": "Look at how AI brands itself. Sparks, gradients, abstract marks. Every major player has kept its AI faceless. Microsoft redrew Copilot this year. Same idea, less of it.",
+   "vo": "Then you add the way AI companies brand themselves. Sparks, gradients, abstract marks. Every major player has kept its AI faceless. Microsoft even re-drew their Copilot logo this year, it's the same idea as the last round, safe, expected, \"on brand\" but animated.",
    "chips": [],
-   "audio": "audio/b2.mp3?v=c1f6716b",
-   "duration": 13.31,
+   "audio": "audio/b2.mp3?v=66792fd2",
+   "duration": 18.0,
    "words": [
     [
-     "Look",
+     "Then",
      0.0
     ],
     [
-     "at",
+     "you",
      0.255
     ],
     [
-     "how",
-     0.337
+     "add",
+     0.395
+    ],
+    [
+     "the",
+     0.569
+    ],
+    [
+     "way",
+     0.685
     ],
     [
      "AI",
-     0.534
+     0.94
     ],
     [
-     "brands",
-     0.859
+     "companies",
+     1.312
     ],
     [
-     "itself.",
-     1.207
+     "brand",
+     1.718
+    ],
+    [
+     "themselves.",
+     2.009
     ],
     [
      "Sparks,",
-     2.136
+     2.926
     ],
     [
      "gradients,",
-     2.728
+     3.541
     ],
     [
      "abstract",
-     3.506
+     4.249
     ],
     [
      "marks.",
-     4.087
+     4.818
     ],
     [
      "Every",
-     5.143
+     5.991
     ],
     [
      "major",
-     5.48
-    ],
-    [
-     "player",
-     5.782
-    ],
-    [
-     "has",
-     6.107
-    ],
-    [
-     "kept",
      6.269
     ],
     [
+     "player",
+     6.618
+    ],
+    [
+     "has",
+     6.989
+    ],
+    [
+     "kept",
+     7.163
+    ],
+    [
      "its",
-     6.513
+     7.407
     ],
     [
      "AI",
-     6.687
+     7.605
     ],
     [
      "faceless.",
-     7.094
+     8.127
     ],
     [
      "Microsoft",
-     8.15
+     9.543
     ],
     [
-     "redrew",
-     8.847
+     "even",
+     10.124
+    ],
+    [
+     "re-drew",
+     10.368
+    ],
+    [
+     "their",
+     10.704
     ],
     [
      "Copilot",
-     9.311
+     10.902
+    ],
+    [
+     "logo",
+     11.54
     ],
     [
      "this",
-     9.927
+     11.923
     ],
     [
-     "year.",
-     10.136
-    ],
-    [
-     "Same",
-     11.273
-    ],
-    [
-     "idea,",
-     11.575
-    ],
-    [
-     "less",
+     "year,",
      12.121
     ],
     [
-     "of",
-     12.388
+     "it's",
+     12.748
     ],
     [
-     "it.",
-     12.527
+     "the",
+     12.98
+    ],
+    [
+     "same",
+     13.108
+    ],
+    [
+     "idea",
+     13.375
+    ],
+    [
+     "as",
+     13.723
+    ],
+    [
+     "the",
+     13.851
+    ],
+    [
+     "last",
+     13.978
+    ],
+    [
+     "round,",
+     14.292
+    ],
+    [
+     "safe,",
+     14.675
+    ],
+    [
+     "expected,",
+     15.081
+    ],
+    [
+     "\"on",
+     15.697
+    ],
+    [
+     "brand\"",
+     16.022
+    ],
+    [
+     "but",
+     16.498
+    ],
+    [
+     "animated.",
+     16.823
     ]
    ],
    "voice": "Eric"
@@ -581,10 +641,10 @@
    "id": "b3",
    "scene": "body",
    "title": "A body for the abstract",
-   "vo": "Muse appeared with a fuzzy, rosy-cheeked character. Meta gave the \u201cAI\u201d thing a body. Muse didn\u2019t change what the category can do. It changed how the category feels.",
+   "vo": "Contrast that with Muse. Muse appeared as a fuzzy, rosy-cheeked character. Meta gave the \u201cAI\u201d thing a body. Muse didn\u2019t change what the category can do. It changed how the category feels and how we enter it.",
    "chips": [
     {
-     "label": "What does a body do?",
+     "label": "What does a body do for Meta?",
      "clip": "c2"
     },
     {
@@ -592,120 +652,156 @@
      "clip": "c3"
     }
    ],
-   "audio": "audio/b3.mp3?v=4d00bc4e",
-   "duration": 11.36,
+   "audio": "audio/b3.mp3?v=c034a719",
+   "duration": 13.72,
    "words": [
     [
-     "Muse",
+     "Contrast",
      0.0
     ],
     [
-     "appeared",
-     0.36
+     "that",
+     0.615
     ],
     [
      "with",
-     0.789
+     0.859
     ],
     [
-     "a",
-     0.975
-    ],
-    [
-     "fuzzy,",
-     1.126
-    ],
-    [
-     "rosy-cheeked",
-     1.625
-    ],
-    [
-     "character.",
-     2.38
-    ],
-    [
-     "Meta",
-     3.286
-    ],
-    [
-     "gave",
-     3.587
-    ],
-    [
-     "the",
-     3.855
-    ],
-    [
-     "\u201cAI\u201d",
-     4.017
-    ],
-    [
-     "thing",
-     4.516
-    ],
-    [
-     "a",
-     4.83
-    ],
-    [
-     "body.",
-     4.923
+     "Muse.",
+     1.057
     ],
     [
      "Muse",
-     5.84
+     2.264
+    ],
+    [
+     "appeared",
+     2.543
+    ],
+    [
+     "as",
+     2.891
+    ],
+    [
+     "a",
+     3.03
+    ],
+    [
+     "fuzzy,",
+     3.216
+    ],
+    [
+     "rosy-cheeked",
+     3.657
+    ],
+    [
+     "character.",
+     4.435
+    ],
+    [
+     "Meta",
+     5.561
+    ],
+    [
+     "gave",
+     5.851
+    ],
+    [
+     "the",
+     6.095
+    ],
+    [
+     "\u201cAI\u201d",
+     6.235
+    ],
+    [
+     "thing",
+     6.676
+    ],
+    [
+     "a",
+     6.908
+    ],
+    [
+     "body.",
+     6.978
+    ],
+    [
+     "Muse",
+     8.057
     ],
     [
      "didn\u2019t",
-     6.165
+     8.324
     ],
     [
      "change",
-     6.42
+     8.58
     ],
     [
      "what",
-     6.803
+     8.893
     ],
     [
      "the",
-     6.989
+     9.033
     ],
     [
      "category",
-     7.105
+     9.137
     ],
     [
      "can",
-     7.674
+     9.659
     ],
     [
      "do.",
-     7.86
+     9.834
     ],
     [
      "It",
-     8.557
+     10.461
     ],
     [
      "changed",
-     8.754
+     10.635
     ],
     [
      "how",
-     9.207
+     10.995
     ],
     [
      "the",
-     9.381
+     11.134
     ],
     [
      "category",
-     9.497
+     11.25
     ],
     [
-     "feels.",
-     10.159
+     "feels",
+     11.854
+    ],
+    [
+     "and",
+     12.283
+    ],
+    [
+     "how",
+     12.411
+    ],
+    [
+     "we",
+     12.574
+    ],
+    [
+     "enter",
+     12.736
+    ],
+    [
+     "it.",
+     12.968
     ]
    ],
    "voice": "Eric"
@@ -1708,339 +1804,409 @@
    "id": "c0",
    "scene": "s02",
    "title": "So cute sells?",
-   "vo": "No. This isn't an argument that cute sells. Under the character, Muse does much of what ChatGPT or Claude does. What's different is how it feels, and the way Meta found that feeling can be taught.",
-   "audio": "audio/c0.mp3?v=8d26fd06",
-   "duration": 12.19,
+   "vo": "You may be inclined to think this is about how \"cute sells\". It isn\u2019t. Inside of the character, Muse does much of what ChatGPT, Claude or ten other models do. What\u2019s different is how we feel about the brand, and the way Meta found that feeling can be taught.",
+   "audio": "audio/c0.mp3?v=f513e3a7",
+   "duration": 16.32,
    "words": [
     [
-     "No.",
+     "You",
      0.0
     ],
     [
-     "This",
-     0.476
-    ],
-    [
-     "isn't",
-     0.743
-    ],
-    [
-     "an",
-     1.01
-    ],
-    [
-     "argument",
-     1.138
-    ],
-    [
-     "that",
-     1.533
-    ],
-    [
-     "cute",
-     1.695
-    ],
-    [
-     "sells.",
-     1.997
-    ],
-    [
-     "Under",
-     3.042
-    ],
-    [
-     "the",
-     3.297
-    ],
-    [
-     "character,",
-     3.413
-    ],
-    [
-     "Muse",
-     3.843
-    ],
-    [
-     "does",
-     4.075
-    ],
-    [
-     "much",
-     4.296
-    ],
-    [
-     "of",
-     4.516
-    ],
-    [
-     "what",
-     4.598
-    ],
-    [
-     "ChatGPT",
-     4.772
-    ],
-    [
-     "or",
-     5.7
-    ],
-    [
-     "Claude",
-     5.921
-    ],
-    [
-     "does.",
-     6.351
-    ],
-    [
-     "What's",
-     7.233
-    ],
-    [
-     "different",
-     7.546
-    ],
-    [
-     "is",
-     7.895
-    ],
-    [
-     "how",
-     8.011
-    ],
-    [
-     "it",
-     8.173
-    ],
-    [
-     "feels,",
-     8.301
-    ],
-    [
-     "and",
-     9.033
-    ],
-    [
-     "the",
-     9.23
-    ],
-    [
-     "way",
-     9.334
-    ],
-    [
-     "Meta",
-     9.543
-    ],
-    [
-     "found",
-     9.903
-    ],
-    [
-     "that",
-     10.263
-    ],
-    [
-     "feeling",
-     10.461
-    ],
-    [
-     "can",
-     10.844
+     "may",
+     0.197
     ],
     [
      "be",
-     11.018
+     0.348
+    ],
+    [
+     "inclined",
+     0.453
+    ],
+    [
+     "to",
+     0.848
+    ],
+    [
+     "think",
+     0.964
+    ],
+    [
+     "this",
+     1.254
+    ],
+    [
+     "is",
+     1.451
+    ],
+    [
+     "about",
+     1.567
+    ],
+    [
+     "how",
+     1.834
+    ],
+    [
+     "\"cute",
+     2.101
+    ],
+    [
+     "sells\".",
+     2.67
+    ],
+    [
+     "It",
+     3.738
+    ],
+    [
+     "isn\u2019t.",
+     3.936
+    ],
+    [
+     "Inside",
+     4.946
+    ],
+    [
+     "of",
+     5.387
+    ],
+    [
+     "the",
+     5.457
+    ],
+    [
+     "character,",
+     5.573
+    ],
+    [
+     "Muse",
+     6.42
+    ],
+    [
+     "does",
+     6.745
+    ],
+    [
+     "much",
+     6.978
+    ],
+    [
+     "of",
+     7.21
+    ],
+    [
+     "what",
+     7.314
+    ],
+    [
+     "ChatGPT,",
+     7.5
+    ],
+    [
+     "Claude",
+     8.406
+    ],
+    [
+     "or",
+     8.835
+    ],
+    [
+     "ten",
+     9.021
+    ],
+    [
+     "other",
+     9.242
+    ],
+    [
+     "models",
+     9.451
+    ],
+    [
+     "do.",
+     9.834
+    ],
+    [
+     "What\u2019s",
+     10.832
+    ],
+    [
+     "different",
+     11.146
+    ],
+    [
+     "is",
+     11.517
+    ],
+    [
+     "how",
+     11.656
+    ],
+    [
+     "we",
+     11.842
+    ],
+    [
+     "feel",
+     12.016
+    ],
+    [
+     "about",
+     12.249
+    ],
+    [
+     "the",
+     12.446
+    ],
+    [
+     "brand,",
+     12.55
+    ],
+    [
+     "and",
+     13.386
+    ],
+    [
+     "the",
+     13.572
+    ],
+    [
+     "way",
+     13.688
+    ],
+    [
+     "Meta",
+     13.874
+    ],
+    [
+     "found",
+     14.164
+    ],
+    [
+     "that",
+     14.431
+    ],
+    [
+     "feeling",
+     14.652
+    ],
+    [
+     "can",
+     15.035
+    ],
+    [
+     "be",
+     15.197
     ],
     [
      "taught.",
-     11.157
+     15.325
     ]
    ],
-   "voice": "Eric"
+   "voice": "Eric",
+   "heading": false
   },
   {
    "id": "c1",
    "scene": "s02",
    "title": "Why Muse?",
-   "vo": "What Thomas cares about is taking esoteric topics and products and making them accessible. An AI agent is about as esoteric as products get. You can\u2019t see it, you can\u2019t hold it, and most people are a little afraid of it.",
-   "audio": "audio/c1.mp3?v=744f75b4",
-   "duration": 14.19,
+   "vo": "Thomas cares about systems, and their close relatives, esoteric topics and products. He asks how they become accessible. An AI agent is about as esoteric as products get. You can\u2019t see it, you can\u2019t hold it, and most people are a little afraid of it.",
+   "audio": "audio/c1.mp3?v=0c665fae",
+   "duration": 17.63,
    "words": [
     [
-     "What",
+     "Thomas",
      0.0
     ],
     [
-     "Thomas",
-     0.279
-    ],
-    [
      "cares",
-     0.65
+     0.441
     ],
     [
      "about",
-     0.964
+     0.755
     ],
     [
-     "is",
-     1.382
+     "systems,",
+     1.022
     ],
     [
-     "taking",
-     1.637
-    ],
-    [
-     "esoteric",
+     "and",
      1.985
     ],
     [
-     "topics",
-     2.635
+     "their",
+     2.345
     ],
     [
-     "and",
-     3.181
+     "close",
+     2.589
     ],
     [
-     "products",
-     3.39
-    ],
-    [
-     "and",
-     4.319
-    ],
-    [
-     "making",
-     4.632
-    ],
-    [
-     "them",
-     4.923
-    ],
-    [
-     "accessible.",
-     5.108
-    ],
-    [
-     "An",
-     6.049
-    ],
-    [
-     "AI",
-     6.269
-    ],
-    [
-     "agent",
-     6.664
-    ],
-    [
-     "is",
-     7.012
-    ],
-    [
-     "about",
-     7.163
-    ],
-    [
-     "as",
-     7.396
+     "relatives,",
+     2.926
     ],
     [
      "esoteric",
-     7.558
+     3.518
     ],
     [
-     "as",
-     8.243
-    ],
-    [
-     "products",
-     8.394
-    ],
-    [
-     "get.",
-     8.824
-    ],
-    [
-     "You",
-     9.961
-    ],
-    [
-     "can\u2019t",
-     10.147
-    ],
-    [
-     "see",
-     10.437
-    ],
-    [
-     "it,",
-     10.67
-    ],
-    [
-     "you",
-     10.879
-    ],
-    [
-     "can\u2019t",
-     11.018
-    ],
-    [
-     "hold",
-     11.25
-    ],
-    [
-     "it,",
-     11.482
+     "topics",
+     4.156
     ],
     [
      "and",
-     11.889
+     4.632
+    ],
+    [
+     "products.",
+     4.807
+    ],
+    [
+     "He",
+     5.944
+    ],
+    [
+     "asks",
+     6.13
+    ],
+    [
+     "how",
+     6.374
+    ],
+    [
+     "they",
+     6.548
+    ],
+    [
+     "become",
+     6.722
+    ],
+    [
+     "accessible.",
+     7.152
+    ],
+    [
+     "An",
+     8.522
+    ],
+    [
+     "AI",
+     8.742
+    ],
+    [
+     "agent",
+     9.195
+    ],
+    [
+     "is",
+     9.845
+    ],
+    [
+     "about",
+     10.066
+    ],
+    [
+     "as",
+     10.333
+    ],
+    [
+     "esoteric",
+     10.472
+    ],
+    [
+     "as",
+     11.076
+    ],
+    [
+     "products",
+     11.204
+    ],
+    [
+     "get.",
+     11.668
+    ],
+    [
+     "You",
+     12.643
+    ],
+    [
+     "can\u2019t",
+     12.806
+    ],
+    [
+     "see",
+     13.084
+    ],
+    [
+     "it,",
+     13.305
+    ],
+    [
+     "you",
+     14.095
+    ],
+    [
+     "can\u2019t",
+     14.234
+    ],
+    [
+     "hold",
+     14.466
+    ],
+    [
+     "it,",
+     14.733
+    ],
+    [
+     "and",
+     15.279
     ],
     [
      "most",
-     12.121
+     15.511
     ],
     [
      "people",
-     12.318
+     15.732
     ],
     [
      "are",
-     12.562
+     15.987
     ],
     [
      "a",
-     12.678
+     16.103
     ],
     [
      "little",
-     12.725
+     16.149
     ],
     [
      "afraid",
-     12.945
+     16.382
     ],
     [
      "of",
-     13.27
+     16.707
     ],
     [
      "it.",
-     13.375
+     16.811
     ]
    ],
-   "voice": "Eric"
+   "voice": "Eric",
+   "heading": false
   },
   {
    "id": "c2",
    "scene": "body",
-   "title": "What does a body do?",
-   "vo": "A body does three jobs a logo can't. It explains: people understand \"a helper\" long before they understand \"an agent.\" It invites: a character makes people ask what it is. It accumulates: the same face in every launch builds on the last instead of starting over.",
-   "audio": "audio/c2.mp3?v=3c68d566",
-   "duration": 17.67,
+   "title": "What does a body do for Meta?",
+   "vo": "A body does three jobs a logo mark can\u2019t. It explains: people understand \u201ca helper\u201d long before they understand \u201can agent.\u201d It invites: a character makes people ask what it is. It accumulates: the same face in every launch builds on the last instead of starting over.",
+   "audio": "audio/c2.mp3?v=db529205",
+   "duration": 18.83,
    "words": [
     [
      "A",
@@ -2048,183 +2214,187 @@
     ],
     [
      "body",
-     0.174
+     0.163
     ],
     [
      "does",
-     0.569
+     0.453
     ],
     [
      "three",
-     0.859
+     0.662
     ],
     [
      "jobs",
-     1.138
+     0.94
     ],
     [
      "a",
-     1.486
+     1.289
     ],
     [
      "logo",
-     1.567
+     1.37
     ],
     [
-     "can't.",
-     1.962
+     "mark",
+     1.66
+    ],
+    [
+     "can\u2019t.",
+     1.927
     ],
     [
      "It",
-     2.972
+     3.204
     ],
     [
      "explains:",
-     3.146
+     3.367
     ],
     [
      "people",
-     3.901
+     4.307
     ],
     [
      "understand",
-     4.238
-    ],
-    [
-     "\"a",
      4.69
     ],
     [
-     "helper\"",
-     4.899
+     "\u201ca",
+     5.294
+    ],
+    [
+     "helper\u201d",
+     5.433
     ],
     [
      "long",
-     5.851
+     6.258
     ],
     [
      "before",
-     6.188
-    ],
-    [
-     "they",
-     6.49
-    ],
-    [
-     "understand",
      6.653
     ],
     [
-     "\"an",
-     7.163
+     "they",
+     7.082
     ],
     [
-     "agent.\"",
-     7.303
+     "understand",
+     7.245
+    ],
+    [
+     "\u201can",
+     7.755
+    ],
+    [
+     "agent.\u201d",
+     7.906
     ],
     [
      "It",
-     8.266
+     8.777
     ],
     [
      "invites:",
-     8.452
+     8.963
     ],
     [
      "a",
-     9.195
+     9.752
     ],
     [
      "character",
-     9.334
+     9.915
     ],
     [
      "makes",
-     9.729
+     10.391
     ],
     [
      "people",
-     9.927
+     10.646
     ],
     [
      "ask",
-     10.217
+     11.018
     ],
     [
      "what",
-     10.414
+     11.389
     ],
     [
      "it",
-     10.588
+     11.587
     ],
     [
      "is.",
-     10.704
+     11.714
     ],
     [
      "It",
-     11.819
+     12.643
     ],
     [
      "accumulates:",
-     11.981
+     12.806
     ],
     [
      "the",
-     13.026
+     14.036
     ],
     [
      "same",
-     13.201
+     14.222
     ],
     [
      "face",
-     13.514
+     14.559
     ],
     [
      "in",
-     13.827
-    ],
-    [
-     "every",
-     13.944
-    ],
-    [
-     "launch",
-     14.199
-    ],
-    [
-     "builds",
-     14.536
-    ],
-    [
-     "on",
      14.907
     ],
     [
+     "every",
+     15.081
+    ],
+    [
+     "launch",
+     15.372
+    ],
+    [
+     "builds",
+     15.882
+    ],
+    [
+     "on",
+     16.405
+    ],
+    [
      "the",
-     15.035
+     16.591
     ],
     [
      "last",
-     15.163
+     16.718
     ],
     [
      "instead",
-     15.917
+     17.113
     ],
     [
      "of",
-     16.289
+     17.45
     ],
     [
      "starting",
-     16.37
+     17.531
     ],
     [
      "over.",
-     16.742
+     17.914
     ]
    ],
    "voice": "Eric"
@@ -2233,144 +2403,269 @@
    "id": "c3",
    "scene": "s05",
    "title": "Where did it come from?",
-   "vo": "And it comes from culture. Meta read the moment: a character people can compare to a Labubu, in a device that looks like a \u201990s Tamagotchi. Not because it\u2019s cute. Because it\u2019s current.",
-   "audio": "audio/c3.mp3?v=f266e3b5",
-   "duration": 13.31,
+   "vo": "What you see and perceive is that it comes from culture. Juan Carlos Castros, a design director Thomas worked with in publishing, taught him that work only resonates when the people making it understand contemporary culture. Meta read the moment: a character people can compare to a Labubu, in a device that looks like a \u201990s Tamagotchi. Not because it\u2019s cute. Because it\u2019s current.",
+   "audio": "audio/c3.mp3?v=6c61a048",
+   "duration": 24.96,
    "words": [
     [
-     "And",
+     "What",
      0.0
     ],
     [
-     "it",
-     0.232
+     "you",
+     0.255
     ],
     [
-     "comes",
-     0.348
+     "see",
+     0.406
     ],
     [
-     "from",
-     0.615
+     "and",
+     0.58
     ],
     [
-     "culture.",
-     0.836
+     "perceive",
+     0.708
     ],
     [
-     "Meta",
-     2.206
-    ],
-    [
-     "read",
-     2.519
-    ],
-    [
-     "the",
-     2.717
-    ],
-    [
-     "moment:",
-     2.833
-    ],
-    [
-     "a",
-     3.982
-    ],
-    [
-     "character",
-     4.122
-    ],
-    [
-     "people",
-     4.563
-    ],
-    [
-     "can",
-     4.865
-    ],
-    [
-     "compare",
-     5.062
-    ],
-    [
-     "to",
-     5.526
-    ],
-    [
-     "a",
-     5.712
-    ],
-    [
-     "Labubu,",
-     5.793
-    ],
-    [
-     "in",
-     6.885
-    ],
-    [
-     "a",
-     7.07
-    ],
-    [
-     "device",
-     7.152
+     "is",
+     1.637
     ],
     [
      "that",
-     7.535
+     1.846
     ],
     [
-     "looks",
-     7.674
+     "it",
+     2.009
     ],
     [
-     "like",
-     7.883
+     "comes",
+     2.125
+    ],
+    [
+     "from",
+     2.403
+    ],
+    [
+     "culture.",
+     2.612
+    ],
+    [
+     "Juan",
+     3.634
+    ],
+    [
+     "Carlos",
+     3.866
+    ],
+    [
+     "Castros,",
+     4.319
     ],
     [
      "a",
-     8.046
+     5.329
     ],
     [
-     "\u201990s",
-     8.115
+     "design",
+     5.468
     ],
     [
-     "Tamagotchi.",
-     8.545
+     "director",
+     5.84
     ],
     [
-     "Not",
-     9.973
+     "Thomas",
+     6.316
     ],
     [
-     "because",
+     "worked",
+     6.711
+    ],
+    [
+     "with",
+     6.989
+    ],
+    [
+     "in",
+     7.198
+    ],
+    [
+     "publishing,",
+     7.338
+    ],
+    [
+     "taught",
+     8.15
+    ],
+    [
+     "him",
+     8.452
+    ],
+    [
+     "that",
+     8.568
+    ],
+    [
+     "work",
+     8.731
+    ],
+    [
+     "only",
+     9.033
+    ],
+    [
+     "resonates",
+     9.334
+    ],
+    [
+     "when",
+     9.892
+    ],
+    [
+     "the",
+     10.077
+    ],
+    [
+     "people",
      10.182
     ],
     [
+     "making",
+     10.542
+    ],
+    [
+     "it",
+     10.902
+    ],
+    [
+     "understand",
+     11.029
+    ],
+    [
+     "contemporary",
+     11.622
+    ],
+    [
+     "culture.",
+     12.353
+    ],
+    [
+     "Meta",
+     13.607
+    ],
+    [
+     "read",
+     13.932
+    ],
+    [
+     "the",
+     14.129
+    ],
+    [
+     "moment:",
+     14.245
+    ],
+    [
+     "a",
+     15.069
+    ],
+    [
+     "character",
+     15.22
+    ],
+    [
+     "people",
+     15.72
+    ],
+    [
+     "can",
+     16.068
+    ],
+    [
+     "compare",
+     16.289
+    ],
+    [
+     "to",
+     16.846
+    ],
+    [
+     "a",
+     17.066
+    ],
+    [
+     "Labubu,",
+     17.148
+    ],
+    [
+     "in",
+     18.088
+    ],
+    [
+     "a",
+     18.262
+    ],
+    [
+     "device",
+     18.343
+    ],
+    [
+     "that",
+     18.727
+    ],
+    [
+     "looks",
+     18.924
+    ],
+    [
+     "like",
+     19.191
+    ],
+    [
+     "a",
+     19.679
+    ],
+    [
+     "\u201990s",
+     19.841
+    ],
+    [
+     "Tamagotchi.",
+     20.34
+    ],
+    [
+     "Not",
+     21.676
+    ],
+    [
+     "because",
+     21.885
+    ],
+    [
      "it\u2019s",
-     10.449
+     22.152
     ],
     [
      "cute.",
-     10.635
+     22.314
     ],
     [
      "Because",
-     11.564
+     23.44
     ],
     [
      "it\u2019s",
-     11.947
+     23.765
     ],
     [
      "current.",
-     12.156
+     23.939
     ]
    ],
-   "voice": "Eric"
+   "voice": "Eric",
+   "heading": false
   },
   {
    "id": "c5",
@@ -3395,5 +3690,5 @@
    "start": "b7"
   }
  ],
- "v": "b6ef7915"
+ "v": "84af4a81"
 }

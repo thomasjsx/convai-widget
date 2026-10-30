@@ -1,4 +1,4 @@
-// s02 · Muse walks in: the character lands centre stage, named, with its App Store #1.
+// s02 · Muse walks in: the character lands centre stage, then gets its name, with its App Store #1.
 // Click the character for a hop.
 export default {
   mount(root, { asset }) {
@@ -19,11 +19,14 @@ export default {
     const btn = root.querySelector('.char');
     btn.onclick = () => { btn.classList.remove('hop'); void btn.offsetWidth; btn.classList.add('hop'); };
   },
-  enter({ root, at, atWord }) {
+  enter({ root, at, atWord, kind }) {
     const s = root.querySelector('.s02');
-    s.className = 's02';
-    at(0.1, () => s.classList.add('named'));
-    atWord('muse', () => s.classList.add('in'));          // "The work he loves is Muse"
+    if (kind === 'clip') s.classList.add('in', 'named');   // a paragraph over the same picture: it's already there
+    else {
+      s.className = 's02';
+      at(0.1, () => s.classList.add('in'));               // the character lands first…
+      atWord('muse', () => s.classList.add('named'));     // …then its name: "The work we will talk about today is Muse"
+    }
     atWord('accessible', () => s.classList.add('feels'));
   },
 };

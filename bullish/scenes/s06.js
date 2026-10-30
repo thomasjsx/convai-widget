@@ -1,8 +1,10 @@
-// s06 · Why step outside: Meta's Hyperion site, large and cold. 71% of Americans oppose a data center near them;
-// Meta is building a $50B+ one. Then the little guy stands in front of it.
+// s06 · Why step outside: Meta's own aerials of its data centers, big and cold, one per line. 71% of Americans oppose
+// a data center near them. Then the little guy stands in front of them.
 // Hover a figure or a source chip to see what it counts; click the Muse character for a hop.
 const FIGURE = '<svg viewBox="0 0 12 24" aria-hidden="true"><circle cx="6" cy="4.2" r="3.3"/><path d="M1 23.4V14.2a5 5 0 0 1 10 0v9.2z"/></svg>';
 const corners = '<i></i><i></i><i></i><i></i>';
+// Meta's photos from datacenters.atmeta.com
+const SITES = [['dc-kuna', 'Kuna, Idaho'], ['dc-temple', 'Temple, Texas'], ['dc-el-paso', 'El Paso, Texas']];
 
 export default {
   mount(root, { asset }) {
@@ -14,10 +16,10 @@ export default {
         <div class="view">
           <div class="frame">
             <div class="plate">
-              <img src="${asset('s06/hyperion-cold.jpg')}" alt="Rendering of Meta's Hyperion AI data center campus in Louisiana">
+              ${SITES.map(([f, place]) => `<img src="${asset(`s06/${f}.jpg`)}" alt="Meta's ${place} data center from the air">`).join('')}
               <div class="site" aria-hidden="true">${corners}</div>
             </div>
-            <span class="tag">Rendering</span>
+            <span class="tag"></span>
           </div>
           <button class="muse" aria-label="The Muse character">
             <span class="warm"></span>
@@ -50,7 +52,12 @@ export default {
     const s = root.querySelector('.s06');
     s.className = 's06';
     root.querySelector('.muse').classList.remove('hop');
-    at(0.1, () => s.classList.add('on'));                     // "Why would Meta do this?" — the site, cold
+    const shots = [...s.querySelectorAll('.plate img')], tag = s.querySelector('.tag');
+    const show = i => { shots.forEach((im, k) => im.classList.toggle('on', k === i)); tag.textContent = `Meta · ${SITES[i][1]}`; };
+    show(0);
+    at(0.1, () => s.classList.add('on'));                     // "Faceless AI is easy to fear." — Kuna, cold
+    atWord('oppose', () => show(1));                          // "…oppose an AI data center in their area." — Temple
+    atWord('really', () => show(2));                          // "You can't really be mad…" — El Paso
     atWord('seven', () => s.classList.add('split', 'seven')); // the frame yields; seven of ten figures fill, count to 71
     atWord('oppose', () => s.classList.add('src1'));
     atWord('building', () => s.classList.add('lock'));        // lock on to the campus
@@ -77,7 +84,8 @@ const css = `
 .s06 .plate { position:absolute; left:50%; top:50%; width:max(100cqw, 200cqh); aspect-ratio:2/1; translate:-50% -50%; transform-origin:50% 45%; }
 .s06.on .plate { animation:s06push 18s linear both; }
 @keyframes s06push { from { scale:1 } to { scale:1.07 } }
-.s06 .plate img { width:100%; height:100%; transition:filter 1.4s var(--ease); }
+.s06 .plate img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1.1s var(--ease), filter 1.4s var(--ease); }
+.s06 .plate img.on { opacity:1; }
 .s06.fear .plate img { filter:brightness(.78) contrast(1.06); }
 .s06 .tag { position:absolute; right:14px; top:14px; padding:6px 10px; border-radius:999px; border:1px solid rgba(203,208,219,.2);
   background:rgba(0,0,0,.35); font:500 10px/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:rgba(203,208,219,.7); }

@@ -82,10 +82,11 @@ function playItem(item, kind, from = 0) {
   clock = from; cues = []; waiting = false; hideChips();
   if (paused && !only) unpause();
   setMic('on');
-  askedEl.hidden = kind !== 'clip'; askedEl.textContent = kind === 'clip' ? item.title : '';
+  const asked = kind === 'clip' && item.heading !== false;   // some answers are plain paragraphs, with no question over them
+  askedEl.hidden = !asked; askedEl.textContent = asked ? item.title : '';
   words = setCaption(item);
   ctx = {
-    asset, scene: item, root: roots[visual], duration: item.duration,
+    asset, scene: item, kind, root: roots[visual], duration: item.duration,
     at: (t, fn) => cues.push({ t, fn, done: false }),
     atWord: (word, fn, nth = 1) => {
       const hits = words.filter(w => norm(w.el.textContent) === norm(word));
