@@ -13,7 +13,7 @@ const clipById = Object.fromEntries(clips.map(c => [c.id, c]));
 const order = beats.flatMap(b => [b.id, ...(b.chips ?? []).map(c => c.clip)]);   // the full walk-through, answers included
 // sections are the chapters (the opening is its own): one plays straight through, answers and all, and it stops only between them
 const section = {};
-{ let s = 0; for (const id of order) { if (chapters.some(c => c.start === id)) s++; section[id] = s; } }
+{ let s = 0; for (const id of order) { if (chapters.some(c => c.start === id && c.stop !== false)) s++; section[id] = s; } }   // a chapter marked stop:false runs on from the one before
 const stage = document.getElementById('stage');
 const captions = document.getElementById('captions');
 const progress = document.getElementById('progress');

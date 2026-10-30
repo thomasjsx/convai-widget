@@ -1,5 +1,5 @@
 // s00 · Hello: the opening thought set large on black, word by word as it is spoken.
-// "feel" turns to the Bullish gradient; then a quiet lockup signs it.
+// "feel" turns to the Bullish gradient.
 // Move the pointer for a soft light that follows; hover "feel" and it glows.
 const words = line => line.split(' ').map(w => `<span class="w" data-w="${w}">${w}</span>`).join(' ');
 
@@ -18,11 +18,6 @@ export default {
               <span class="row"><span class="ch">${words('can make people')}</span> <span class="ch"><span class="w feel" data-w="feel"><span class="glow" aria-hidden="true">feel</span><span class="t">feel</span></span> ${words('something.')}</span></span>
             </span>
           </h2>
-          <div class="sig">
-            <i class="rule"></i>
-            <p class="for">for Bullish, CoinDesk and Consensus</p>
-            <p class="keys"><kbd>Space</kbd> pause <span class="sep"></span><kbd>&larr;</kbd><kbd>&rarr;</kbd> skip</p>
-          </div>
         </div>
       </div>`;
     const s = root.querySelector('.s00');
@@ -62,9 +57,7 @@ export default {
     const nth = k => before.filter(x => x === k).length + 1;   // the thesis's own word, not one said in the intro
     atWord('memorable', () => s.classList.add('dim'), nth('memorable'));   // the merely-right line steps back
     atWord('feel', () => s.classList.add('lit'));            // gradient wipes across "feel"
-    atWord('Thomas', () => s.classList.add('signed'));       // the lockup
     atWord('difference', () => s.classList.add('pulse'));    // "feel" breathes once more
-    atWord('Interrupt', () => s.classList.add('keys'));      // "Interrupt me anytime"
   },
 };
 
@@ -106,27 +99,11 @@ const css = `
 .s00.lit .feel:hover .t { background-position:right, 100% 0; }
 .s00.lit .feel:hover .glow { opacity:1; transition-delay:0s; }
 
-/* the lockup */
-.s00 .sig { margin-top:clamp(40px, 9vh, 92px); }
-.s00 .sig > * { opacity:0; transform:translateY(10px); transition:opacity 1s var(--ease), transform 1.1s var(--ease); }
-.s00 .rule { display:block; width:56px; height:2px; margin-bottom:24px; background:var(--grad); transform:scaleX(0); transform-origin:left; opacity:1; }
-.s00 .for { margin:10px 0 0; font:500 12px/1.5 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--mute); }
-.s00.signed .rule { transform:scaleX(1); transition:transform 1.2s cubic-bezier(.6,0,.2,1); }
-.s00.signed .for { opacity:1; transform:none; transition-delay:.4s; }
-.s00 .keys { display:flex; align-items:center; gap:8px; margin:26px 0 0;
-  font:500 11px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; color:rgba(203,208,219,.55); }
-.s00 .keys kbd { font:inherit; letter-spacing:.06em; min-width:24px; padding:5px 7px; border-radius:5px; text-align:center;
-  border:1px solid rgba(203,208,219,.22); color:var(--mute); }
-.s00 .keys .sep { width:18px; }
-.s00.keys .keys { opacity:1; transform:none; }
-@media (hover: none) { .s00 .keys { display:none; } }
-
 /* tall or narrow screens: one phrase per line, set larger */
 @media (max-aspect-ratio: 1/1), (max-width: 900px) {
   .s00 .copy { padding:0 max(24px, 8vw) 2vh; }
   .s00 .say { font-size:clamp(20px, min(8.6vw, 5.2vh), 72px); line-height:1.04; }
   .s00 .ch { display:block; }
-  .s00 .sig { margin-top:clamp(36px, 6vh, 72px); }
 }
 @media (max-width: 720px) { .s00 .copy { padding:0 20px 2vh; } }
 `;

@@ -8,7 +8,6 @@ export default {
         <div class="name">
           <img class="m" src="${asset('brand/muse-m.svg')}" alt="">
           <h2>Muse</h2>
-          <span class="from">from Meta · Sept 2026</span>
         </div>
         <button class="char" aria-label="Muse">
           <img src="${asset('s05/muse.png')}" alt="The Muse character">
@@ -52,7 +51,6 @@ const css = `
 .s02.named .name { opacity:1; transform:translate(0,-50%); }
 .s02 .name .m { width:64px; margin-bottom:18px; }
 .s02 .name h2 { margin:0; font-weight:700; font-size:clamp(48px,6vw,92px); letter-spacing:-.04em; line-height:.9; }
-.s02 .name .from { display:block; margin-top:14px; font:500 12px var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--mute); }
 .s02 .chip { position:absolute; right:8vw; top:50%; transform:translate(20px,-50%); opacity:0; transition:all .8s var(--ease);
   padding:12px 18px; border-radius:999px; border:1px solid rgba(203,208,219,.25); font:500 13px var(--mono); letter-spacing:.08em; color:var(--mute); }
 .s02 .chip b { color:var(--green); font-weight:500; margin-right:6px; }

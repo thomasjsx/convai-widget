@@ -3675,11 +3675,13 @@
  "chapters": [
   {
    "title": "Why Muse works",
-   "start": "b1"
+   "start": "b1",
+   "stop": false
   },
   {
    "title": "Staid to interesting",
-   "start": "b4"
+   "start": "b4",
+   "stop": false
   },
   {
    "title": "With the team",
@@ -3690,5 +3692,5 @@
    "start": "b7"
   }
  ],
- "v": "84af4a81"
+ "v": "b10dff84"
 }
