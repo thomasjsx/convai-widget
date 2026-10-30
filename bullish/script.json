@@ -810,7 +810,7 @@
    "id": "b4",
    "scene": "s03",
    "title": "Staid to interesting",
-   "vo": "But why? Why would Meta, a company known for building the container, make a character? Meta's naming and look are staid, corporate, clean: a blue mark built to sit quietly across its apps. Meta didn\u2019t redesign the house to make room for Muse. It let one product step outside, with its own mark, its own character and a name with history. The house stayed sober, and one product got a soul. Does every product in your house have to look like the parent?",
+   "vo": "But why? Why would Meta, a company known for building the container, make a character? Meta's naming and look are staid, corporate, clean: a blue logo mark built to sit quietly across its apps. Meta didn't redesign the house to make room for Muse. It let one product step outside of the system, with its own mark, its own character and a name with history. The house stayed, and one product got a soul. One must ask: does every product in your house have to look like the parent?",
    "chips": [
     {
      "label": "Why would Meta do it?",
@@ -821,8 +821,8 @@
      "clip": "c6"
     }
    ],
-   "audio": "audio/b4.mp3?v=48ced3bd",
-   "duration": 29.38,
+   "audio": "audio/b4.mp3?v=56bde45d",
+   "duration": 33.28,
    "words": [
     [
      "But",
@@ -830,331 +830,355 @@
     ],
     [
      "why?",
-     0.232
+     0.255
     ],
     [
      "Why",
-     1.08
+     1.289
     ],
     [
      "would",
-     1.324
-    ],
-    [
-     "Meta,",
      1.533
     ],
     [
+     "Meta,",
+     1.753
+    ],
+    [
      "a",
-     2.183
+     2.392
     ],
     [
      "company",
-     2.38
+     2.554
     ],
     [
      "known",
-     2.833
+     2.926
     ],
     [
      "for",
-     3.181
+     3.17
     ],
     [
      "building",
-     3.355
+     3.332
     ],
     [
      "the",
-     3.692
+     3.68
     ],
     [
      "container,",
-     3.808
+     3.796
     ],
     [
      "make",
-     4.389
+     4.795
     ],
     [
      "a",
-     4.586
+     5.027
     ],
     [
      "character?",
-     4.656
+     5.097
     ],
     [
      "Meta's",
-     5.654
+     6.316
     ],
     [
      "naming",
-     6.095
+     6.711
     ],
     [
      "and",
-     6.49
+     7.14
     ],
     [
      "look",
-     6.629
+     7.43
     ],
     [
      "are",
-     6.978
+     7.86
     ],
     [
      "staid,",
-     7.198
+     8.162
     ],
     [
      "corporate,",
-     7.964
+     9.009
     ],
     [
      "clean:",
-     8.487
+     9.683
     ],
     [
      "a",
-     9.242
+     10.716
     ],
     [
      "blue",
-     9.381
+     10.879
+    ],
+    [
+     "logo",
+     11.192
     ],
     [
      "mark",
-     9.636
+     11.587
     ],
     [
      "built",
-     9.938
+     11.993
     ],
     [
      "to",
-     10.159
+     12.353
     ],
     [
      "sit",
-     10.263
+     12.516
     ],
     [
      "quietly",
-     10.495
-    ],
-    [
-     "across",
-     10.995
-    ],
-    [
-     "its",
-     11.355
-    ],
-    [
-     "apps.",
-     11.552
-    ],
-    [
-     "Meta",
-     12.492
-    ],
-    [
-     "didn\u2019t",
      12.759
     ],
     [
-     "redesign",
-     13.015
+     "across",
+     13.282
     ],
     [
-     "the",
-     13.56
-    ],
-    [
-     "house",
+     "its",
      13.688
     ],
     [
-     "to",
-     13.99
+     "apps.",
+     13.874
     ],
     [
-     "make",
-     14.094
+     "Meta",
+     15.093
     ],
     [
-     "room",
-     14.292
+     "didn't",
+     15.43
     ],
     [
-     "for",
-     14.559
+     "redesign",
+     15.708
     ],
     [
-     "Muse.",
-     14.745
-    ],
-    [
-     "It",
-     15.755
-    ],
-    [
-     "let",
-     15.929
-    ],
-    [
-     "one",
-     16.138
-    ],
-    [
-     "product",
-     16.37
-    ],
-    [
-     "step",
-     16.858
-    ],
-    [
-     "outside,",
-     17.172
-    ],
-    [
-     "with",
-     18.124
-    ],
-    [
-     "its",
-     18.333
-    ],
-    [
-     "own",
-     18.507
-    ],
-    [
-     "mark,",
-     18.716
-    ],
-    [
-     "its",
-     19.377
-    ],
-    [
-     "own",
-     19.598
-    ],
-    [
-     "character",
-     19.772
-    ],
-    [
-     "and",
-     20.295
-    ],
-    [
-     "a",
-     20.422
-    ],
-    [
-     "name",
-     20.492
-    ],
-    [
-     "with",
-     20.689
-    ],
-    [
-     "history.",
-     20.875
-    ],
-    [
-     "The",
-     22.175
+     "the",
+     16.208
     ],
     [
      "house",
-     22.361
+     16.335
     ],
     [
-     "stayed",
-     22.582
+     "to",
+     17.02
     ],
     [
-     "sober,",
-     22.907
+     "make",
+     17.183
+    ],
+    [
+     "room",
+     17.369
+    ],
+    [
+     "for",
+     17.624
+    ],
+    [
+     "Muse.",
+     17.798
+    ],
+    [
+     "It",
+     18.75
+    ],
+    [
+     "let",
+     18.936
+    ],
+    [
+     "one",
+     19.18
+    ],
+    [
+     "product",
+     19.47
+    ],
+    [
+     "step",
+     19.934
+    ],
+    [
+     "outside",
+     20.225
+    ],
+    [
+     "of",
+     20.619
+    ],
+    [
+     "the",
+     20.701
+    ],
+    [
+     "system,",
+     20.828
+    ],
+    [
+     "with",
+     21.537
+    ],
+    [
+     "its",
+     21.757
+    ],
+    [
+     "own",
+     21.908
+    ],
+    [
+     "mark,",
+     22.117
+    ],
+    [
+     "its",
+     22.941
+    ],
+    [
+     "own",
+     23.15
+    ],
+    [
+     "character",
+     23.325
     ],
     [
      "and",
      23.824
     ],
     [
-     "one",
-     24.149
-    ],
-    [
-     "product",
-     24.358
-    ],
-    [
-     "got",
-     24.834
-    ],
-    [
      "a",
-     25.078
+     23.951
     ],
     [
-     "soul.",
-     25.194
+     "name",
+     24.033
     ],
     [
-     "Does",
-     26.192
+     "with",
+     24.253
     ],
     [
-     "every",
-     26.436
+     "history.",
+     24.428
     ],
     [
-     "product",
-     26.657
-    ],
-    [
-     "in",
-     27.04
-    ],
-    [
-     "your",
-     27.145
+     "The",
+     25.681
     ],
     [
      "house",
+     25.856
+    ],
+    [
+     "stayed,",
+     26.111
+    ],
+    [
+     "and",
+     26.517
+    ],
+    [
+     "one",
+     26.691
+    ],
+    [
+     "product",
+     26.877
+    ],
+    [
+     "got",
      27.295
     ],
     [
+     "a",
+     27.504
+    ],
+    [
+     "soul.",
+     27.597
+    ],
+    [
+     "One",
+     28.514
+    ],
+    [
+     "must",
+     28.712
+    ],
+    [
+     "ask:",
+     28.932
+    ],
+    [
+     "does",
+     29.397
+    ],
+    [
+     "every",
+     29.664
+    ],
+    [
+     "product",
+     29.965
+    ],
+    [
+     "in",
+     30.36
+    ],
+    [
+     "your",
+     30.465
+    ],
+    [
+     "house",
+     30.627
+    ],
+    [
      "have",
-     27.551
+     31.452
     ],
     [
      "to",
-     27.725
+     31.661
     ],
     [
      "look",
-     27.829
+     31.765
     ],
     [
      "like",
-     28.015
+     31.974
     ],
     [
      "the",
-     28.189
+     32.125
     ],
     [
      "parent?",
-     28.306
+     32.229
     ]
    ],
    "voice": "Eric"
@@ -1163,7 +1187,7 @@
    "id": "b5",
    "scene": "team",
    "title": "Ask the team first",
-   "vo": "Thomas would bring Muse to the team as a case study, not a mood board. And he wouldn't start with his answers. So let me ask you first. What do you think this is?",
+   "vo": "How would Thomas bring the value of Muse thinking to the team? As a case study, a mood board, or a conversation? Open-ended. He wouldn't start with his answers; he'd let the knowledge unfold.",
    "chips": [
     {
      "label": "What's his answer?",
@@ -1174,144 +1198,144 @@
      "clip": "c8"
     }
    ],
-   "audio": "audio/b5.mp3?v=828b44a6",
-   "duration": 9.54,
+   "audio": "audio/b5.mp3?v=f54e7423",
+   "duration": 13.26,
    "words": [
     [
-     "Thomas",
+     "How",
      0.0
     ],
     [
      "would",
-     0.406
+     0.221
+    ],
+    [
+     "Thomas",
+     0.395
     ],
     [
      "bring",
-     0.58
-    ],
-    [
-     "Muse",
-     0.824
-    ],
-    [
-     "to",
-     1.138
+     0.743
     ],
     [
      "the",
-     1.254
+     0.952
     ],
     [
-     "team",
-     1.358
+     "value",
+     1.091
     ],
     [
-     "as",
-     1.614
+     "of",
+     1.474
     ],
     [
-     "a",
-     1.718
+     "Muse",
+     1.66
     ],
     [
-     "case",
-     1.788
-    ],
-    [
-     "study,",
+     "thinking",
      2.032
     ],
     [
-     "not",
-     2.368
+     "to",
+     2.45
+    ],
+    [
+     "the",
+     2.589
+    ],
+    [
+     "team?",
+     2.705
+    ],
+    [
+     "As",
+     3.831
     ],
     [
      "a",
-     2.554
+     4.04
+    ],
+    [
+     "case",
+     4.122
+    ],
+    [
+     "study,",
+     4.365
+    ],
+    [
+     "a",
+     4.911
     ],
     [
      "mood",
-     2.624
+     5.062
     ],
     [
-     "board.",
-     2.856
+     "board,",
+     5.317
     ],
     [
-     "And",
-     3.68
+     "or",
+     5.956
     ],
     [
-     "he",
-     3.982
+     "a",
+     6.142
+    ],
+    [
+     "conversation?",
+     6.2
+    ],
+    [
+     "Open-ended.",
+     7.639
+    ],
+    [
+     "He",
+     9.079
     ],
     [
      "wouldn't",
-     4.098
+     9.218
     ],
     [
      "start",
-     4.423
+     9.509
     ],
     [
      "with",
-     4.76
+     9.752
     ],
     [
      "his",
-     4.957
+     9.892
     ],
     [
-     "answers.",
-     5.132
+     "answers;",
+     10.054
     ],
     [
-     "So",
-     6.235
+     "he'd",
+     11.227
     ],
     [
      "let",
-     6.432
+     11.436
     ],
     [
-     "me",
-     6.548
+     "the",
+     11.598
     ],
     [
-     "ask",
-     6.664
+     "knowledge",
+     11.714
     ],
     [
-     "you",
-     6.861
-    ],
-    [
-     "first.",
-     7.001
-    ],
-    [
-     "What",
-     7.895
-    ],
-    [
-     "do",
-     8.069
-    ],
-    [
-     "you",
-     8.139
-    ],
-    [
-     "think",
-     8.255
-    ],
-    [
-     "this",
-     8.44
-    ],
-    [
-     "is?",
-     8.649
+     "unfold.",
+     12.086
     ]
    ],
    "voice": "Eric"
@@ -1325,10 +1349,6 @@
     {
      "label": "What's underneath?",
      "clip": "c9"
-    },
-    {
-     "label": "And for the team?",
-     "clip": "c10"
     }
    ],
    "audio": "audio/b6.mp3?v=c65624de",
@@ -1449,251 +1469,335 @@
    "id": "b7",
    "scene": "weave",
    "title": "How we'd build it",
-   "vo": "Most of it happens in-house, because the team is closest to the business. The body gets drawn by hand, once. Figma Weave does the volume. The team builds the tool once. Comms in London, sales in Hong Kong and events in Grand Cayman use it without a designer in the room, and the work still looks like us.",
+   "vo": "How does Muse thinking inject itself into the day-to-day? Most work and production happens in-house, because the team is closest to the business. As a metaphor, the body gets drawn by hand, once. Tools like Figma Weave take individual ideas and turn up the volume. The team builds the tool once. Comms in London, sales in Hong Kong and events in Grand Cayman all use the tool without a designer in the room, and the work still looks on brand.",
    "chips": [
-    {
-     "label": "What's Figma Weave?",
-     "clip": "c11"
-    },
     {
      "label": "When would you bring in an agency?",
      "clip": "c12"
     }
    ],
-   "audio": "audio/b7.mp3?v=2b15a20e",
-   "duration": 19.72,
+   "audio": "audio/b7.mp3?v=51914121",
+   "duration": 29.65,
    "words": [
     [
-     "Most",
+     "How",
      0.0
     ],
     [
-     "of",
-     0.302
-    ],
-    [
-     "it",
-     0.395
-    ],
-    [
-     "happens",
-     0.488
-    ],
-    [
-     "in-house,",
-     0.848
-    ],
-    [
-     "because",
-     1.834
-    ],
-    [
-     "the",
-     2.171
-    ],
-    [
-     "team",
-     2.287
-    ],
-    [
-     "is",
-     2.531
-    ],
-    [
-     "closest",
-     2.659
-    ],
-    [
-     "to",
-     3.111
-    ],
-    [
-     "the",
-     3.228
-    ],
-    [
-     "business.",
-     3.332
-    ],
-    [
-     "The",
-     4.772
-    ],
-    [
-     "body",
-     4.946
-    ],
-    [
-     "gets",
-     5.236
-    ],
-    [
-     "drawn",
-     5.468
-    ],
-    [
-     "by",
-     5.793
-    ],
-    [
-     "hand,",
-     5.991
-    ],
-    [
-     "once.",
-     6.316
-    ],
-    [
-     "Figma",
-     7.535
-    ],
-    [
-     "Weave",
-     7.906
-    ],
-    [
      "does",
-     8.22
+     0.209
+    ],
+    [
+     "Muse",
+     0.36
+    ],
+    [
+     "thinking",
+     0.615
+    ],
+    [
+     "inject",
+     0.964
+    ],
+    [
+     "itself",
+     1.335
+    ],
+    [
+     "into",
+     1.707
     ],
     [
      "the",
-     8.44
+     1.892
     ],
     [
-     "volume.",
-     8.557
+     "day-to-day?",
+     2.009
     ],
     [
-     "The",
-     9.729
-    ],
-    [
-     "team",
-     9.915
-    ],
-    [
-     "builds",
-     10.194
-    ],
-    [
-     "the",
-     10.484
-    ],
-    [
-     "tool",
-     10.612
-    ],
-    [
-     "once.",
-     10.995
-    ],
-    [
-     "Comms",
-     11.947
-    ],
-    [
-     "in",
-     12.376
-    ],
-    [
-     "London,",
-     12.539
-    ],
-    [
-     "sales",
-     13.433
-    ],
-    [
-     "in",
-     13.816
-    ],
-    [
-     "Hong",
-     13.932
-    ],
-    [
-     "Kong",
-     14.199
-    ],
-    [
-     "and",
-     14.559
-    ],
-    [
-     "events",
-     14.687
-    ],
-    [
-     "in",
-     15.012
-    ],
-    [
-     "Grand",
-     15.128
-    ],
-    [
-     "Cayman",
-     15.407
-    ],
-    [
-     "use",
-     15.813
-    ],
-    [
-     "it",
-     16.022
-    ],
-    [
-     "without",
-     16.127
-    ],
-    [
-     "a",
-     16.452
-    ],
-    [
-     "designer",
-     16.533
-    ],
-    [
-     "in",
-     16.963
-    ],
-    [
-     "the",
-     17.044
-    ],
-    [
-     "room,",
-     17.148
-    ],
-    [
-     "and",
-     17.648
-    ],
-    [
-     "the",
-     17.833
+     "Most",
+     3.379
     ],
     [
      "work",
-     17.938
+     3.669
     ],
     [
-     "still",
-     18.158
+     "and",
+     3.913
     ],
     [
-     "looks",
-     18.379
+     "production",
+     4.04
+    ],
+    [
+     "happens",
+     4.632
+    ],
+    [
+     "in-house,",
+     5.039
+    ],
+    [
+     "because",
+     6.246
+    ],
+    [
+     "the",
+     6.734
+    ],
+    [
+     "team",
+     6.861
+    ],
+    [
+     "is",
+     7.245
+    ],
+    [
+     "closest",
+     7.407
+    ],
+    [
+     "to",
+     7.93
+    ],
+    [
+     "the",
+     8.034
+    ],
+    [
+     "business.",
+     8.139
+    ],
+    [
+     "As",
+     9.346
+    ],
+    [
+     "a",
+     9.567
+    ],
+    [
+     "metaphor,",
+     9.648
+    ],
+    [
+     "the",
+     10.449
+    ],
+    [
+     "body",
+     10.612
+    ],
+    [
+     "gets",
+     10.913
+    ],
+    [
+     "drawn",
+     11.18
+    ],
+    [
+     "by",
+     11.54
+    ],
+    [
+     "hand,",
+     11.784
+    ],
+    [
+     "once.",
+     12.91
+    ],
+    [
+     "Tools",
+     14.373
     ],
     [
      "like",
-     18.6
+     14.756
     ],
     [
-     "us.",
-     18.809
+     "Figma",
+     14.954
+    ],
+    [
+     "Weave",
+     15.302
+    ],
+    [
+     "take",
+     15.615
+    ],
+    [
+     "individual",
+     15.882
+    ],
+    [
+     "ideas",
+     16.44
+    ],
+    [
+     "and",
+     16.904
+    ],
+    [
+     "turn",
+     17.055
+    ],
+    [
+     "up",
+     17.287
+    ],
+    [
+     "the",
+     17.403
+    ],
+    [
+     "volume.",
+     17.519
+    ],
+    [
+     "The",
+     18.402
+    ],
+    [
+     "team",
+     18.564
+    ],
+    [
+     "builds",
+     18.797
+    ],
+    [
+     "the",
+     19.075
+    ],
+    [
+     "tool",
+     19.18
+    ],
+    [
+     "once.",
+     19.493
+    ],
+    [
+     "Comms",
+     20.329
+    ],
+    [
+     "in",
+     20.724
+    ],
+    [
+     "London,",
+     20.852
+    ],
+    [
+     "sales",
+     21.595
+    ],
+    [
+     "in",
+     21.978
+    ],
+    [
+     "Hong",
+     22.094
+    ],
+    [
+     "Kong",
+     22.338
+    ],
+    [
+     "and",
+     22.837
+    ],
+    [
+     "events",
+     23.348
+    ],
+    [
+     "in",
+     23.789
+    ],
+    [
+     "Grand",
+     23.917
+    ],
+    [
+     "Cayman",
+     24.218
+    ],
+    [
+     "all",
+     24.706
+    ],
+    [
+     "use",
+     25.066
+    ],
+    [
+     "the",
+     25.298
+    ],
+    [
+     "tool",
+     25.414
+    ],
+    [
+     "without",
+     25.739
+    ],
+    [
+     "a",
+     26.076
+    ],
+    [
+     "designer",
+     26.157
+    ],
+    [
+     "in",
+     26.61
+    ],
+    [
+     "the",
+     26.691
+    ],
+    [
+     "room,",
+     26.807
+    ],
+    [
+     "and",
+     27.458
+    ],
+    [
+     "the",
+     27.655
+    ],
+    [
+     "work",
+     27.759
+    ],
+    [
+     "still",
+     27.992
+    ],
+    [
+     "looks",
+     28.224
+    ],
+    [
+     "on",
+     28.468
+    ],
+    [
+     "brand.",
+     28.619
     ]
    ],
    "voice": "Eric"
@@ -2673,133 +2777,157 @@
    "id": "c5",
    "scene": "s06",
    "title": "Why would Meta do it?",
-   "vo": "Faceless AI is easy to fear. Seven in ten Americans oppose an AI data center in their area. You can't really be mad that the little guy has a data center.",
-   "audio": "audio/c5.mp3?v=533fdb52",
-   "duration": 8.66,
+   "vo": "We know that faceless AI is easy to fear. Seven in ten Americans oppose an AI data center in their area. Can you really be mad that this little guy has a data center? I think not.",
+   "audio": "audio/c5.mp3?v=6f88663f",
+   "duration": 10.98,
    "words": [
     [
-     "Faceless",
+     "We",
      0.0
     ],
     [
-     "AI",
-     0.534
-    ],
-    [
-     "is",
-     0.871
-    ],
-    [
-     "easy",
-     0.998
-    ],
-    [
-     "to",
-     1.231
-    ],
-    [
-     "fear.",
-     1.347
-    ],
-    [
-     "Seven",
-     2.043
-    ],
-    [
-     "in",
-     2.368
-    ],
-    [
-     "ten",
-     2.461
-    ],
-    [
-     "Americans",
-     2.659
-    ],
-    [
-     "oppose",
-     3.1
-    ],
-    [
-     "an",
-     3.379
-    ],
-    [
-     "AI",
-     3.518
-    ],
-    [
-     "data",
-     3.866
-    ],
-    [
-     "center",
-     4.156
-    ],
-    [
-     "in",
-     4.412
-    ],
-    [
-     "their",
-     4.481
-    ],
-    [
-     "area.",
-     4.656
-    ],
-    [
-     "You",
-     5.457
-    ],
-    [
-     "can't",
-     5.619
-    ],
-    [
-     "really",
-     5.817
-    ],
-    [
-     "be",
-     6.06
-    ],
-    [
-     "mad",
-     6.211
+     "know",
+     0.221
     ],
     [
      "that",
-     6.502
+     0.418
     ],
     [
-     "the",
-     6.641
+     "faceless",
+     0.592
     ],
     [
-     "little",
-     6.757
+     "AI",
+     1.068
     ],
     [
-     "guy",
-     6.966
+     "is",
+     1.451
     ],
     [
-     "has",
-     7.187
+     "easy",
+     1.591
     ],
     [
-     "a",
-     7.361
+     "to",
+     1.846
+    ],
+    [
+     "fear.",
+     1.962
+    ],
+    [
+     "Seven",
+     2.659
+    ],
+    [
+     "in",
+     2.995
+    ],
+    [
+     "ten",
+     3.111
+    ],
+    [
+     "Americans",
+     3.355
+    ],
+    [
+     "oppose",
+     3.947
+    ],
+    [
+     "an",
+     4.365
+    ],
+    [
+     "AI",
+     4.505
     ],
     [
      "data",
-     7.442
+     4.865
     ],
     [
-     "center.",
-     7.732
+     "center",
+     5.132
+    ],
+    [
+     "in",
+     5.387
+    ],
+    [
+     "their",
+     5.468
+    ],
+    [
+     "area.",
+     5.619
+    ],
+    [
+     "Can",
+     6.653
+    ],
+    [
+     "you",
+     6.838
+    ],
+    [
+     "really",
+     6.966
+    ],
+    [
+     "be",
+     7.256
+    ],
+    [
+     "mad",
+     7.407
+    ],
+    [
+     "that",
+     7.639
+    ],
+    [
+     "this",
+     7.767
+    ],
+    [
+     "little",
+     7.964
+    ],
+    [
+     "guy",
+     8.197
+    ],
+    [
+     "has",
+     8.394
+    ],
+    [
+     "a",
+     8.58
+    ],
+    [
+     "data",
+     8.661
+    ],
+    [
+     "center?",
+     8.916
+    ],
+    [
+     "I",
+     9.683
+    ],
+    [
+     "think",
+     9.857
+    ],
+    [
+     "not.",
+     10.089
     ]
    ],
    "voice": "Eric"
@@ -2808,173 +2936,173 @@
    "id": "c6",
    "scene": "s07",
    "title": "Doesn't anyone hate it?",
-   "vo": "And some people hate it. Meta shipped it anyway. A character some people hate is still a character people talk about. A logo nobody minds is a logo nobody notices. Warmth has to open a door, never hide what's behind it.",
-   "audio": "audio/c6.mp3?v=326a4267",
-   "duration": 13.07,
+   "vo": "Will some people hate it? Yes. Muse is not the safe bet. Meta shipped it anyway. A character some people hate is still a character people talk about. A logo nobody minds is a logo nobody notices. Warmth opens a door.",
+   "audio": "audio/c6.mp3?v=901570b6",
+   "duration": 14.51,
    "words": [
     [
-     "And",
+     "Will",
      0.0
     ],
     [
      "some",
-     0.267
+     0.279
     ],
     [
      "people",
-     0.453
+     0.464
     ],
     [
      "hate",
-     0.743
+     0.766
     ],
     [
-     "it.",
-     0.964
+     "it?",
+     0.987
     ],
     [
-     "Meta",
-     1.242
+     "Yes.",
+     1.811
     ],
     [
-     "shipped",
-     1.521
+     "Muse",
+     2.461
     ],
     [
-     "it",
-     1.788
+     "is",
+     2.775
     ],
     [
-     "anyway.",
-     1.892
+     "not",
+     2.914
     ],
     [
-     "A",
-     2.694
+     "the",
+     3.1
     ],
     [
-     "character",
-     2.856
+     "safe",
+     3.216
     ],
     [
-     "some",
-     3.332
-    ],
-    [
-     "people",
+     "bet.",
      3.529
     ],
     [
-     "hate",
-     3.843
+     "Meta",
+     4.249
     ],
     [
-     "is",
-     4.098
+     "shipped",
+     4.54
     ],
     [
-     "still",
-     4.214
+     "it",
+     4.841
     ],
     [
-     "a",
-     4.435
-    ],
-    [
-     "character",
-     4.505
-    ],
-    [
-     "people",
-     4.911
-    ],
-    [
-     "talk",
-     5.201
-    ],
-    [
-     "about.",
-     5.48
+     "anyway.",
+     4.957
     ],
     [
      "A",
-     6.165
+     5.956
     ],
     [
-     "logo",
-     6.304
+     "character",
+     6.118
     ],
     [
-     "nobody",
-     6.629
+     "some",
+     6.536
     ],
     [
-     "minds",
-     6.943
+     "people",
+     6.711
+    ],
+    [
+     "hate",
+     7.036
     ],
     [
      "is",
-     7.279
+     7.256
+    ],
+    [
+     "still",
+     7.338
     ],
     [
      "a",
-     7.419
+     7.57
+    ],
+    [
+     "character",
+     7.639
+    ],
+    [
+     "people",
+     8.069
+    ],
+    [
+     "talk",
+     8.371
+    ],
+    [
+     "about.",
+     8.661
+    ],
+    [
+     "A",
+     9.404
     ],
     [
      "logo",
-     7.5
-    ],
-    [
-     "nobody",
-     7.837
-    ],
-    [
-     "notices.",
-     8.173
-    ],
-    [
-     "Warmth",
      9.555
     ],
     [
-     "has",
-     9.915
+     "nobody",
+     9.903
     ],
     [
-     "to",
-     10.101
-    ],
-    [
-     "open",
+     "minds",
      10.217
     ],
     [
+     "is",
+     10.565
+    ],
+    [
      "a",
-     10.472
+     10.693
     ],
     [
-     "door,",
-     10.553
+     "logo",
+     10.774
     ],
     [
-     "never",
-     11.262
+     "nobody",
+     11.146
     ],
     [
-     "hide",
-     11.529
+     "notices.",
+     11.471
     ],
     [
-     "what's",
-     11.738
+     "Warmth",
+     12.759
     ],
     [
-     "behind",
-     11.958
+     "opens",
+     13.131
     ],
     [
-     "it.",
-     12.307
+     "a",
+     13.444
+    ],
+    [
+     "door.",
+     13.526
     ]
    ],
    "voice": "Eric"
@@ -2983,104 +3111,89 @@
    "id": "c7",
    "scene": "team",
    "title": "What's his answer?",
-   "vo": "His answer: a face disarms people who are angry at a faceless industry. But he'd want to hear the team's first.",
-   "audio": "audio/c7.mp3?v=91cdace1",
-   "duration": 7.69,
+   "vo": "There is a story here: a face that disarms people who are angry at a faceless industry.",
+   "audio": "audio/c7.mp3?v=dd36aec3",
+   "duration": 5.04,
    "words": [
     [
-     "His",
+     "There",
      0.0
     ],
     [
-     "answer:",
+     "is",
      0.267
     ],
     [
      "a",
-     0.929
+     0.395
     ],
     [
-     "face",
-     1.08
+     "story",
+     0.476
     ],
     [
-     "disarms",
-     1.37
-    ],
-    [
-     "people",
-     1.962
-    ],
-    [
-     "who",
-     2.554
-    ],
-    [
-     "are",
-     2.775
-    ],
-    [
-     "angry",
-     2.972
-    ],
-    [
-     "at",
-     3.355
+     "here:",
+     0.836
     ],
     [
      "a",
-     3.437
+     1.265
+    ],
+    [
+     "face",
+     1.393
+    ],
+    [
+     "that",
+     1.614
+    ],
+    [
+     "disarms",
+     1.765
+    ],
+    [
+     "people",
+     2.229
+    ],
+    [
+     "who",
+     2.519
+    ],
+    [
+     "are",
+     2.67
+    ],
+    [
+     "angry",
+     2.868
+    ],
+    [
+     "at",
+     3.239
+    ],
+    [
+     "a",
+     3.332
     ],
     [
      "faceless",
-     3.529
+     3.413
     ],
     [
      "industry.",
-     4.075
-    ],
-    [
-     "But",
-     5.271
-    ],
-    [
-     "he'd",
-     5.457
-    ],
-    [
-     "want",
-     5.642
-    ],
-    [
-     "to",
-     5.828
-    ],
-    [
-     "hear",
-     5.933
-    ],
-    [
-     "the",
-     6.153
-    ],
-    [
-     "team's",
-     6.269
-    ],
-    [
-     "first.",
-     6.618
+     3.889
     ]
    ],
-   "voice": "Eric"
+   "voice": "Eric",
+   "heading": false
   },
   {
    "id": "c8",
    "scene": "team",
    "title": "What would that look like for Bullish?",
-   "vo": "From the outside, those are hypotheses, not answers. That's where the team would start, and Thomas would want to hear yours first.",
-   "audio": "audio/c8.mp3?v=028dea8a",
-   "duration": 7.59,
+   "vo": "From the outside, those are hypotheses, not answers. That's where the team would start, and Thomas would want to hear their point of view first.",
+   "audio": "audio/c8.mp3?v=9b7c0463",
+   "duration": 8.8,
    "words": [
     [
      "From",
@@ -3092,7 +3205,7 @@
     ],
     [
      "outside,",
-     0.383
+     0.372
     ],
     [
      "those",
@@ -3100,75 +3213,87 @@
     ],
     [
      "are",
-     1.544
+     1.579
     ],
     [
      "hypotheses,",
-     1.683
+     1.776
     ],
     [
      "not",
-     2.496
+     2.775
     ],
     [
      "answers.",
-     2.763
+     3.019
     ],
     [
      "That's",
-     3.646
+     4.447
     ],
     [
      "where",
-     3.947
+     4.783
     ],
     [
      "the",
-     4.122
+     4.969
     ],
     [
      "team",
-     4.238
-    ],
-    [
-     "would",
-     4.47
-    ],
-    [
-     "start,",
-     4.656
-    ],
-    [
-     "and",
      5.085
     ],
     [
+     "would",
+     5.329
+    ],
+    [
+     "start,",
+     5.515
+    ],
+    [
+     "and",
+     5.886
+    ],
+    [
      "Thomas",
-     5.294
+     6.037
     ],
     [
      "would",
-     5.596
+     6.374
     ],
     [
      "want",
-     5.77
+     6.56
     ],
     [
      "to",
-     5.898
+     6.711
     ],
     [
      "hear",
-     5.991
+     6.815
     ],
     [
-     "yours",
-     6.188
+     "their",
+     7.047
+    ],
+    [
+     "point",
+     7.279
+    ],
+    [
+     "of",
+     7.488
+    ],
+    [
+     "view",
+     7.558
     ],
     [
      "first.",
-     6.525
+     7.767
     ]
    ],
    "voice": "Eric"
@@ -3341,210 +3466,12 @@
    "voice": "Eric"
   },
   {
-   "id": "c10",
-   "scene": "s10",
-   "title": "And for the team?",
-   "vo": "And one habit. Each designer brings one piece of culture every week. Thomas goes first.",
-   "audio": "audio/c10.mp3?v=2b0edc9f",
-   "duration": 5.78,
-   "words": [
-    [
-     "And",
-     0.0
-    ],
-    [
-     "one",
-     0.302
-    ],
-    [
-     "habit.",
-     0.534
-    ],
-    [
-     "Each",
-     1.091
-    ],
-    [
-     "designer",
-     1.358
-    ],
-    [
-     "brings",
-     1.811
-    ],
-    [
-     "one",
-     2.125
-    ],
-    [
-     "piece",
-     2.322
-    ],
-    [
-     "of",
-     2.543
-    ],
-    [
-     "culture",
-     2.659
-    ],
-    [
-     "every",
-     3.042
-    ],
-    [
-     "week.",
-     3.274
-    ],
-    [
-     "Thomas",
-     4.122
-    ],
-    [
-     "goes",
-     4.528
-    ],
-    [
-     "first.",
-     4.76
-    ]
-   ],
-   "voice": "Eric"
-  },
-  {
-   "id": "c11",
-   "scene": "weave",
-   "title": "What's Figma Weave?",
-   "vo": "It puts AI image, video, animation and motion models on one canvas. In Weave, a designer can build a tool that takes any input and returns a consistent output.",
-   "audio": "audio/c11.mp3?v=6db9c489",
-   "duration": 10.43,
-   "words": [
-    [
-     "It",
-     0.0
-    ],
-    [
-     "puts",
-     0.174
-    ],
-    [
-     "AI",
-     0.441
-    ],
-    [
-     "image,",
-     0.882
-    ],
-    [
-     "video,",
-     1.289
-    ],
-    [
-     "animation",
-     1.8
-    ],
-    [
-     "and",
-     2.38
-    ],
-    [
-     "motion",
-     2.519
-    ],
-    [
-     "models",
-     2.879
-    ],
-    [
-     "on",
-     3.274
-    ],
-    [
-     "one",
-     3.506
-    ],
-    [
-     "canvas.",
-     3.727
-    ],
-    [
-     "In",
-     4.783
-    ],
-    [
-     "Weave,",
-     4.969
-    ],
-    [
-     "a",
-     5.271
-    ],
-    [
-     "designer",
-     5.352
-    ],
-    [
-     "can",
-     5.782
-    ],
-    [
-     "build",
-     5.933
-    ],
-    [
-     "a",
-     6.165
-    ],
-    [
-     "tool",
-     6.269
-    ],
-    [
-     "that",
-     6.664
-    ],
-    [
-     "takes",
-     6.838
-    ],
-    [
-     "any",
-     7.163
-    ],
-    [
-     "input",
-     7.5
-    ],
-    [
-     "and",
-     7.976
-    ],
-    [
-     "returns",
-     8.22
-    ],
-    [
-     "a",
-     8.684
-    ],
-    [
-     "consistent",
-     8.766
-    ],
-    [
-     "output.",
-     9.346
-    ]
-   ],
-   "voice": "Eric"
-  },
-  {
    "id": "c12",
    "scene": "weave",
    "title": "When would you bring in an agency?",
-   "vo": "For brand-defining work, a partner like Collins. We write the brief and own the idea. Meta did both: an outside artist drew Muse's mark, and its own designer created the character.",
-   "audio": "audio/c12.mp3?v=8a5aa6d9",
-   "duration": 12.42,
+   "vo": "For brand-defining work, a partner like Collins. The team writes the brief and owns the idea. Meta did both: an outside artist drew Muse's mark, and its own designer created the character.",
+   "audio": "audio/c12.mp3?v=fc792278",
+   "duration": 11.96,
    "words": [
     [
      "For",
@@ -3556,119 +3483,123 @@
     ],
     [
      "work,",
-     1.045
+     0.952
     ],
     [
      "a",
-     1.649
+     1.544
     ],
     [
      "partner",
-     1.776
+     1.707
     ],
     [
      "like",
-     2.101
+     2.067
     ],
     [
      "Collins.",
-     2.299
+     2.241
     ],
     [
-     "We",
-     3.46
+     "The",
+     3.448
     ],
     [
-     "write",
-     3.646
+     "team",
+     3.611
+    ],
+    [
+     "writes",
+     3.82
     ],
     [
      "the",
-     3.901
+     4.133
     ],
     [
      "brief",
-     4.017
+     4.249
     ],
     [
      "and",
-     4.47
+     4.574
     ],
     [
-     "own",
-     4.748
+     "owns",
+     4.737
     ],
     [
      "the",
-     4.969
+     5.016
     ],
     [
      "idea.",
-     5.108
+     5.143
     ],
     [
      "Meta",
-     6.385
+     5.968
     ],
     [
      "did",
-     6.664
+     6.269
     ],
     [
      "both:",
-     6.85
+     6.455
     ],
     [
      "an",
-     7.628
+     7.349
     ],
     [
      "outside",
-     7.814
+     7.512
     ],
     [
      "artist",
-     8.231
+     7.918
     ],
     [
      "drew",
-     8.533
+     8.231
     ],
     [
      "Muse's",
-     8.719
+     8.452
     ],
     [
      "mark,",
-     9.137
+     8.858
     ],
     [
      "and",
-     9.88
+     9.509
     ],
     [
      "its",
-     10.124
+     9.706
     ],
     [
      "own",
-     10.286
+     9.845
     ],
     [
      "designer",
-     10.437
+     9.996
     ],
     [
      "created",
-     10.855
+     10.414
     ],
     [
      "the",
-     11.215
+     10.762
     ],
     [
      "character.",
-     11.32
+     10.855
     ]
    ],
    "voice": "Eric"
@@ -3694,5 +3625,5 @@
    "start": "b7"
   }
  ],
- "v": "0b0df636"
+ "v": "ddf92eed"
 }

@@ -41,16 +41,17 @@ export default {
       o.onmouseleave = () => root.querySelector(`.w-${o.dataset.k}`).classList.remove('hot');
     });
   },
-  enter({ root, at, atWord }) {
+  enter({ root, at, atWord, kind }) {
     const s = root.querySelector('.sweave');
     s.className = 'sweave snap'; void s.offsetWidth; s.classList.remove('snap');
     s.querySelectorAll('.out').forEach(o => o.classList.remove('on'));
     at(0.2, () => s.classList.add('a'));                       // "Most of it happens in-house."
+    if (kind === 'clip') { s.classList.add('drawn', 'tool-on', 'wired', 'same'); s.querySelectorAll('[data-k]').forEach(o => o.classList.add('on')); }
     atWord('hand', () => s.classList.add('drawn'));            // "The body gets drawn by hand, once."
     atWord('weave', () => s.classList.add('tool-on'));         // "Figma Weave does the volume."
     atWord('tool', () => s.classList.add('wired'));            // "a designer can build a tool"
     OUT.forEach(([k]) => atWord(k, () => s.querySelector(`[data-k="${k}"]`).classList.add('on')));
-    atWord('us', () => s.classList.add('same'));               // "the work still looks like us."
+    atWord('brand', () => s.classList.add('same'));            // "…and the work still looks on brand."
   },
 };
 

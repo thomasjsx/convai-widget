@@ -21,9 +21,6 @@ export default {
     root.innerHTML = `
       <div class="steam">
         <section class="ask">
-          <p class="kick">A case study, not a mood board</p>
-          <h2 class="q q1">What do you think this is?</h2>
-          <h2 class="q q2">What did Meta get that it couldn’t get any other way?</h2>
         </section>
         <figure class="tfig" aria-hidden="true">
           <div class="faceless">${FACELESS.map(f => `<img src="${asset(`marks/${f}.svg`)}" alt="">`).join('')}</div>
@@ -44,7 +41,7 @@ export default {
   enter({ root, at, atWord, scene }) {
     const s = root.querySelector('.steam');
     s.className = 'steam snap'; void s.offsetWidth; s.classList.remove('snap');
-    if (scene.id === 'b5') at(0.3, () => s.classList.add('f-muse'));              // the case on the table
+    if (scene.id === 'b5') at(0.3, () => s.classList.add('f-muse', 'f-center'));  // the case on the table, alone in the middle
     if (scene.id === 'c7') {
       at(0.2, () => s.classList.add('f-muse'));
       atWord('faceless', () => s.classList.add('f-faceless'));                    // "…angry at a faceless industry"
@@ -94,6 +91,7 @@ const css = `
 .steam .tfig .muse { grid-area:1/1; height:100%; width:auto; filter:drop-shadow(0 30px 40px rgba(0,0,0,.6));
   opacity:0; transform:translateY(20px) scale(.97); transition:opacity .8s var(--ease), transform 1s var(--ease); }
 .steam.f-muse .tfig .muse { opacity:1; transform:none; }
+.steam.f-center .tfig { right:50%; transform:translate(50%,-50%); }
 .steam .faceless { grid-area:1/1; align-self:end; display:flex; gap:clamp(14px,1.8vw,26px); margin-bottom:-8%; opacity:0; transition:opacity .9s var(--ease); }
 .steam .faceless img { width:clamp(30px,3.2vw,48px); height:auto; filter:grayscale(1) brightness(1.6); opacity:.45; }
 .steam.f-faceless .faceless { opacity:1; }
