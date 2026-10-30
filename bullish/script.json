@@ -1802,7 +1802,7 @@
  "clips": [
   {
    "id": "c0",
-   "scene": "s02",
+   "scene": "agent",
    "title": "So cute sells?",
    "vo": "You may be inclined to think this is about how \"cute sells\". It isn\u2019t. Inside of the character, Muse does much of what ChatGPT, Claude or ten other models do. What\u2019s different is how we feel about the brand, and the way Meta found that feeling can be taught.",
    "audio": "audio/c0.mp3?v=f513e3a7",
@@ -2006,11 +2006,12 @@
     ]
    ],
    "voice": "Eric",
-   "heading": false
+   "heading": false,
+   "video": "agent/errands.mp4"
   },
   {
    "id": "c1",
-   "scene": "s02",
+   "scene": "agent",
    "title": "Why Muse?",
    "vo": "Thomas cares about systems, and their close relatives, esoteric topics and products. He asks how they become accessible. An AI agent is about as esoteric as products get. You can\u2019t see it, you can\u2019t hold it, and most people are a little afraid of it.",
    "audio": "audio/c1.mp3?v=0c665fae",
@@ -2198,7 +2199,8 @@
     ]
    ],
    "voice": "Eric",
-   "heading": false
+   "heading": false,
+   "video": "agent/flight.mp4"
   },
   {
    "id": "c2",
@@ -3692,5 +3694,5 @@
    "start": "b7"
   }
  ],
- "v": "b10dff84"
+ "v": "2d9ec8fd"
 }
