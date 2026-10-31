@@ -26,6 +26,7 @@ const css = `
 .sagent video { width:min(100%, calc((100vh - var(--caption-h) - 120px) * 16 / 9)); aspect-ratio:16/9; border-radius:18px; background:#f4f6fa;
   box-shadow:0 40px 80px rgba(0,0,0,.55); opacity:0; transform:scale(.97); transition:opacity .7s var(--ease), transform .9s var(--ease); }
 .sagent.in video { opacity:1; transform:none; }
+@media (max-aspect-ratio: 1/1) { .sagent video { width:min(100%, 520px); aspect-ratio:4/5; object-fit:cover; } }
 .sagent .muse { position:absolute; left:50%; top:50%; height:min(52vh,460px); transform:translate(-50%,-46%); opacity:0;
   filter:drop-shadow(0 30px 40px rgba(0,0,0,.6)); transition:opacity .8s var(--ease), transform 1s var(--ease); }
 .sagent.done video { opacity:0; transform:scale(.97); }

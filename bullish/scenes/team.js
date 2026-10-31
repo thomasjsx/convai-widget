@@ -104,7 +104,8 @@ const css = `
 .steam .brands span:nth-child(2) b { display:none; }   /* CoinDesk's wordmark already says it */
 .steam.f-brands .brands { opacity:1; transform:none; }
 @media (max-aspect-ratio: 1/1), (max-width: 900px) {
-  .steam .tfig { left:6vw; right:6vw; width:auto; top:auto; bottom:4vh; height:34vh; transform:none; }
+  .steam .tfig, .steam.f-center .tfig { left:6vw; right:6vw; width:auto; top:6vh; bottom:3vh; height:auto; transform:none; }
+  .steam .tfig .muse { height:min(100%, 52vh); }
   .steam:is(.f-muse, .f-brands) .ask { right:6vw; top:30%; }
   .steam section { left:6vw; right:6vw; }
   .steam .box li { flex-direction:column; gap:2px; }

@@ -117,11 +117,18 @@ body:not(.playing) #scrub, body.preview #scrub { display: none; }
 body.preview #start, body.preview #chapters, body.preview #controls { display: none; }
 
 @media (max-width: 720px) {
-  :root { --caption-h: 150px; }
+  :root { --caption-h: calc(150px + env(safe-area-inset-bottom, 0px)); }
   #chapters { display: none; }
-  #controls { left: 20px; bottom: 20px; }
-  #captions { bottom: 70px; width: calc(100vw - 40px); }   /* on phones the controls sit below the captions */
+  #controls { left: max(20px, env(safe-area-inset-left, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); }
+  #captions { bottom: calc(70px + env(safe-area-inset-bottom, 0px)); width: calc(100vw - 40px); }   /* on phones the controls sit below the captions */
 }
+/* a phone on its side is too short for the scenes: ask for it upright */
+@media (max-height: 500px) and (orientation: landscape) and (pointer: coarse) {
+  body::after { content: "Turn your phone upright"; position: fixed; inset: 0; z-index: 40; display: grid; place-items: center;
+    background: var(--bg); color: var(--mute); font: 500 13px var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+}
+html, body { height: 100%; }
+@supports (height: 100dvh) { html, body { height: 100dvh; } }   /* iPhone: the height you can actually see, toolbar or not */
 
 /* placeholder for scenes not built yet */
 .placeholder { position: absolute; inset: 0; display: grid; place-content: center; gap: 14px; text-align: center; padding: 0 12vw; }
@@ -148,7 +155,7 @@ body.can-talk #talk { display: inline-flex; }
 @keyframes talkPulse { 0% { box-shadow: 0 0 0 0 rgba(24,229,137,.55); } 100% { box-shadow: 0 0 0 12px rgba(24,229,137,0); } }
 body.talking #controls, body.talking #chapters { opacity: .25; pointer-events: none; }
 body.talking #captions .w { color: var(--ink); }
-@media (max-width: 720px) { #talk { right: 20px; bottom: 20px; } }
+@media (max-width: 720px) { #talk { right: max(20px, env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); } }
 
 /* the question an answer is answering, shown while it plays */
 #asked { position: fixed; z-index: 16; left: 50%; bottom: calc(46px + 3.2em + 18px); transform: translateX(-50%); max-width: calc(100vw - 48px);

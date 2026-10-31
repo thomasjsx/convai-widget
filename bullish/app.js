@@ -364,9 +364,10 @@ function hear(text, final, idx) {
   if (waiting && !paused) startAutoContinue();
 }
 
+const iOS = /iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.userAgent));
 function listen() {
   const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!Recognition || only || rec) return;
+  if (!Recognition || only || rec || iOS) return;   // on iPhone the agent's own mic does the listening, from the Ask button
   rec = new Recognition();
   rec.continuous = true; rec.interimResults = true; rec.lang = 'en-US';
   rec.onstart = () => setMic(paused || waiting ? 'ask' : 'on');
