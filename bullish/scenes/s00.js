@@ -8,6 +8,7 @@ export default {
     root.innerHTML = `
       <div class="s00">
         <div class="light"></div>
+        <p class="intro">What makes a good brand campaign?</p>
         <div class="copy">
           <h2 class="say">
             <span class="l1"><span class="row"><span class="ch">${words('A good campaign')}</span> <span class="ch">${words('looks correct,')}</span></span>
@@ -34,7 +35,7 @@ export default {
     s.addEventListener('pointermove', e => place(e, false));
     s.addEventListener('pointerleave', () => light.classList.remove('on'));
   },
-  enter({ root, atWord, scene }) {
+  enter({ root, at, atWord, scene }) {
     const s = root.querySelector('.s00');
     const ws = [...s.querySelectorAll('.say .w')];
     // snap back to blank without playing the transitions in reverse (the scene loops in preview)
@@ -55,6 +56,9 @@ export default {
       atWord(w.dataset.w, () => w.classList.add('on'), seen[k]);
     });
     const nth = k => before.filter(x => x === k).length + 1;   // the thesis's own word, not one said in the intro
+    at(0.05, () => s.classList.add('intro-on'));            // the title holds through the spoken intro…
+    const first = scene.words?.find(([w]) => norm(w) === 'good');
+    if (first) at(Math.max(0, first[1] - .6), () => s.classList.add('intro-off'));   // …and gives way as the thesis starts
     atWord('memorable', () => s.classList.add('dim'), nth('memorable'));   // the merely-right line steps back
     atWord('feel', () => s.classList.add('lit'));            // gradient wipes across "feel"
     atWord('difference', () => s.classList.add('pulse'));    // "feel" breathes once more
@@ -71,6 +75,11 @@ const css = `
   opacity:0; pointer-events:none; transition:transform 1.6s var(--ease), opacity 1.2s var(--ease); }
 .s00 .light.on { opacity:1; }
 
+.s00 .intro { position:absolute; inset:0; margin:0; display:grid; place-items:center; padding:0 8vw 6vh; text-align:center; text-wrap:balance;
+  font-weight:500; font-size:clamp(30px, min(5vw, 9vh), 76px); letter-spacing:-.035em; line-height:1.05; opacity:0;
+  transition:opacity .9s var(--ease), transform 1.1s var(--ease), filter .9s var(--ease); }
+.s00.intro-on .intro { opacity:1; }
+.s00.intro-off .intro { opacity:0; transform:translateY(-14px); filter:blur(8px); }
 .s00 .copy { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 8vw 2vh; }
 .s00 .say { margin:0; font-weight:500; font-size:clamp(22px, min(4.6vw, calc((100vh - var(--caption-h) - 120px) / 8.5)), 76px); line-height:1.06; letter-spacing:-.035em; }
 .s00 .l1, .s00 .l2, .s00 .row { display:block; }
