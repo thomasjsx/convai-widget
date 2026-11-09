@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What makes a good brand campaign?</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Thomas Stevenson for Bullish, CoinDesk and Consensus.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* What makes a good brand campaign? The tap-through deck. Same look and same assets as /bullish (images load from ../bullish/assets). */
+:root {
+  color-scheme: dark;
+  --bg: #000; --ink: #fff; --mute: #cbd0db; --green: #18e589; --blue: #218cff;
+  --grad: linear-gradient(90deg, #18e589, #218cff);
+  --sans: "DM Sans", system-ui, sans-serif;
+  --mono: "DM Mono", ui-monospace, monospace;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+  --pad: clamp(24px, 6vw, 96px);
+  --chrome: 44px;   /* the strip at the bottom that holds the counter */
+  --big: clamp(30px, min(5.4vw, 9.4vh), 92px);
+  --kick: 500 clamp(11px, 1vw, 14px)/1.3 var(--mono);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: var(--sans); overflow: hidden; }
+@supports (height: 100dvh) { html, body { height: 100dvh; } }
+body { touch-action: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; cursor: default; }
+img, svg { display: block; -webkit-user-drag: none; }
+h1, h2, h3, p, figure, ul, ol { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+
+/* ---------- slides: every slide fills the screen, one shows at a time */
+#deck { position: fixed; inset: 0; }
+.s { position: absolute; inset: 0 0 var(--chrome); opacity: 0; visibility: hidden; transition: opacity .35s var(--ease), visibility 0s linear .35s; overflow: hidden; }
+.s.on { opacity: 1; visibility: visible; transition: opacity .35s var(--ease); }
+.a { opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease) var(--d, 0s), transform .7s var(--ease) var(--d, 0s); }
+.s.on .a { opacity: 1; transform: none; }
+.big { font-weight: 500; font-size: var(--big); line-height: 1.04; letter-spacing: -.035em; text-wrap: balance; }
+.kick { font: var(--kick); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.guy { height: 100%; width: auto; filter: drop-shadow(0 28px 40px rgba(0,0,0,.6)); }
+.center { display: grid; place-content: center; justify-items: center; text-align: center; padding: 0 var(--pad); }
+.split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4vw; padding: 0 var(--pad); }
+
+/* ---------- chrome: counter and progress */
+#count { position: fixed; z-index: 5; right: max(20px, env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); font: 500 12px/1 var(--mono); letter-spacing: .12em; color: rgba(203,208,219,.6); }
+#hint { position: fixed; z-index: 5; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); font: 500 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); white-space: nowrap; transition: opacity .3s; }
+body:not(.first) #hint { opacity: 0; }
+#bar { position: fixed; z-index: 5; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(203,208,219,.16); }
+#bar i { display: block; height: 100%; width: 0; background: var(--grad); transition: width .35s var(--ease); }
+
+/* 1 · title */
+.title { gap: clamp(18px, 3.4vh, 34px); }
+.title h1 { font-weight: 500; font-size: clamp(38px, min(7vw, 12vh), 116px); line-height: 1; letter-spacing: -.04em; max-width: 13em; text-wrap: balance; }
+.title .logos { display: flex; align-items: center; gap: clamp(20px, 3vw, 44px); margin-top: 1.5vh; }
+.title .logos img { height: clamp(26px, 4vh, 40px); width: auto; }
+.title .logos img.cd { height: clamp(16px, 2.4vh, 24px); }
+
+/* 2 · the thesis */
+.thesis { display: flex; flex-direction: column; justify-content: center; gap: .5em; padding: 0 var(--pad); font-size: var(--big); }
+.thesis p { font-weight: 500; font-size: 1em; line-height: 1.04; letter-spacing: -.035em; max-width: 16em; text-wrap: balance; }
+.thesis .good { color: rgba(203,208,219,.42); }
+
+/* 3 · the lens */
+.lens h2 { font-size: clamp(36px, min(7.4vw, 13vh), 124px); line-height: 1; max-width: 11em; }
+
+/* 4 · Muse: the guy and the logo */
+.muse .fig { height: min(72vh, 620px); justify-self: end; }
+.muse .id { display: grid; justify-items: start; gap: clamp(12px, 2.4vh, 22px); }
+.muse .mark { width: clamp(110px, min(19vw, 30vh), 280px); height: auto; }
+.muse h2 { font-weight: 500; font-size: clamp(54px, min(9vw, 15vh), 148px); line-height: .9; letter-spacing: -.045em; }
+.muse h2 small { font-size: .3em; font-weight: 500; letter-spacing: -.02em; color: var(--mute); margin-left: .35em; white-space: nowrap; }
+.muse p { font-size: clamp(20px, min(2.4vw, 4vh), 36px); letter-spacing: -.02em; line-height: 1.15; color: var(--mute); max-width: 15em; text-wrap: balance; }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(203,208,219,.28); font: 500 clamp(11px, 1vw, 13px)/1 var(--mono); letter-spacing: .08em; color: var(--mute); }
+.chip b { color: var(--green); font-weight: 500; }
+
+/* 5 · the faceless wall */
+.wallslide { background: #000; }
+.wall { --c: clamp(78px, 8.6vmax, 190px); position: absolute; left: 50%; top: 42%; display: grid; grid-template-columns: repeat(13, var(--c)); grid-auto-rows: var(--c); transform: translate(-50%, -50%); }
+.cell { display: grid; place-items: center; }
+.cell i, .cell img { width: 44%; height: 44%; }
+.cell i { background: #5c616c; -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
+.cell.hero img { width: 62%; height: 62%; filter: drop-shadow(0 0 26px rgba(120,160,255,.5)); }
+.wallslide .tag { position: absolute; left: 0; right: 0; text-align: center; top: calc(42% + clamp(78px, 8.6vmax, 190px) * .56); font: var(--kick); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; color: var(--mute); }
+.wallslide .tag b { color: var(--ink); font-weight: 500; }
+.wallslide .say { position: absolute; left: 0; right: 0; bottom: 0; padding: 16vh var(--pad) 3vh; background: linear-gradient(transparent, #000 56%); }
+
+/* 6 · a body */
+.body .fig { height: min(68vh, 590px); justify-self: end; }
+.body .fig img { height: 100%; width: auto; filter: drop-shadow(0 26px 34px rgba(0,0,0,.6)); }
+
+/* 7 · three jobs */
+.jobs .fig { height: min(62vh, 520px); justify-self: end; }
+.jobs .col { display: grid; gap: clamp(10px, 2vh, 22px); }
+.jobs .kick { margin-bottom: 1vh; }
+.jobs h3 { font-weight: 500; font-size: clamp(42px, min(6.6vw, 11.5vh), 112px); line-height: 1; letter-spacing: -.04em; }
+
+/* 8 · culture */
+.culture { --u: min(31vh, 19vw, 300px); display: grid; grid-template-rows: 1fr auto; padding: 3vh 4vw 0; }
+.culture .row { display: flex; justify-content: center; align-items: flex-end; gap: clamp(26px, 5vw, 90px); align-self: end; padding-bottom: 2.4vh; }
+.culture .pair { display: flex; align-items: flex-end; gap: clamp(8px, 1.6vw, 26px); }
+.culture figure { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.culture figure img { width: auto; filter: drop-shadow(0 22px 30px rgba(0,0,0,.6)); }
+.culture figcaption, .house .label { font: 500 clamp(10px, .95vw, 12px)/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); white-space: nowrap; }
+.culture .eq { margin-bottom: 1px; font: 400 18px/1 var(--mono); color: rgba(203,208,219,.5); }
+.culture .verdict { text-align: center; padding-bottom: 3vh; }
+.culture .l1 { font-weight: 500; font-size: clamp(20px, min(2.6vw, 4.2vh), 40px); letter-spacing: -.02em; color: var(--mute); }
+.culture .l2 { font-weight: 700; font-size: clamp(38px, min(6vw, 9.4vh), 100px); line-height: 1; letter-spacing: -.045em; color: var(--green); }
+.culture .struck { position: relative; display: inline-block; color: rgba(203,208,219,.45); }
+.culture .struck::after { content: ""; position: absolute; left: -3%; right: -1%; top: 56%; height: max(2px, .07em); background: var(--ink); }
+
+/* 9 · the house */
+.house { --w: min(15.5vw, 25vh, 230px); }
+.house .phones { position: relative; display: flex; gap: clamp(12px, 2vw, 32px); align-items: flex-end; justify-self: center; margin-top: 5vh; }
+.house .phone { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.house .screen { width: var(--w); aspect-ratio: 9 / 19.5; height: auto; object-fit: cover; object-position: top; background: #fff; border: calc(var(--w) * .03) solid #0b0d10; border-radius: calc(var(--w) * .15); box-shadow: 0 0 0 1px rgba(203,208,219,.16), 0 24px 60px rgba(0,0,0,.6); }
+.house .quiet .screen { filter: brightness(.5) saturate(.6); }
+.house .label { display: flex; align-items: center; gap: 8px; }
+.house .label img { width: 18px; height: 18px; border-radius: 5px; }
+.house .char { position: absolute; z-index: 2; right: calc(var(--w) / 2); top: 0; height: calc(var(--w) * 1.2); width: auto; transform: translate(50%, -16%); filter: drop-shadow(0 26px 36px rgba(0,0,0,.7)); }
+.house .col { display: grid; gap: clamp(14px, 2.6vh, 26px); }
+.house .ask { font-size: clamp(18px, min(2vw, 3.4vh), 30px); letter-spacing: -.02em; line-height: 1.2; color: var(--mute); max-width: 19em; text-wrap: balance; }
+
+/* 10 · seven in ten */
+.s.seven { inset: 0; }
+.seven .plate { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.34) saturate(.6); }
+.seven::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.72), transparent 72%); }
+.seven > * { z-index: 2; }
+.seven .text { position: absolute; left: var(--pad); top: 0; bottom: 0; width: min(58vw, 860px); display: grid; align-content: center; gap: clamp(14px, 3vh, 28px); }
+.seven .people { display: flex; gap: clamp(5px, .7vw, 10px); }
+.seven .people svg { height: clamp(36px, 7vh, 72px); width: auto; fill: rgba(203,208,219,.26); }
+.seven .people svg.on { fill: var(--green); }
+.seven .stat { font-size: clamp(16px, min(1.9vw, 3.2vh), 28px); letter-spacing: -.015em; color: var(--mute); }
+.seven .stat b { color: var(--ink); font-weight: 500; }
+.seven .src { font: var(--kick); letter-spacing: .1em; text-transform: uppercase; color: rgba(203,208,219,.62); }
+.seven .fig { position: absolute; right: 6vw; bottom: 0; height: min(72vh, 620px); }
+.seven .fig .guy { filter: drop-shadow(0 0 60px rgba(255,214,180,.3)) drop-shadow(0 26px 34px rgba(0,0,0,.6)); }
+
+/* 11 · some people hate it */
+.hate { display: grid; grid-template-columns: 1fr auto; gap: 5vw; align-items: center; padding: 0 var(--pad); }
+.hate .col { display: grid; gap: clamp(22px, 5vh, 46px); }
+.hate .heads { display: grid; gap: clamp(7px, 1.4vh, 14px); font-size: clamp(14px, min(1.5vw, 2.6vh), 22px); letter-spacing: -.01em; line-height: 1.22; color: rgba(203,208,219,.62); }
+.hate .heads b { display: block; font: 500 clamp(9px, .8vw, 11px)/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: rgba(203,208,219,.5); }
+.hate .no1 { height: min(70vh, 620px); width: auto; border-radius: 22px; box-shadow: 0 0 0 1px rgba(203,208,219,.16), 0 24px 60px rgba(0,0,0,.6); }
+
+/* 12 · with the team */
+.team { gap: clamp(14px, 3vh, 28px); }
+.team .fig { height: min(44vh, 400px); }
+.team h2 { max-width: 15em; }
+.team .open { font-size: clamp(20px, min(2.4vw, 4vh), 36px); letter-spacing: -.02em; color: var(--green); }
+
+/* 13 · four questions */
+.four { display: grid; align-content: center; gap: clamp(14px, 3vh, 28px); padding: 0 var(--pad); }
+.four .cards { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 1.4vw, 20px); }
+.four li { display: grid; align-content: space-between; gap: clamp(14px, 3vh, 34px); min-height: min(30vh, 260px); padding: clamp(16px, 2vw, 30px); border-radius: 16px; background: #1c1c1c; border: 1px solid rgba(203,208,219,.14); }
+.four .n { font: 500 13px/1 var(--mono); letter-spacing: .1em; color: var(--green); }
+.four b { font-weight: 500; font-size: clamp(22px, min(3.2vw, 5.6vh), 54px); line-height: 1.04; letter-spacing: -.03em; text-wrap: balance; }
+
+/* 14 · how it gets built */
+.weave { display: grid; align-content: center; gap: clamp(20px, 5vh, 56px); padding: 0 var(--pad); }
+.weave .flow { display: grid; grid-template-columns: auto 60px minmax(180px, 280px) 60px auto; align-items: center; justify-content: center; }
+.weave .wire { height: 1px; background: linear-gradient(90deg, rgba(203,208,219,.2), var(--green)); }
+.weave .hand { display: grid; justify-items: center; gap: 12px; }
+.weave .paper { width: clamp(100px, min(15vw, 24vh), 220px); aspect-ratio: 1; display: grid; place-items: center; background: #f5f1e8; color: #1a1a1a; border-radius: 6px; transform: rotate(-2deg); }
+.weave .paper svg { width: 74%; }
+.weave .tool { display: grid; gap: 6px; padding: clamp(16px, 2vw, 28px); border-radius: 14px; border: 1px solid var(--green); text-align: center; }
+.weave .tool b { font-weight: 500; font-size: clamp(26px, min(3vw, 5.4vh), 46px); letter-spacing: -.03em; line-height: 1; }
+.weave .tool .kick { color: var(--green); }
+.weave .outs { display: grid; gap: clamp(10px, 1.8vh, 18px); }
+.weave .out { display: flex; align-items: center; gap: 14px; }
+.weave .frame { width: clamp(42px, min(5vw, 8.4vh), 72px); aspect-ratio: 1; display: grid; place-items: center; background: #f5f1e8; color: #1a1a1a; border-radius: 4px; }
+.weave .frame svg { width: 66%; }
+.weave .out p { font-size: clamp(15px, min(1.7vw, 3vh), 26px); letter-spacing: -.02em; white-space: nowrap; }
+.weave .out span { color: var(--mute); }
+.weave h2 { text-align: center; }
+
+/* 15 · the close */
+.close { gap: clamp(20px, 5vh, 52px); }
+.close h2 { font-weight: 500; font-size: clamp(54px, min(11vw, 19vh), 188px); line-height: .96; letter-spacing: -.05em; }
+
+/* ---------- tall or narrow screens: pictures on top, words under */
+@media (max-aspect-ratio: 1/1), (max-width: 760px) {
+  :root { --big: clamp(29px, min(9.2vw, 5.4vh), 72px); --pad: clamp(24px, 6vw, 60px); }
+  .split { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: center; gap: 3.4vh; }
+  .title h1 { font-size: clamp(38px, min(12.6vw, 7.4vh), 96px); }
+  .lens h2 { font-size: clamp(36px, min(11.6vw, 7vh), 92px); }
+
+  .muse .fig { height: 42vh; justify-self: center; }
+  .muse .id { justify-items: center; text-align: center; }
+  .muse .mark { width: min(30vw, 15vh); }
+  .muse h2 { font-size: clamp(54px, min(17vw, 10vh), 120px); }
+  .muse p { font-size: clamp(19px, min(5.6vw, 3vh), 30px); }
+
+  .wall { top: 36%; }
+  .wallslide .tag { top: calc(36% + clamp(78px, 8.6vmax, 190px) * .56); }
+
+  .body .fig, .jobs .fig { justify-self: center; }
+  .body h2 { text-align: center; }
+  .body .fig { height: 46vh; }
+  .jobs .fig { height: 32vh; }
+  .jobs .col { justify-items: center; text-align: center; }
+  .jobs h3 { font-size: clamp(42px, min(13.4vw, 7.6vh), 96px); }
+
+  .culture { --u: min(16vh, 34vw, 240px); }
+  .culture .row { flex-direction: column; align-items: center; justify-content: center; gap: 2.4vh; align-self: center; padding-bottom: 0; }
+  .culture .l1 { font-size: clamp(19px, min(5.4vw, 3vh), 40px); }
+  .culture .l2 { font-size: clamp(34px, min(10vw, 6vh), 84px); }
+
+  .house { --w: min(25vw, 23vh, 220px); }
+  .house .phones { margin-top: 6vh; }
+  .house .col { justify-items: center; text-align: center; }
+  .house .ask { font-size: clamp(16px, min(4.6vw, 2.6vh), 26px); }
+
+  .seven::before { background: linear-gradient(rgba(0,0,0,.72), transparent 76%); }
+  .seven .text { top: 5vh; bottom: auto; left: var(--pad); right: var(--pad); width: auto; }
+  .seven .fig { left: 0; right: 0; display: flex; justify-content: center; height: 42vh; }
+
+  .hate { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: center; gap: 3vh; }
+  .hate .no1 { height: 24vh; justify-self: center; border-radius: 14px; order: -1; }
+  .hate .col { gap: 2.6vh; }
+  .hate .heads { font-size: clamp(13px, min(3.6vw, 1.9vh), 20px); }
+
+  .team .fig { height: 36vh; }
+  .team .open { font-size: clamp(19px, min(5.6vw, 3vh), 30px); }
+
+  .four .cards { grid-template-columns: 1fr; }
+  .four li { min-height: 0; grid-auto-flow: column; grid-template-columns: auto 1fr; justify-content: start; align-items: center; align-content: center; gap: 14px; padding: clamp(14px, 2.4vh, 24px) 18px; }
+  .four b { font-size: clamp(21px, min(6vw, 3.4vh), 40px); }
+
+  .weave { gap: 3.4vh; }
+  .weave .flow { grid-template-columns: 1fr; grid-template-rows: auto 3.4vh auto 3.4vh auto; justify-items: center; }
+  .weave .wire { width: 1px; height: 100%; background: linear-gradient(rgba(203,208,219,.2), var(--green)); }
+  .weave .paper { width: min(32vw, 17vh); }
+  .weave .tool { width: min(78vw, 360px); padding: 16px; }
+  .weave .outs { width: min(78vw, 360px); justify-content: center; }
+  .weave .frame { width: min(11vw, 6vh); }
+  .weave .out p { font-size: clamp(16px, min(4.6vw, 2.6vh), 24px); }
+
+  .close h2 { font-size: clamp(54px, min(19vw, 10.6vh), 150px); }
+}
+
+@media (prefers-reduced-motion: reduce) { .a, .s, #bar i { transition: none !important; } }
+</style>
+</head>
+<body class="first">
+  <main id="deck">
+
+    <section class="s center title" aria-label="Title">
+      <h1 class="a">What makes a good brand campaign?</h1>
+      <p class="kick a" style="--d:.1s">For Bullish, CoinDesk and Consensus</p>
+      <div class="logos a" style="--d:.18s">
+        <img src="../bullish/assets/brand/bullish.png" alt="Bullish">
+        <img class="cd" src="../bullish/assets/brand/coindesk.svg" alt="CoinDesk">
+        <img src="../bullish/assets/brand/consensus.svg" alt="Consensus">
+      </div>
+      <p class="kick a" style="--d:.26s">Thomas Stevenson</p>
+    </section>
+
+    <section class="s thesis" aria-label="The thesis">
+      <p class="good a">A good campaign looks correct, proper and expected.</p>
+      <p class="a" style="--d:.2s">A memorable one makes people <span class="grad">feel</span> something.</p>
+    </section>
+
+    <section class="s center lens" aria-label="The lens">
+      <h2 class="big a">An unlikely lens nobody else in the category chose.</h2>
+    </section>
+
+    <section class="s split muse" aria-label="Muse, by Meta">
+      <div class="fig a"><img class="guy" src="../bullish/assets/s05/muse.png" alt="The Muse character"></div>
+      <div class="id">
+        <img class="mark a" style="--d:.12s" src="../bullish/assets/brand/muse-m.svg" alt="The Muse logo">
+        <h2 class="a" style="--d:.18s">Muse<small>by Meta</small></h2>
+        <p class="a" style="--d:.26s">Agents are the most abstract product in tech.</p>
+        <span class="chip a" style="--d:.32s"><b>#1</b> App Store · Free apps</span>
+      </div>
+    </section>
+
+    <section class="s wallslide" aria-label="AI is faceless">
+      <div class="wall" id="wall" aria-hidden="true"></div>
+      <p class="tag a" style="--d:.2s"><b>Copilot</b> · redrawn 2026</p>
+      <div class="say"><h2 class="big a" style="--d:.1s">Every major player has kept its AI faceless.</h2></div>
+    </section>
+
+    <section class="s split body" aria-label="A body">
+      <div class="fig a"><img src="../bullish/assets/body/muse-run.webp" alt="Muse running"></div>
+      <h2 class="big a" style="--d:.15s">Meta gave the “AI” thing a body.</h2>
+    </section>
+
+    <section class="s split jobs" aria-label="Three jobs">
+      <div class="fig a"><img class="guy" src="../bullish/assets/s05/muse.png" alt="The Muse character"></div>
+      <div class="col">
+        <p class="kick a">A body does three jobs a logo can’t</p>
+        <h3 class="a" style="--d:.1s">Explains</h3>
+        <h3 class="a" style="--d:.2s">Invites</h3>
+        <h3 class="a grad" style="--d:.3s">Accumulates</h3>
+      </div>
+    </section>
+
+    <section class="s culture" aria-label="It comes from culture">
+      <div class="row a">
+        <div class="pair">
+          <figure><img style="height:calc(var(--u) * 1.6)" src="../bullish/assets/s05/labubu.png" alt="A Labubu"><figcaption>Labubu</figcaption></figure>
+          <span class="eq" aria-hidden="true">≈</span>
+          <figure><img style="height:var(--u)" src="../bullish/assets/s05/muse.png" alt="The Muse character"><figcaption>Muse</figcaption></figure>
+        </div>
+        <div class="pair">
+          <figure><img style="height:calc(var(--u) * 1.22)" src="../bullish/assets/s05/charm.png" alt="The Charm"><figcaption>Charm</figcaption></figure>
+          <span class="eq" aria-hidden="true">≈</span>
+          <figure><img style="height:calc(var(--u) * .8)" src="../bullish/assets/s05/tamagotchi.png" alt="A Tamagotchi"><figcaption>Tamagotchi</figcaption></figure>
+        </div>
+      </div>
+      <div class="verdict a" style="--d:.2s">
+        <p class="l1">Not because it’s <span class="struck">cute</span>.</p>
+        <p class="l2">Because it’s current.</p>
+      </div>
+    </section>
+
+    <section class="s split house" aria-label="The house">
+      <div class="phones a">
+        <div class="phone quiet"><img class="screen" src="../bullish/assets/meta/facebook-ui.jpg" alt="The Facebook app"><span class="label"><img src="../bullish/assets/meta/facebook-icon.png" alt="">Facebook</span></div>
+        <div class="phone quiet"><img class="screen" src="../bullish/assets/meta/meta-ai-ui.jpg" alt="The Meta AI app"><span class="label"><img src="../bullish/assets/meta/meta-ai-icon.png" alt="">Meta AI</span></div>
+        <div class="phone"><img class="screen" src="../bullish/assets/meta/muse-ui.jpg" alt="The Muse app"><span class="label"><img src="../bullish/assets/meta/muse-icon.png" alt="">Muse</span></div>
+        <img class="char" src="../bullish/assets/s05/muse.png" alt="The Muse character">
+      </div>
+      <div class="col">
+        <h2 class="big a" style="--d:.15s">The house stayed, and one product got a soul.</h2>
+        <p class="ask a" style="--d:.25s">Does every product in your house have to look like the parent?</p>
+      </div>
+    </section>
+
+    <section class="s seven" aria-label="Seven in ten">
+      <img class="plate" src="../bullish/assets/s06/dc-kuna.jpg" alt="Meta’s Kuna, Idaho data center from the air">
+      <div class="text a">
+        <div class="people" id="people" role="img" aria-label="Seven of ten figures filled"></div>
+        <p class="stat"><b>Seven in ten Americans</b> oppose an AI data center in their area.</p>
+        <h2 class="big">Can you really be mad that this little guy has a data center?</h2>
+        <p class="src">Gallup · March 2026</p>
+      </div>
+      <div class="fig a" style="--d:.2s"><img class="guy" src="../bullish/assets/s05/muse.png" alt="The Muse character"></div>
+    </section>
+
+    <section class="s hate" aria-label="Some people hate it">
+      <div class="col">
+        <ul class="heads a">
+          <li><b>NBC News</b>It’s cute. It’s cuddly. And it wants your data.</li>
+          <li><b>Creative Bloq</b>Meta’s new AI avatar is making me feel infantilised</li>
+          <li><b>Fortune</b>A Clippy marketing moment with Muse</li>
+        </ul>
+        <h2 class="big a" style="--d:.18s">A logo nobody minds is a logo nobody notices.</h2>
+      </div>
+      <img class="no1 a" style="--d:.1s" src="../bullish/assets/s07/app-store-no1.png" alt="Muse from Meta at number one in the App Store">
+    </section>
+
+    <section class="s center team" aria-label="With the team">
+      <div class="fig a"><img class="guy" src="../bullish/assets/s05/muse.png" alt="The Muse character"></div>
+      <h2 class="big a" style="--d:.12s">A case study, a mood board, or a conversation?</h2>
+      <p class="open a" style="--d:.22s">Open-ended.</p>
+    </section>
+
+    <section class="s four" aria-label="Four questions">
+      <p class="kick a">Four questions · every brief</p>
+      <ol class="cards">
+        <li class="a" style="--d:.06s"><span class="n">01</span><b>How should it feel?</b></li>
+        <li class="a" style="--d:.12s"><span class="n">02</span><b>What lens would nobody else choose?</b></li>
+        <li class="a" style="--d:.18s"><span class="n">03</span><b>Do the name and the body agree?</b></li>
+        <li class="a" style="--d:.24s"><span class="n">04</span><b>Muse or siren?</b></li>
+      </ol>
+    </section>
+
+    <section class="s weave" aria-label="How it gets built">
+      <div class="flow a">
+        <div class="hand">
+          <div class="paper" data-sketch></div>
+          <p class="kick">Drawn by hand, once</p>
+        </div>
+        <i class="wire"></i>
+        <div class="tool"><p class="kick">Figma Weave</p><b>One tool</b></div>
+        <i class="wire"></i>
+        <div class="outs">
+          <div class="out"><div class="frame" data-sketch></div><p>Comms <span>London</span></p></div>
+          <div class="out"><div class="frame" data-sketch></div><p>Sales <span>Hong Kong</span></p></div>
+          <div class="out"><div class="frame" data-sketch></div><p>Events <span>Grand Cayman</span></p></div>
+        </div>
+      </div>
+      <h2 class="big a" style="--d:.15s">The team builds the tool once.</h2>
+    </section>
+
+    <section class="s center close" aria-label="What’s your Muse?">
+      <div id="horns" aria-hidden="true"></div>
+      <h2 class="a" style="--d:.5s">What’s <span class="grad">your</span> Muse?</h2>
+    </section>
+
+  </main>
+
+  <p id="hint" aria-hidden="true">Tap to advance</p>
+  <p id="count" role="status" aria-live="polite"></p>
+  <div id="bar" aria-hidden="true"><i></i></div>
+
+<script type="module">
+import { horns } from '../bullish/scenes/lib/horns.js';
+
+const A = '../bullish/assets/';
+
+// slide 5: the category's marks, tiled cold, with the redrawn Copilot in colour at the centre
+const MARKS = ['marks/claude-symbol.svg', 'marks/openai-symbol.svg', 'marks/meta-ai-ring.svg', 'marks/copilot-2026-icon.svg', 's01/gemini-spark.svg', 'marks/xai-logo.svg',
+  'marks/mistral-logo.svg', 's01/perplexity-symbol.svg', 's01/deepseek-whale.svg', 'marks/copilot-icon-one-color.svg', 's01/grok-symbol.svg'];
+const HERO = 3, COLS = 13, ROWS = 15, CC = 6, CR = 7;
+let cells = '';
+for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
+  const i = (((c - CC) + 3 * (r - CR) + HERO) % MARKS.length + MARKS.length) % MARKS.length;
+  cells += r === CR && c === CC
+    ? `<div class="cell hero"><img src="${A}${MARKS[i]}" alt=""></div>`
+    : `<div class="cell"><i style="--src:url('${A}${MARKS[i]}')"></i></div>`;
+}
+document.getElementById('wall').innerHTML = cells;
+
+// slide 10: seven of ten figures
+const FIGURE = on => `<svg class="${on ? 'on' : ''}" viewBox="0 0 12 24" aria-hidden="true"><circle cx="6" cy="4.2" r="3.3"/><path d="M1 23.4V14.2a5 5 0 0 1 10 0v9.2z"/></svg>`;
+document.getElementById('people').innerHTML = Array.from({ length: 10 }, (_, i) => FIGURE(i < 7)).join('');
+
+// slide 14: the hand-drawn face from the pitch
+const SKETCH = '<svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 12 C 74 10, 90 30, 88 54 C 87 78, 70 92, 49 91 C 27 90, 11 74, 12 52 C 13 29, 28 13, 50 12 Z M37 47 l0.5 3 M63 47 l0.5 3 M38 64 C 45 71, 56 71, 63 63" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+document.querySelectorAll('[data-sketch]').forEach(el => { el.innerHTML = SKETCH; });
+
+// slide 15: the Bullish horns, drawn on when the slide arrives
+const hornsCtl = horns(document.getElementById('horns'), { width: 'clamp(150px, min(24vw, 26vh), 340px)' });
+let hornsTimer;
+
+const slides = [...document.querySelectorAll('.s')];
+const count = document.getElementById('count');
+const fill = document.querySelector('#bar i');
+const last = slides.length - 1;
+let cur = -1;
+
+function go(n) {
+  n = Math.max(0, Math.min(last, n));
+  if (n === cur) return;
+  slides.forEach((s, i) => { s.classList.toggle('on', i === n); s.setAttribute('aria-hidden', String(i !== n)); });
+  document.body.classList.toggle('first', n === 0);
+  count.textContent = `${String(n + 1).padStart(2, '0')} / ${slides.length}`;
+  fill.style.width = `${(n + 1) / slides.length * 100}%`;
+  history.replaceState(null, '', `#${n + 1}`);
+  clearTimeout(hornsTimer);
+  hornsCtl.reset();
+  if (n === last) { hornsCtl.draw(); hornsTimer = setTimeout(() => hornsCtl.alive(), 1700); }
+  cur = n;
+}
+
+// keyboard and clickers
+addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key;
+  if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(k)) { e.preventDefault(); go(cur + 1); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); go(cur - 1); }
+  else if (k === 'Home') go(0);
+  else if (k === 'End') go(last);
+});
+
+// tap or click: the left quarter goes back, everywhere else goes forward. A sideways swipe also works.
+let down = null;
+addEventListener('pointerdown', e => { if (e.isPrimary) down = { x: e.clientX, y: e.clientY }; });
+addEventListener('pointerup', e => {
+  if (!down || !e.isPrimary) return;
+  const dx = e.clientX - down.x, dy = e.clientY - down.y;
+  down = null;
+  if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(cur + (dx < 0 ? 1 : -1));
+  else if (Math.abs(dx) < 12 && Math.abs(dy) < 12) go(cur + (e.clientX < innerWidth * .25 ? -1 : 1));
+});
+addEventListener('pointercancel', () => { down = null; });
+addEventListener('dragstart', e => e.preventDefault());
+
+addEventListener('hashchange', () => go(parseInt(location.hash.slice(1), 10) - 1 || 0));
+go(parseInt(location.hash.slice(1), 10) - 1 || 0);
+window.focus();   // so arrow keys work straight away inside the embed
+</script>
+</body>
+</html>
