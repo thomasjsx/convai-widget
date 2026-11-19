@@ -17,7 +17,8 @@ var GROUPS = [
     { title: 'Rolex', type: 'images', thumb: M + 'rolex-print-2.jpg',
       images: [M + 'rolex-print-2.jpg', M + 'rolex-print-1.jpg', M + 'rolex-print-3.jpg', M + 'rolex-fearless.jpg', M + 'rolex-heritage.jpg', M + 'rolex-ice.jpg', M + 'rolex-beneath.jpg',
         M + 'rolex-app-hero.jpg', M + 'rolex-app-1.png', M + 'rolex-app-2.png'] },
-    { title: 'Stitches', sub: 'A remix from a live event', type: 'video', src: M + 'stitches-live.mp4', poster: M + 'stitches-live-poster.jpg', thumb: M + 'stitches-live-poster.jpg' }
+    { title: 'Stitches', sub: 'A remix from a live event', type: 'images', thumb: M + 'stitches-live-poster.jpg',
+      images: [M + 'stitches-about.jpg', { video: M + 'stitches-live.mp4', poster: M + 'stitches-live-poster.jpg' }] }
   ]},
   { id: 'backup', name: 'Backup', pieces: [
     { title: 'Economist site library', type: 'images', thumb: M + 'econ-tiffany.jpg',
