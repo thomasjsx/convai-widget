@@ -14,9 +14,9 @@ var GROUPS = [
   { id: '3pm', name: '3:00pm', pieces: [
     { title: 'Retail Store', type: 'images', thumb: M + 'sidekick-2.jpg',
       images: [M + 'sidekick-1.jpg', M + 'sidekick-2.jpg', M + 'sidekick-3.jpg', M + 'sidekick-4.jpg', M + 'sidekick-5.jpg'] },
-    { title: 'Rolex and Bing launch work', type: 'images', thumb: M + 'rolex-print-2.jpg',
+    { title: 'Rolex', type: 'images', thumb: M + 'rolex-print-2.jpg',
       images: [M + 'rolex-print-2.jpg', M + 'rolex-print-1.jpg', M + 'rolex-print-3.jpg', M + 'rolex-fearless.jpg', M + 'rolex-heritage.jpg', M + 'rolex-ice.jpg', M + 'rolex-beneath.jpg',
-        M + 'rolex-app-hero.jpg', M + 'rolex-app-1.png', M + 'rolex-app-2.png', M + 'bing-1.jpg', M + 'bing-2.jpg', { video: M + 'bing-concert.mp4', poster: M + 'bing-concert-poster.jpg' }] },
+        M + 'rolex-app-hero.jpg', M + 'rolex-app-1.png', M + 'rolex-app-2.png'] },
     { title: 'Stitches', sub: 'A remix from a live event', type: 'video', src: M + 'stitches-live.mp4', poster: M + 'stitches-live-poster.jpg', thumb: M + 'stitches-live-poster.jpg' }
   ]},
   { id: 'backup', name: 'Backup', pieces: [
