@@ -46,7 +46,9 @@
       p.images.forEach(function (it) {
         var f = document.createElement('figure');
         if (typeof it === 'string') f.innerHTML = '<img alt="" src="' + it + '">';
-        else if (it.link) f.innerHTML = '<a href="' + it.link + '" target="_blank" rel="noopener"><img alt="Open the live demo" src="' + it.img + '"></a>';
+        else if (it.live) f.innerHTML = navigator.onLine
+          ? '<iframe class="live" src="' + it.live + '" title="Live demo" allow="microphone; autoplay"></iframe>'
+          : '<img alt="" src="' + it.img + '">';
         else f.innerHTML = '<video src="' + it.video + '" poster="' + (it.poster || '') + '" playsinline controls preload="auto"></video>';
         gal.appendChild(f);
       });
