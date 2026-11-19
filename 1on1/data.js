@@ -12,7 +12,7 @@ var GROUPS = [
     { title: 'The Oct 30 take-home', type: 'link', href: 'https://adcd.nyc/bullish-convo', thumb: M + 'takehome-thumb.jpg', fallback: M + 'takehome.jpg' }
   ]},
   { id: '3pm', name: '3:00pm', pieces: [
-    { title: 'Retail Store', type: 'images', thumb: M + 'sidekick-2.jpg',
+    { title: 'T-Mobile', type: 'images', thumb: M + 'sidekick-2.jpg',
       images: [M + 'sidekick-1.jpg', M + 'sidekick-2.jpg', M + 'sidekick-3.jpg', M + 'sidekick-4.jpg', M + 'sidekick-5.jpg'] },
     { title: 'Rolex', type: 'images', thumb: M + 'rolex-print-2.jpg',
       images: [M + 'rolex-print-2.jpg', M + 'rolex-print-1.jpg', M + 'rolex-print-3.jpg', M + 'rolex-fearless.jpg', M + 'rolex-heritage.jpg', M + 'rolex-ice.jpg', M + 'rolex-beneath.jpg',
