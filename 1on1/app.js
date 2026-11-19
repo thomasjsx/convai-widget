@@ -7,7 +7,7 @@
   var statusEl = document.querySelector('.status');
   var KIND = { video: 'Video', images: 'Images', link: 'Live site' };
 
-  // Build the page from data.js; ?person=tram shows one person's pieces only
+  // Build the page from data.js; ?person=2pm shows one meeting's pieces only
   var only = new URLSearchParams(location.search).get('person');
   if (only) document.body.classList.add('single');
   GROUPS.filter(function (g) { return !only || g.id === only; }).forEach(function (g) {

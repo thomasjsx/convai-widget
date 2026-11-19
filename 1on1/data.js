@@ -1,17 +1,17 @@
-// The meeting kit: one tap per piece, grouped by person.
+// The meeting kit: one tap per piece, grouped by meeting time.
 var M = 'media/';
 var GROUPS = [
-  { id: 'dionne', name: '1:00pm · Dionne', pieces: [
+  { id: '1pm', name: '1:00pm', pieces: [
     { title: 'Stitches', sub: 'A remix, plus the pipeline', type: 'images', thumb: M + 'stitches-remix-poster.jpg',
       images: [{ video: M + 'stitches-remix.mp4', poster: M + 'stitches-remix-poster.jpg' }, M + 'stitches-pipeline.jpg'] },
     { title: 'adcd.nyc', sub: 'The voice portfolio', type: 'link', href: 'https://adcd.nyc', thumb: M + 'adcd-home.jpg', fallback: M + 'adcd-home.jpg' }
   ]},
-  { id: 'tram', name: '2:00pm · Tram', pieces: [
+  { id: '2pm', name: '2:00pm', pieces: [
     { title: 'Bing / Microsoft', type: 'images', thumb: M + 'bing-1.jpg',
       images: [M + 'bing-1.jpg', M + 'bing-2.jpg', M + 'bing-3.jpg', { video: M + 'bing-concert.mp4', poster: M + 'bing-concert-poster.jpg' }] },
     { title: 'The Oct 30 take-home', type: 'link', href: 'https://adcd.nyc/bullish-convo', thumb: M + 'takehome.jpg', fallback: M + 'takehome.jpg' }
   ]},
-  { id: 'macy', name: '3:00pm · Macy', pieces: [
+  { id: '3pm', name: '3:00pm', pieces: [
     { title: 'Sidekick retail stores', type: 'images', thumb: M + 'sidekick-6.jpg',
       images: [M + 'sidekick-1.jpg', M + 'sidekick-2.jpg', M + 'sidekick-3.jpg', M + 'sidekick-4.jpg', M + 'sidekick-5.jpg', M + 'sidekick-6.jpg'] },
     { title: 'Rolex and Bing launch work', type: 'images', thumb: M + 'rolex-print-2.jpg',
