@@ -1,7 +1,7 @@
 // Saves the whole meeting kit on first visit so it opens with no internet.
 // Bump VERSION whenever a file changes.
 importScripts('files.js');
-var VERSION = 'v12';
+var VERSION = 'v13';
 var CACHE = 'bullish-1on1-' + VERSION;
 
 function tell(msg) {
