@@ -5,7 +5,7 @@ var GROUPS = [
     { title: 'Stitches', sub: 'A remix from a live event', type: 'images', thumb: M + 'stitches-live-poster.jpg',
       images: [M + 'stitches-about.jpg', M + 'stitches-picks.jpg', { video: M + 'stitches-live.mp4', poster: M + 'stitches-live-poster.jpg' }] },
     { title: 'Conversational Portfolio', type: 'images', thumb: M + 'portfolio-orb.jpg',
-      images: [M + 'portfolio-why.jpg', M + 'portfolio-arch.jpg', { live: 'https://thomasjsx.github.io/convai-widget/jpmc.html', img: M + 'portfolio-demo.jpg' }] }
+      images: [M + 'portfolio-why.jpg', M + 'portfolio-arch.jpg', { live: 'https://thomasjsx.github.io/convai-widget/jpmc.html?bg=111111', img: M + 'portfolio-demo.jpg' }] }
   ]},
   { id: '2pm', name: '2:00pm', pieces: [
     { title: 'Bing / Microsoft', type: 'images', thumb: M + 'bing-logos.jpg',
