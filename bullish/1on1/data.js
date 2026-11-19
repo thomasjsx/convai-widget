@@ -2,8 +2,8 @@
 var M = 'media/';
 var GROUPS = [
   { id: '1pm', name: '1:00pm', pieces: [
-    { title: 'Stitches', sub: 'A remix, plus the pipeline', type: 'images', thumb: M + 'stitches-remix-poster.jpg',
-      images: [{ video: M + 'stitches-remix.mp4', poster: M + 'stitches-remix-poster.jpg' }, M + 'stitches-pipeline.jpg'] },
+    { title: 'Stitches', sub: 'A remix from a live event', type: 'images', thumb: M + 'stitches-live-poster.jpg',
+      images: [M + 'stitches-about.jpg', M + 'stitches-picks.jpg', { video: M + 'stitches-live.mp4', poster: M + 'stitches-live-poster.jpg' }] },
     { title: 'adcd.nyc', sub: 'The voice portfolio', type: 'link', href: 'https://adcd.nyc', thumb: M + 'adcd-home.jpg', fallback: M + 'adcd-home.jpg' }
   ]},
   { id: '2pm', name: '2:00pm', pieces: [
