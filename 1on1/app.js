@@ -85,6 +85,9 @@
   // Offline copy: the service worker saves everything, and reports back here
   function say(t, ok) { statusEl.textContent = t; statusEl.classList.toggle('ok', !!ok); }
   if ('serviceWorker' in navigator) {
+    // When an update takes over, reload once so the new version shows
+    var hadController = !!navigator.serviceWorker.controller, reloaded = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function () { if (hadController && !reloaded) { reloaded = true; location.reload(); } });
     navigator.serviceWorker.addEventListener('message', function (e) {
       var d = e.data || {};
       if (d.type === 'progress') say('Saving for offline… ' + d.done + ' / ' + d.total);

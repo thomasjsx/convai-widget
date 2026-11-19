@@ -1,7 +1,7 @@
 // Saves the whole meeting kit on first visit so it opens with no internet.
 // Bump VERSION whenever a file changes.
 importScripts('files.js');
-var VERSION = 'v8';
+var VERSION = 'v9';
 var CACHE = 'bullish-1on1-' + VERSION;
 
 function tell(msg) {
@@ -44,6 +44,22 @@ async function ranged(req, res) {
 self.addEventListener('fetch', function (e) {
   if (e.request.method !== 'GET') return;
   var url = new URL(e.request.url); url.hash = '';
+  // Pages and code: fetch fresh when online so edits show at once; fall back to the saved copy offline
+  var shell = e.request.mode === 'navigate' || /\.(html|js|css|json)$/.test(url.pathname) || url.pathname.slice(-1) === '/';
+  if (shell) {
+    e.respondWith((async function () {
+      var cache = await caches.open(CACHE);
+      try {
+        var fresh = await fetch(e.request, { cache: 'no-cache' });
+        if (fresh.ok && url.origin === self.location.origin) cache.put(url.href, fresh.clone());
+        return fresh;
+      } catch (err) {
+        return (await cache.match(url.href, { ignoreSearch: true })) || (await cache.match(new URL('index.html', self.registration.scope).href)) || Response.error();
+      }
+    })());
+    return;
+  }
+  // Images and video: the saved copy first
   e.respondWith((async function () {
     var cache = await caches.open(CACHE);
     var hit = await cache.match(url.href, { ignoreSearch: true });
