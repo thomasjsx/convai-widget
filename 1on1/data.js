@@ -9,7 +9,7 @@ var GROUPS = [
   { id: '2pm', name: '2:00pm', pieces: [
     { title: 'Bing / Microsoft', type: 'images', thumb: M + 'bing-logos.jpg',
       images: [M + 'bing-1.jpg', M + 'bing-2.jpg', M + 'bing-3.jpg', { video: M + 'bing-concert.mp4', poster: M + 'bing-concert-poster.jpg' }] },
-    { title: 'The Oct 30 take-home', type: 'link', href: 'https://adcd.nyc/bullish-convo', thumb: M + 'takehome-thumb.jpg', fallback: M + 'takehome.jpg' }
+    { title: 'The Oct 30 take-home', type: 'link', href: 'https://adcd.nyc/bullish/convo-ai', thumb: M + 'takehome-thumb.jpg', fallback: M + 'takehome.jpg' }
   ]},
   { id: '3pm', name: '3:00pm', pieces: [
     { title: 'T-Mobile', type: 'images', thumb: M + 'sidekick-2.jpg',
@@ -21,7 +21,7 @@ var GROUPS = [
       images: [M + 'stitches-about.jpg', { video: M + 'stitches-live.mp4', poster: M + 'stitches-live-poster.jpg' }] }
   ]},
   { id: 'backup', name: 'Backup', pieces: [
-    { title: 'Economist Templates', type: 'link', href: 'https://adcd.nyc/economist2', thumb: M + 'econ-templates.jpg', fallback: M + 'econ-templates.jpg' },
+    { title: 'Economist Templates', type: 'link', href: 'https://adcd.nyc/bullish/economist-templates', thumb: M + 'econ-templates.jpg', fallback: M + 'econ-templates.jpg' },
     { title: 'Economist', type: 'images', thumb: M + 'econ-phone.jpg',
       images: [M + 'econ-ibm.jpg', M + 'econ-gates.jpg', M + 'econ-hcl.jpg', M + 'econ-workfront.jpg', M + 'econ-tiffany.jpg', M + 'econ-climateworks.jpg', M + 'econ-upamerica.jpg'] },
     { title: 'Horizon', sub: 'Before and after: 3 people to 14', type: 'images', thumb: M + 'horizon-team.jpg', images: [M + 'horizon-team.jpg'] }
