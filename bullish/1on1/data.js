@@ -21,9 +21,9 @@ var GROUPS = [
       images: [M + 'stitches-about.jpg', M + 'stitches-picks.jpg', { video: M + 'stitches-live.mp4', poster: M + 'stitches-live-poster.jpg' }] }
   ]},
   { id: 'backup', name: 'Backup', pieces: [
-    { title: 'Economist Templates', type: 'link', href: 'https://adcd.nyc/bullish/economist-brand', thumb: M + 'econ-templates.jpg', fallback: M + 'econ-templates.jpg' },
-    { title: 'Economist', type: 'images', thumb: M + 'econ-phone.jpg',
-      images: [M + 'econ-ibm.jpg', M + 'econ-gates.jpg', M + 'econ-hcl.jpg', M + 'econ-workfront.jpg', M + 'econ-tiffany.jpg', M + 'econ-climateworks.jpg', M + 'econ-upamerica.jpg'] },
+    { title: 'Economist', sub: 'Product work', type: 'link', href: 'https://adcd.nyc/bullish/economist-brand', thumb: M + 'econ-phone.jpg', fallback: M + 'econ-templates.jpg' },
+    { title: 'Economist', sub: 'Client work', type: 'images', thumb: M + 'econ-tiffany.jpg',
+      images: [M + 'econ-tiffany.jpg', M + 'econ-gates.jpg', M + 'econ-hcl.jpg', M + 'econ-workfront.jpg', M + 'econ-climateworks.jpg', M + 'econ-upamerica.jpg'] },
     { title: 'Horizon', sub: 'Before and after: 3 people to 14', type: 'images', thumb: M + 'horizon-team.jpg', images: [M + 'horizon-team.jpg'] }
   ]}
 ];
