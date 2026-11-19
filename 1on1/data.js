@@ -7,7 +7,7 @@ var GROUPS = [
     { title: 'adcd.nyc', sub: 'The voice portfolio', type: 'link', href: 'https://adcd.nyc', thumb: M + 'adcd-home.jpg', fallback: M + 'adcd-home.jpg' }
   ]},
   { id: '2pm', name: '2:00pm', pieces: [
-    { title: 'Bing / Microsoft', type: 'images', thumb: M + 'bing-1.jpg',
+    { title: 'Bing / Microsoft', type: 'images', thumb: M + 'bing-logos.jpg',
       images: [M + 'bing-1.jpg', M + 'bing-2.jpg', M + 'bing-3.jpg', { video: M + 'bing-concert.mp4', poster: M + 'bing-concert-poster.jpg' }] },
     { title: 'The Oct 30 take-home', type: 'link', href: 'https://adcd.nyc/bullish-convo', thumb: M + 'takehome-thumb.jpg', fallback: M + 'takehome.jpg' }
   ]},
