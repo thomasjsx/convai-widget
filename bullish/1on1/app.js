@@ -46,6 +46,7 @@
       p.images.forEach(function (it) {
         var f = document.createElement('figure');
         if (typeof it === 'string') f.innerHTML = '<img alt="" src="' + it + '">';
+        else if (it.link) f.innerHTML = '<a href="' + it.link + '" target="_blank" rel="noopener"><img alt="Open the live demo" src="' + it.img + '"></a>';
         else f.innerHTML = '<video src="' + it.video + '" poster="' + (it.poster || '') + '" playsinline controls preload="auto"></video>';
         gal.appendChild(f);
       });
@@ -57,7 +58,7 @@
       };
       gal.addEventListener('scroll', count); requestAnimationFrame(count);
       gal.addEventListener('click', function (e) {
-        if (e.target.tagName === 'VIDEO') return;
+        if (e.target.tagName === 'VIDEO' || e.target.closest('a')) return;
         var r = gal.getBoundingClientRect(), dir = e.clientX > r.left + r.width / 2 ? 1 : -1;
         gal.scrollBy({ left: dir * gal.clientWidth, behavior: 'smooth' });
       });
