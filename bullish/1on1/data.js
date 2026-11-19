@@ -9,7 +9,7 @@ var GROUPS = [
   { id: '2pm', name: '2:00pm', pieces: [
     { title: 'Bing / Microsoft', type: 'images', thumb: M + 'bing-logos.jpg',
       images: [M + 'bing-1.jpg', M + 'bing-2.jpg', M + 'bing-3.jpg', { video: M + 'bing-concert.mp4', poster: M + 'bing-concert-poster.jpg' }] },
-    { title: 'The Oct 30 take-home', type: 'link', href: 'https://adcd.nyc/bullish/convo-ai', thumb: M + 'takehome-thumb.jpg', fallback: M + 'takehome.jpg' }
+    { title: 'The Oct 30 take-home', type: 'link', href: 'https://adcd.nyc/bullish/presentation', thumb: M + 'takehome-deck.jpg', fallback: M + 'takehome-deck.jpg' }
   ]},
   { id: '3pm', name: '3:00pm', pieces: [
     { title: 'T-Mobile', type: 'images', thumb: M + 'sidekick-2.jpg',
